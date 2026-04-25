@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>The 1 Percent | Elite Expansion</title>
+    <meta name="description"
+        content="Exclusive strategy and implementation for high-caliber assets. Measured excellence for those who define the threshold of success.">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#16130b",
+                        "primary-container": "#d4af37",
+                        "on-surface": "#eae1d4",
+                        "background": "#16130b",
+                        "primary": "#f2ca50",
+                        "on-surface-variant": "#d0c5af",
+                        "outline-variant": "#4d4635"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Noto Serif"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg": ["Noto Serif"],
+                        "label-sm": ["Manrope"],
+                        "headline-md": ["Noto Serif"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "display-xl": ["80px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background-color: #16130b;
+            cursor: none;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .custom-cursor {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #d4af37;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Sleeker Navigation Links */
+        .nav-link {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            position: relative;
+            background: linear-gradient(90deg, #a3a3a3 0%, #ffffff 50%, #a3a3a3 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link:hover {
+            background-position: right center;
+            background: linear-gradient(90deg, #D4AF37 0%, #fff6d6 50%, #D4AF37 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(90deg, #D4AF37 0%, #f2ca50 50%, #D4AF37 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+            padding-bottom: 2px;
+        }
+
+        .ticker-scroll {
+            animation: ticker 40s linear infinite;
+        }
+
+        @keyframes ticker {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .diamond-rotate {
+            display: inline-block;
+            animation: rotateDiamond 8s linear infinite;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes rotateDiamond {
+            from {
+                transform: rotateY(0deg);
+            }
+
+            to {
+                transform: rotateY(360deg);
+            }
+        }
+
+        .glow-pulse {
+            animation: glow-pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes glow-pulse {
+
+            0%,
+            100% {
+                text-shadow: 0 0 5px rgba(212, 175, 55, 0.2);
+            }
+
+            50% {
+                text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-body-md text-on-surface">
+
+    <!-- Custom Cursor Orb -->
+    <div class="custom-cursor" id="cursor">
+        <div class="absolute inset-0 bg-primary-container opacity-20 rounded-full animate-ping"></div>
+    </div>
+
+    <!-- TopNavBar -->
+    <header
+        class="fixed top-0 w-full z-50 border-b border-[#D4AF37]/10 bg-neutral-950/80 backdrop-blur-[20px] shadow-[0_10px_40px_rgba(212,175,55,0.1)]">
+        <div class="flex justify-between items-center px-12 h-24 max-w-[1440px] mx-auto">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-4">
+                <div class="diamond-rotate flex items-center cursor-pointer" id="interactive-diamond">
+                    <span class="material-symbols-outlined text-[#D4AF37] text-2xl transition-all duration-300"
+                        data-icon="diamond">diamond</span>
+                </div>
+                <a href="index.html"
+                    class="flex items-baseline gap-2 text-xl font-bold text-[#D4AF37] tracking-[0.2em] uppercase font-serif antialiased drop-shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:opacity-80 transition-opacity">
+                    <span>The</span>
+                    <span
+                        class="text-4xl text-[#f2ca50] animate-pulse drop-shadow-[0_0_15px_rgba(242,202,80,0.8)]">1</span>
+                    <span>Percent</span>
+                </a>
+            </div>
+            <!-- Navigation -->
+            <nav class="hidden md:flex items-center gap-12">
+                <a class="nav-link active" href="index.html">Home</a>
+                <a class="nav-link" href="concepts.html">Concepts</a>
+                <a class="nav-link" href="methodology.html">Methodology</a>
+                <a class="nav-link" href="pricing.html">Pricing</a>
+            </nav>
+            <!-- Action -->
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com" target="_blank">
+                <button
+                    class="bg-gradient-to-tr from-[#D4AF37] to-[#f2ca50] text-[#3c2f00] px-8 py-3 rounded-full font-serif font-bold tracking-[0.2em] uppercase hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                    ENQUIRE
+                </button>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="relative flex flex-col justify-center overflow-hidden min-h-screen bg-[#16130b]">
+        <!-- Interactive Aurora & Pulse Canvas -->
+        <canvas id="aurora-canvas" class="absolute inset-0 pointer-events-none z-0"></canvas>
+
+        <div class="max-w-7xl mx-auto px-12 w-full grid grid-cols-12 relative z-10 pt-48 pb-64">
+            <!-- Content Area -->
+            <div class="col-span-12 md:col-span-7 flex flex-col items-start gap-lg">
+                <div class="relative">
+                    <h1 class="font-display-xl text-display-xl text-on-surface mb-xs relative">
+                        Elite expansion for the <span class="text-primary-container glow-pulse">visionary</span>.
+                    </h1>
+                </div>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                    Exclusive strategy and implementation for high-caliber assets. Measured excellence for those who
+                    define the threshold of success.
+                </p>
+                <div class="flex gap-md mt-sm">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com"
+                        target="_blank">
+                        <button
+                            class="bg-gradient-to-r from-primary-container to-[#e9c349] text-[#3c2f00] px-10 py-4 font-bold tracking-widest uppercase text-label-sm rounded-none border-l-2 border-[#ffe088] transition-all hover:translate-x-2">
+                            Enter Inner Circle
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Glassmorphic Revolving Banner -->
+        <div
+            class="absolute bottom-0 w-full overflow-hidden bg-neutral-950/40 backdrop-blur-md border-t border-yellow-600/10 py-12 z-10">
+            <div class="flex ticker-scroll whitespace-nowrap">
+                <div class="flex gap-16 px-8 items-center">
+                    <div
+                        class="flex items-center gap-4 hover:text-primary transition-colors text-neutral-500 cursor-default">
+                        <span class="material-symbols-outlined text-xl">ac_unit</span>
+                        <span class="text-headline-md font-display-xl">HVAC Specialists</span>
+                    </div>
+                    <span class="material-symbols-outlined text-primary-container opacity-30 text-xs"
+                        data-icon="fiber_manual_record">fiber_manual_record</span>
+                    <div
+                        class="flex items-center gap-4 hover:text-primary transition-colors text-neutral-500 cursor-default">
+                        <span class="material-symbols-outlined text-xl">storefront</span>
+                        <span class="text-headline-md font-display-xl">Local Businesses</span>
+                    </div>
+                    <span class="material-symbols-outlined text-primary-container opacity-30 text-xs"
+                        data-icon="fiber_manual_record">fiber_manual_record</span>
+                    <div
+                        class="flex items-center gap-4 hover:text-primary transition-colors text-neutral-500 cursor-default">
+                        <span class="material-symbols-outlined text-xl">business</span>
+                        <span class="text-headline-md font-display-xl">Privatized Business</span>
+                    </div>
+                    <span class="material-symbols-outlined text-primary-container opacity-30 text-xs"
+                        data-icon="fiber_manual_record">fiber_manual_record</span>
+                    <div
+                        class="flex items-center gap-4 hover:text-primary transition-colors text-neutral-500 cursor-default">
+                        <span class="material-symbols-outlined text-xl">rocket_launch</span>
+                        <span class="text-headline-md font-display-xl">New Startups</span>
+                    </div>
+                    <span class="material-symbols-outlined text-primary-container opacity-30 text-xs"
+                        data-icon="fiber_manual_record">fiber_manual_record</span>
+                </div>
+                <!-- Repeat for seamless scroll -->
+                <div class="flex gap-16 px-8 items-center">
+                    <div
+                        class="flex items-center gap-4 hover:text-primary transition-colors text-neutral-500 cursor-default">
+                        <span class="material-symbols-outlined text-xl">ac_unit</span>
+                        <span class="text-headline-md font-display-xl">HVAC Specialists</span>
+                    </div>
+                    <span class="material-symbols-outlined text-primary-container opacity-30 text-xs"
+                        data-icon="fiber_manual_record">fiber_manual_record</span>
+                    <div
+                        class="flex items-center gap-4 hover:text-primary transition-colors text-neutral-500 cursor-default">
+                        <span class="material-symbols-outlined text-xl">storefront</span>
+                        <span class="text-headline-md font-display-xl">Local Businesses</span>
+                    </div>
+                    <span class="material-symbols-outlined text-primary-container opacity-30 text-xs"
+                        data-icon="fiber_manual_record">fiber_manual_record</span>
+                    <div
+                        class="flex items-center gap-4 hover:text-primary transition-colors text-neutral-500 cursor-default">
+                        <span class="material-symbols-outlined text-xl">business</span>
+                        <span class="text-headline-md font-display-xl">Privatized Business</span>
+                    </div>
+                    <span class="material-symbols-outlined text-primary-container opacity-30 text-xs"
+                        data-icon="fiber_manual_record">fiber_manual_record</span>
+                    <div
+                        class="flex items-center gap-4 hover:text-primary transition-colors text-neutral-500 cursor-default">
+                        <span class="material-symbols-outlined text-xl">rocket_launch</span>
+                        <span class="text-headline-md font-display-xl">New Startups</span>
+                    </div>
+                    <span class="material-symbols-outlined text-primary-container opacity-30 text-xs"
+                        data-icon="fiber_manual_record">fiber_manual_record</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-950 w-full border-t border-[#D4AF37]/5 mt-auto relative z-10">
+        <div class="flex flex-col md:flex-row justify-between items-center w-full max-w-7xl mx-auto px-12 py-12">
+            <div class="flex flex-col gap-xs items-center md:items-start mb-lg md:mb-0">
+                <span
+                    class="flex items-baseline gap-2 text-xl font-bold text-[#D4AF37] tracking-[0.2em] uppercase font-serif antialiased">
+                    <span>The</span>
+                    <span
+                        class="text-3xl text-[#f2ca50] animate-pulse drop-shadow-[0_0_15px_rgba(242,202,80,0.8)]">1</span>
+                    <span>Percent</span>
+                </span>
+                <span class="font-serif text-sm tracking-normal text-neutral-500 mt-1">© 2026 The 1 Percent. All rights
+                    reserved.</span>
+            </div>
+            <div class="flex gap-8 items-center">
+                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#D4AF37] transition-colors ease-in-out duration-300"
+                    href="privacy.html">Privacy Policy</a>
+                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#D4AF37] transition-colors ease-in-out duration-300"
+                    href="terms.html">Terms of Service</a>
+                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#D4AF37] transition-colors ease-in-out duration-300"
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com"
+                    target="_blank">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Cursor & Canvas Logic -->
+    <script>
+        const cursor = document.getElementById('cursor');
+        const canvas = document.getElementById('aurora-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let ripples = [];
+        let time = 0;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 12 + 'px';
+            cursor.style.top = e.clientY - 12 + 'px';
+
+            // Spawn Dot Pulse Ripple
+            if (Math.random() > 0.5) {
+                ripples.push({
+                    x: e.clientX,
+                    y: e.clientY + window.scrollY,
+                    radius: 5,
+                    alpha: 1
+                });
+            }
+        });
+
+        // Aurora + Pulse Animation Loop
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            time += 0.005;
+
+            // Draw Golden Aurora Borealis
+            ctx.save();
+            for (let i = 0; i < 3; i++) {
+                ctx.beginPath();
+                ctx.moveTo(0, canvas.height * 0.5);
+
+                for (let x = 0; x < canvas.width; x += 50) {
+                    const y = Math.sin(x * 0.002 + time + i) * 150 +
+                        Math.sin(x * 0.005 - time * 2) * 50 +
+                        canvas.height * 0.5;
+                    ctx.lineTo(x, y);
+                }
+
+                const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+                gradient.addColorStop(0, `rgba(212, 175, 55, 0)`);
+                gradient.addColorStop(0.5, `rgba(212, 175, 55, ${0.05 + i * 0.02})`);
+                gradient.addColorStop(1, `rgba(212, 175, 55, 0)`);
+
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = 100 + i * 50;
+                ctx.stroke();
+            }
+            ctx.restore();
+
+            // Draw Dot-Pulse Ripples
+            for (let i = ripples.length - 1; i >= 0; i--) {
+                let ripple = ripples[i];
+
+                const numDots = 12;
+                for (let d = 0; d < numDots; d++) {
+                    const angle = (Math.PI * 2 / numDots) * d + (ripple.radius * 0.05);
+                    const dotX = ripple.x + Math.cos(angle) * ripple.radius;
+                    const dotY = ripple.y - window.scrollY + Math.sin(angle) * ripple.radius;
+
+                    ctx.beginPath();
+                    ctx.arc(dotX, dotY, 1.5, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(212, 175, 55, ${ripple.alpha})`;
+                    ctx.fill();
+                }
+
+                ripple.radius += 2;
+                ripple.alpha -= 0.02;
+
+                if (ripple.alpha <= 0) ripples.splice(i, 1);
+            }
+
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        document.querySelectorAll('a, button, .ticker-scroll span').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.width = '64px';
+                cursor.style.height = '64px';
+                cursor.style.background = 'rgba(212, 175, 55, 0.1)';
+                cursor.style.border = '1px solid rgba(212, 175, 55, 0.8)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.width = '24px';
+                cursor.style.height = '24px';
+                cursor.style.background = 'transparent';
+                cursor.style.border = '2px solid #d4af37';
+            });
+        });
+
+        // Diamond Animation Logic
+        const diamondContainer = document.getElementById('interactive-diamond');
+        if (diamondContainer) {
+            let isAnimating = false;
+            diamondContainer.addEventListener('click', () => {
+                if (isAnimating) return;
+                isAnimating = true;
+                const iconSpan = diamondContainer.querySelector('.material-symbols-outlined');
+
+                // Speed up rotation and add blur
+                diamondContainer.style.animation = 'rotateDiamond 0.5s linear infinite';
+                diamondContainer.style.filter = 'blur(2px)';
+
+                setTimeout(() => {
+                    // Morph to 1 and stop
+                    diamondContainer.style.animation = 'none';
+                    diamondContainer.style.transform = 'rotateY(0deg)';
+                    diamondContainer.style.filter = 'none';
+                    iconSpan.textContent = '1';
+                    iconSpan.classList.remove('material-symbols-outlined');
+                    iconSpan.classList.add('font-serif', 'text-3xl', 'font-bold');
+
+                    setTimeout(() => {
+                        // Morph back and resume slow rotation
+                        iconSpan.textContent = 'diamond';
+                        iconSpan.classList.add('material-symbols-outlined');
+                        iconSpan.classList.remove('font-serif', 'text-3xl', 'font-bold');
+                        diamondContainer.style.animation = 'rotateDiamond 8s linear infinite';
+                        isAnimating = false;
+                    }, 1500);
+                }, 1000);
+            });
+        }
+    </script>
+</body>
+
+</html>
