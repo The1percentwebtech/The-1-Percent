@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#343027",
+                    "on-primary": "#3c2f00",
+                    "surface-container-highest": "#38342b",
+                    "surface": "#16130b",
+                    "on-secondary-fixed": "#261a00",
+                    "on-secondary": "#402d00",
+                    "primary-container": "#d4af37",
+                    "error-container": "#93000a",
+                    "surface-container-lowest": "#110e07",
+                    "on-tertiary-fixed-variant": "#27438a",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#00174b",
+                    "surface-dim": "#16130b",
+                    "secondary-fixed": "#ffdfa0",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "on-primary-fixed-variant": "#574500",
+                    "tertiary-fixed": "#dbe1ff",
+                    "surface-container-low": "#1f1b13",
+                    "on-surface": "#eae1d4",
+                    "background": "#16130b",
+                    "primary": "#f2ca50",
+                    "on-tertiary": "#082b72",
+                    "on-surface-variant": "#d0c5af",
+                    "on-background": "#eae1d4",
+                    "tertiary-fixed-dim": "#b4c5ff",
+                    "primary-fixed-dim": "#e9c349",
+                    "on-tertiary-container": "#254188",
+                    "surface-variant": "#38342b",
+                    "tertiary": "#bfcdff",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-error": "#690005",
+                    "secondary": "#ffe2ab",
+                    "error": "#ffb4ab",
+                    "on-primary-container": "#554300",
+                    "inverse-surface": "#eae1d4",
+                    "outline-variant": "#4d4635",
+                    "tertiary-container": "#97b0ff",
+                    "surface-tint": "#e9c349",
+                    "surface-bright": "#3d392f",
+                    "inverse-primary": "#735c00",
+                    "surface-container": "#231f17",
+                    "primary-fixed": "#ffe088",
+                    "on-secondary-container": "#6d5000",
+                    "outline": "#99907c",
+                    "surface-container-high": "#2d2a21",
+                    "secondary-container": "#ffbf00",
+                    "on-primary-fixed": "#241a00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "80px",
+                    "sm": "12px",
+                    "container-max": "1280px",
+                    "md": "24px",
+                    "gutter": "32px",
+                    "base": "8px",
+                    "xs": "4px",
+                    "lg": "48px"
+            },
+            "fontFamily": {
+                    "display-xl": ["Noto Serif"],
+                    "body-lg": ["Manrope"],
+                    "headline-lg": ["Noto Serif"],
+                    "label-sm": ["Manrope"],
+                    "headline-md": ["Noto Serif"],
+                    "body-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "display-xl": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .bloom-shadow {
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.15);
+        }
+        .glass-panel {
+            background: rgba(22, 19, 11, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        body {
+            cursor: none;
+        }
+        #custom-cursor {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #D4AF37;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease;
+        }
+        #custom-cursor::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: #f2ca50;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #f2ca50;
+        }
+        .pulsate {
+            animation: pulse-ring 2s infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(0.8); }
+        }
+        .diamond-rotate {
+            animation: rotate-slow 12s linear infinite;
+        }
+        @keyframes rotate-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">
+<!-- Custom Cursor Orb -->
+<div class="pulsate" id="custom-cursor"></div>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 border-b border-[#D4AF37]/10 bg-neutral-950/80 backdrop-blur-[20px] shadow-[0_10px_40px_rgba(212,175,55,0.1)]">
+<nav class="flex justify-between items-center px-12 h-24 max-w-[1440px] mx-auto">
+<div class="text-4xl font-serif font-bold text-[#D4AF37] drop-shadow-[0_0_20px_rgba(212,175,55,0.3)]">1</div>
+<div class="hidden md:flex items-center space-x-12">
+<a class="font-serif tracking-wide text-neutral-400 hover:text-[#D4AF37] hover:scale-105 transition-all duration-300" href="#">Home</a>
+<a class="font-serif tracking-wide text-[#D4AF37] border-b border-[#D4AF37] pb-1 hover:scale-105 transition-all duration-300" href="#">Concepts</a>
+<a class="font-serif tracking-wide text-neutral-400 hover:text-[#D4AF37] hover:scale-105 transition-all duration-300" href="#">Methodology</a>
+<a class="font-serif tracking-wide text-neutral-400 hover:text-[#D4AF37] hover:scale-105 transition-all duration-300" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-[#D4AF37] diamond-rotate text-2xl" data-icon="diamond">diamond</span>
+<div class="h-8 w-px bg-[#D4AF37]/20"></div>
+<span class="font-serif tracking-wide text-[#D4AF37] uppercase text-sm tracking-[0.2em]">Enquire</span>
+</div>
+</nav>
+</header>
+<main class="pt-24 min-h-screen">
+<!-- Hero Section -->
+<section class="relative h-[819px] flex items-center justify-center overflow-hidden px-12 py-xl">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background z-10"></div>
+<img alt="Fine dining table setup" class="w-full h-full object-cover grayscale-[20%] brightness-50" data-alt="Close-up of a perfectly set fine dining table with crystal glassware and silver cutlery in a dimly lit, moody atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3SQ1Y49XsBFn22HMNGo5lQevtJdVW0UB9ZSYpjYMO1zXppw7-HLPLdtOyrYmxHLCqHvCEIz9-wRf24-1Fp7EB9R7i-D5wOtJWRCdHsKFI8UFsRU9Eo10RtFmRlMpeSlg0ev3kkOxmHbBcsCUx0e73XZM4l4TXhEHF8g3rxN9USpHfRoqlh-zs3WVdazFYbYu7lY827d2oiAiVDJlaVxwG3edFHjl-ZdAUKACIKalKnERFje1xjmNwcV0ylzA2zzJwSnyK1_r0743w"/>
+</div>
+<div class="relative z-20 text-center max-w-4xl">
+<span class="font-label-sm text-label-sm text-primary tracking-[0.4em] uppercase mb-6 block">In-Depth Analysis</span>
+<h1 class="font-display-xl text-display-xl text-on-surface mb-8">Restaurant Concept Strategy</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto italic">Exploring the synergy between architectural exclusivity and sensory immersion.</p>
+</div>
+</section>
+<!-- Bento Grid Analysis -->
+<section class="max-w-[1440px] mx-auto px-12 py-xl">
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Main Insight: Reservation Architecture -->
+<div class="col-span-12 lg:col-span-8 glass-panel rounded-xl p-lg bloom-shadow group hover:translate-y-[-4px] transition-all duration-500 cubic-bezier(0.34,1.56,0.64,1)">
+<div class="flex items-start justify-between mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">Reservation Architecture</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant tracking-widest uppercase">Structural Exclusivity</p>
+</div>
+<span class="material-symbols-outlined text-4xl text-primary/30" data-icon="architecture">architecture</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-6">
+<div class="border-l-2 border-primary/20 pl-6 py-2">
+<h3 class="font-headline-md text-[24px] text-on-surface mb-2">Temporal Scarcity</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">The systematic release of seating windows creates a high-velocity demand cycle, ensuring 100% occupancy while maintaining a curated guest profile.</p>
+</div>
+<div class="border-l-2 border-primary/20 pl-6 py-2">
+<h3 class="font-headline-md text-[24px] text-on-surface mb-2">Frictionless Integration</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Invisible technology layers that handle guest preferences before arrival, allowing for a seamless transition from street to table.</p>
+</div>
+</div>
+<div class="rounded-lg overflow-hidden h-full min-h-[300px]">
+<img alt="Elegant hostess station" class="w-full h-full object-cover brightness-75 group-hover:scale-110 transition-transform duration-700" data-alt="An elegant minimalist hostess podium in a high-end restaurant with warm point lighting and dark marble textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcJETMZfcD_kIlqv7YbHSckGOwaX59mU_WzvNpvs_EmMGltaEekG5eh3qHA0FwPCOadzyT87WRexoufDBMIGADucxxlBeRizMIOHDHNhViYvuqs0U0somEmYSNmYtex_aOLF6U-div59-yLsjh_uZBRcsmz2_SJ8IMSE0Yjq6gMSL94hFwiIXRL3H21AEpvSlK1WiKhrn7W0Qk2pxHm5abL6lwRew8lgaGN_Zzcs6XwT14TJXtBpLd88ZzVwK8C9wS9MBzO9-aCKtd"/>
+</div>
+</div>
+</div>
+<!-- Secondary Insight: Atmosphere -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<div class="flex-1 glass-panel rounded-xl p-8 bloom-shadow hover:translate-y-[-4px] transition-all duration-500 cubic-bezier(0.34,1.56,0.64,1)">
+<span class="material-symbols-outlined text-primary text-3xl mb-4" data-icon="auto_awesome">auto_awesome</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Atmospheric Storytelling</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Every tactile surface and acoustic layer is engineered to narrate the brand's heritage, transforming dining into a theatrical event.</p>
+</div>
+<div class="flex-1 rounded-xl overflow-hidden relative group">
+<div class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+<img alt="Luxury cocktail" class="w-full h-full object-cover z-0" data-alt="A sophisticated luxury cocktail served in a vintage crystal coupe with orange zest garnish and atmospheric backlighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS0BMgZ4sb9wnj3_XaJ1LbWqysj9N1nrz1o64iRGtqJ7qdgtKqUgw9u6g3tmnZ8koUsuAUMJJHBozOckiCxgjYFzIEGZM1hMbDnFhqUoOvoquyL6PzL4NC4tAXiiR45WnZS7WZd7pMQ5CJ_uR2UqKo52HggXWY7PlGWKPzK3rPG4WrzzcsOH7wDy710Sh4d2NTEotFLd1EU1B9p3rtCush2O0207L8T4YnrI-U4EFWHW2GtfJBJo0LKM0IN5xRL2E7b6ootBMZhj_h"/>
+</div>
+</div>
+<!-- Three Pillar Breakdown -->
+<div class="col-span-12 md:col-span-4 glass-panel rounded-xl p-8 border-b-2 border-b-primary/40">
+<h4 class="font-label-sm text-label-sm text-primary tracking-widest uppercase mb-6">Pillar I: Sensory</h4>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Olfactory branding and localized sound-masking create private acoustic bubbles for every table configuration.</p>
+</div>
+<div class="col-span-12 md:col-span-4 glass-panel rounded-xl p-8 border-b-2 border-b-primary/40">
+<h4 class="font-label-sm text-label-sm text-primary tracking-widest uppercase mb-6">Pillar II: Visual</h4>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Dynamic lighting that adapts to the circadian rhythm of the evening, shifting from amber glow to deep obsidian hues.</p>
+</div>
+<div class="col-span-12 md:col-span-4 glass-panel rounded-xl p-8 border-b-2 border-b-primary/40">
+<h4 class="font-label-sm text-label-sm text-primary tracking-widest uppercase mb-6">Pillar III: Tactile</h4>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Sourcing materials that demand touch—honed stone, raw silk, and hand-forged metals—to ground the digital guest journey.</p>
+</div>
+</div>
+</section>
+<!-- Aesthetic Detail Section -->
+<section class="max-w-[1440px] mx-auto px-12 py-xl grid grid-cols-12 gap-gutter items-center">
+<div class="col-span-12 md:col-span-6">
+<div class="relative inline-block mb-8">
+<div class="absolute -inset-4 bg-primary/10 blur-3xl rounded-full"></div>
+<img alt="Gourmet dish" class="relative z-10 rounded-xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-1000" data-alt="Exquisitely plated gourmet dish with micro-greens and artistic sauce swirls on a dark ceramic plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC84Mhf9lOUbjIZeo3IWCUVkg7j5ig9yZDfSvYZyp_0_guaFh4VbkFfDL56yrp_5533br5B-i3xskK55vFvImJTO06_Tl8IMz9h8zbbYSKPMfSNVkBwl0GmIPWbdQGy73AB2js4rkRQj5A4DNfkvFG4LRuVBBK8IODBr9EYvk8SqdCpiQ7Vvo0BOHbEUPgicgKqyG176Ts1vId0TTjtACjfLaPPLo2V5zxkZEMZAXnIq1cujvW5BZLtL_Gw5GlUH-NH0VeY3TtyfYQq"/>
+</div>
+</div>
+<div class="col-span-12 md:col-span-6 lg:pl-12">
+<h2 class="font-display-xl text-[56px] text-on-surface mb-8">The Culmination of Craft</h2>
+<div class="space-y-12">
+<div>
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-px bg-primary"></div>
+<span class="font-label-sm text-label-sm text-primary uppercase">Curation</span>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant">We don't just design spaces; we curate emotional responses. The intersection of architecture and hospitality is where memories are solidified.</p>
+</div>
+<div class="grid grid-cols-2 gap-8 pt-8 border-t border-primary/10">
+<div>
+<span class="block font-display-xl text-headline-lg text-primary mb-2">94%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Retention Score</span>
+</div>
+<div>
+<span class="block font-display-xl text-headline-lg text-primary mb-2">12ms</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Visual Recognition</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-[#D4AF37]/5 bg-neutral-950">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-16 max-w-[1440px] mx-auto gap-8">
+<div class="text-[#D4AF37] font-bold font-serif text-xl">ELITE EXCELLENCE</div>
+<div class="flex gap-12">
+<a class="font-serif text-xs uppercase tracking-widest text-neutral-600 hover:text-white transition-colors duration-500" href="#">Privacy</a>
+<a class="font-serif text-xs uppercase tracking-widest text-neutral-600 hover:text-white transition-colors duration-500" href="#">Terms</a>
+<a class="font-serif text-xs uppercase tracking-widest text-neutral-600 hover:text-white transition-colors duration-500" href="#">Contact</a>
+</div>
+<div class="font-serif text-xs uppercase tracking-widest text-neutral-600">
+                © 2026 Elite Excellence
+            </div>
+</div>
+</footer>
+<script>
+        const cursor = document.getElementById('custom-cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 12 + 'px';
+            cursor.style.top = e.clientY - 12 + 'px';
+        });
+
+        const interactables = document.querySelectorAll('a, button, .glass-panel, img');
+        interactables.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                cursor.style.width = '64px';
+                cursor.style.height = '64px';
+                cursor.style.backgroundColor = 'rgba(212, 175, 55, 0.2)';
+                cursor.style.backdropFilter = 'blur(4px)';
+                cursor.style.border = '1px solid rgba(212, 175, 55, 0.5)';
+                cursor.classList.remove('pulsate');
+            });
+            item.addEventListener('mouseleave', () => {
+                cursor.style.width = '24px';
+                cursor.style.height = '24px';
+                cursor.style.backgroundColor = 'transparent';
+                cursor.style.backdropFilter = 'none';
+                cursor.style.border = '2px solid #D4AF37';
+                cursor.classList.add('pulsate');
+            });
+        });
+    </script>
+</body></html>

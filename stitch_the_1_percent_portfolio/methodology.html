@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Methodology | The 1 Percent</title>
+    <meta name="description" content="Discover The 1 Percent's methodology. Designed for the global elite to facilitate transitions from individual success to collective sovereignty.">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "surface": "#16130b",
+              "primary-container": "#d4af37",
+              "on-surface": "#eae1d4",
+              "background": "#16130b",
+              "primary": "#f2ca50",
+              "on-surface-variant": "#d0c5af",
+              "outline-variant": "#4d4635"
+            },
+            "fontFamily": {
+              "display-xl": ["Noto Serif"],
+              "body-lg": ["Manrope"],
+              "headline-lg": ["Noto Serif"],
+              "label-sm": ["Manrope"],
+              "headline-md": ["Noto Serif"],
+              "body-md": ["Manrope"]
+            },
+            "fontSize": {
+              "display-xl": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+              "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+              "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+              "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+              "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+              "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        body {
+            background-color: #16130b;
+            color: #eae1d4;
+            cursor: none;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Sleeker Navigation Links */
+        .nav-link {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            position: relative;
+            background: linear-gradient(90deg, #a3a3a3 0%, #ffffff 50%, #a3a3a3 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link:hover {
+            background-position: right center;
+            background: linear-gradient(90deg, #D4AF37 0%, #fff6d6 50%, #D4AF37 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            transform: translateY(-2px);
+        }
+        .nav-link.active {
+            background: linear-gradient(90deg, #D4AF37 0%, #f2ca50 50%, #D4AF37 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+            padding-bottom: 2px;
+        }
+
+        .custom-cursor {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #D4AF37;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            animation: pulse 2s infinite ease-in-out;
+            transition: width 0.3s, height 0.3s, background-color 0.3s, border-width 0.3s, filter 0.3s;
+        }
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(0.8); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+            100% { transform: translate(-50%, -50%) scale(0.8); }
+        }
+        .orb-glow {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #f2ca50;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 8px #f2ca50;
+        }
+        .glass-card {
+            background: rgba(22, 19, 11, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .glass-card:hover {
+            transform: scale(1.02) translateY(-4px);
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+        }
+        .gold-glow-text {
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+        .diamond-rotate {
+            display: inline-block;
+            animation: rotateDiamond 8s linear infinite;
+            transform-style: preserve-3d;
+        }
+        @keyframes rotateDiamond {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+        .heartbeat {
+            animation: heartbeat 3s infinite ease-in-out;
+        }
+        @keyframes heartbeat {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body class="font-body-md selection:bg-primary-container selection:text-on-primary-container">
+    <div class="custom-cursor hidden md:block" id="cursor">
+        <div class="orb-glow"></div>
+    </div>
+
+    <!-- Navigation Shell -->
+    <nav class="fixed top-0 w-full z-50 bg-neutral-950/80 backdrop-blur-[20px] border-b border-[#D4AF37]/10 shadow-[0_10px_40px_rgba(212,175,55,0.1)]">
+        <div class="flex justify-between items-center px-12 h-24 max-w-[1440px] mx-auto">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-4">
+                <div class="diamond-rotate flex items-center cursor-pointer" id="interactive-diamond">
+                    <span class="material-symbols-outlined text-[#D4AF37] text-2xl transition-all duration-300" data-icon="diamond">diamond</span>
+                </div>
+                <a href="index.html" class="flex items-baseline gap-2 text-xl font-bold text-[#D4AF37] tracking-[0.2em] uppercase font-serif antialiased drop-shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:opacity-80 transition-opacity">
+                    <span>The</span>
+                    <span class="text-4xl text-[#f2ca50] animate-pulse drop-shadow-[0_0_15px_rgba(242,202,80,0.8)]">1</span>
+                    <span>Percent</span>
+                </a>
+            </div>
+            <!-- Navigation -->
+            <nav class="hidden md:flex items-center gap-12">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="concepts.html">Concepts</a>
+                <a class="nav-link active" href="methodology.html">Methodology</a>
+                <a class="nav-link" href="pricing.html">Pricing</a>
+            </nav>
+            <!-- Action -->
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com" target="_blank">
+                <button class="bg-gradient-to-tr from-[#D4AF37] to-[#f2ca50] text-[#3c2f00] px-8 py-3 rounded-full font-serif font-bold tracking-[0.2em] uppercase hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                    ENQUIRE
+                </button>
+            </a>
+        </div>
+    </nav>
+
+    <main class="pt-48 pb-32 px-12 max-w-[1440px] mx-auto flex-grow">
+        <!-- Hero Section -->
+        <section class="mb-32 text-center">
+            <h1 class="font-display-xl text-display-xl text-[#D4AF37] mb-8 gold-glow-text">The Architecture of Excellence</h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl mx-auto opacity-80">
+                Our methodology is not a curriculum; it is a structured evolution. Designed for the global elite, we facilitate transitions from individual success to collective sovereignty.
+            </p>
+        </section>
+
+        <!-- Stats Banner -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
+            <div class="glass-card p-12 rounded-xl flex flex-col items-center justify-center text-center">
+                <span class="text-6xl font-display-xl text-[#D4AF37] mb-2">99%</span>
+                <span class="font-label-sm uppercase tracking-[0.2em] text-on-surface-variant">Retention Rate</span>
+            </div>
+            <div class="glass-card p-12 rounded-xl flex flex-col items-center justify-center text-center">
+                <span class="text-6xl font-display-xl text-[#D4AF37] mb-2">24/7</span>
+                <span class="font-label-sm uppercase tracking-[0.2em] text-on-surface-variant">Elite Support Ecosystem</span>
+            </div>
+        </div>
+
+        <!-- Bento Grid Methodology Topics -->
+        <div class="grid grid-cols-12 gap-8">
+            <!-- Mutual Sovereignty -->
+            <div class="col-span-12 md:col-span-8 glass-card p-12 rounded-xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <span class="material-symbols-outlined text-[120px] text-[#D4AF37]">handshake</span>
+                </div>
+                <h2 class="font-headline-lg text-headline-lg text-[#D4AF37] mb-6">Mutual Sovereignty</h2>
+                <div class="w-12 h-1 bg-[#D4AF37] mb-8"></div>
+                <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed max-w-2xl">
+                    Focusing on formal, non-hierarchical relationships within the ecosystem. We facilitate frameworks where independent powerhouses align without compromising autonomy. This is the cornerstone of high-trust networking and long-term strategic alliances.
+                </p>
+            </div>
+
+            <!-- Kinetic Efficiency -->
+            <div class="col-span-12 md:col-span-4 glass-card p-12 rounded-xl flex flex-col justify-end group">
+                <span class="material-symbols-outlined text-4xl text-[#D4AF37] mb-6 heartbeat">bolt</span>
+                <h2 class="font-headline-md text-headline-md text-[#D4AF37] mb-4">Kinetic Efficiency</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant opacity-70">
+                    Optimizing the transfer of energy and resources across global borders. Minimizing friction in execution through elite-level process mapping.
+                </p>
+            </div>
+
+            <!-- Learning Together -->
+            <div class="col-span-12 md:col-span-5 glass-card p-12 rounded-xl group">
+                <div class="mb-8 w-full h-48 bg-[#231f17] rounded-lg overflow-hidden border border-[#D4AF37]/10">
+                    <img alt="Collaborative workspace" class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBUkZOZyDwTCisJJfaZT0IlLvY1O9KnP2syeRrtku4Ulu6EjaxwwRYKBgA9CYlbsK9piwHA30n-0ezx2PjjdDdYPFdIyslXQfpRfT1MtwTKSQUe2mqKHMByvlyWBjywJ-KUYuw880u1ARXBKr1133p-_8P_R683Sc5dFWnQpYjLd1RK8VPLJF9VnzfnWlcd6XvMVw7dLa-d4AHaKBFyuTOYj2Kt0Zq5M1hbJ_N4NcSEq0ktslrqTyPdcYCvpGDVY8QlUcLCW4brZGM"/>
+                </div>
+                <h2 class="font-headline-md text-headline-md text-[#D4AF37] mb-4">Learning Together</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant opacity-70">
+                    Collaborative intelligence systems where insights from one industry illuminate the blind spots of another. Shared mastery through curated focus groups.
+                </p>
+            </div>
+
+            <!-- Newer Experiences -->
+            <div class="col-span-12 md:col-span-7 glass-card p-12 rounded-xl relative group">
+                <div class="absolute inset-0 bg-gradient-to-br from-[#D4AF37]/5 to-transparent pointer-events-none"></div>
+                <h2 class="font-headline-md text-headline-md text-[#D4AF37] mb-6">Newer Experiences</h2>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <p class="font-body-md text-body-md text-on-surface-variant opacity-80 leading-relaxed mb-4">
+                            We specialize in crafting premium web designs for emerging jobs, local businesses, and anyone looking to grow engagement.
+                        </p>
+                        <p class="font-body-md text-body-md text-on-surface-variant opacity-80 leading-relaxed">
+                            Our designs are highly interactive, immersive, and fundamentally friendly to navigate.
+                        </p>
+                    </div>
+                    <div class="flex flex-col gap-4 border-l border-[#D4AF37]/20 pl-8">
+                        <div class="flex items-center gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#D4AF37]"></span>
+                            <span class="font-label-sm text-on-surface-variant uppercase">Unlisted Assets</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#D4AF37]"></span>
+                            <span class="font-label-sm text-on-surface-variant uppercase">Spatial Evolution</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#D4AF37]"></span>
+                            <span class="font-label-sm text-on-surface-variant uppercase">Zero-Friction Access</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-950 w-full border-t border-[#D4AF37]/5 mt-auto relative z-10">
+        <div class="flex flex-col md:flex-row justify-between items-center w-full max-w-7xl mx-auto px-12 py-12">
+            <div class="flex flex-col gap-xs items-center md:items-start mb-8 md:mb-0">
+                <span class="flex items-baseline gap-2 text-xl font-bold text-[#D4AF37] tracking-[0.2em] uppercase font-serif antialiased">
+                    <span>The</span>
+                    <span class="text-3xl text-[#f2ca50] animate-pulse drop-shadow-[0_0_15px_rgba(242,202,80,0.8)]">1</span>
+                    <span>Percent</span>
+                </span>
+                <span class="font-serif text-sm tracking-normal text-neutral-500 mt-1">© 2026 The 1 Percent. All rights reserved.</span>
+            </div>
+            <div class="flex gap-8 items-center">
+                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#D4AF37] transition-colors ease-in-out duration-300" href="privacy.html">Privacy Policy</a>
+                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#D4AF37] transition-colors ease-in-out duration-300" href="terms.html">Terms of Service</a>
+                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#D4AF37] transition-colors ease-in-out duration-300" href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com" target="_blank">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.getElementById('cursor');
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Expanded cursor effect for interactables
+        document.querySelectorAll('a, button, .glass-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                const cursor = document.getElementById('cursor');
+                cursor.style.width = '64px';
+                cursor.style.height = '64px';
+                cursor.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
+                cursor.style.borderWidth = '1px';
+                cursor.style.filter = 'blur(4px)';
+            });
+            el.addEventListener('mouseleave', () => {
+                const cursor = document.getElementById('cursor');
+                cursor.style.width = '24px';
+                cursor.style.height = '24px';
+                cursor.style.backgroundColor = 'transparent';
+                cursor.style.borderWidth = '2px';
+                cursor.style.filter = 'none';
+            });
+        });
+
+        // Diamond Animation Logic
+        const diamondContainer = document.getElementById('interactive-diamond');
+        if (diamondContainer) {
+            let isAnimating = false;
+            diamondContainer.addEventListener('click', () => {
+                if (isAnimating) return;
+                isAnimating = true;
+                const iconSpan = diamondContainer.querySelector('.material-symbols-outlined');
+                
+                diamondContainer.style.animation = 'rotateDiamond 0.5s linear infinite';
+                diamondContainer.style.filter = 'blur(2px)';
+                
+                setTimeout(() => {
+                    diamondContainer.style.animation = 'none';
+                    diamondContainer.style.transform = 'rotateY(0deg)';
+                    diamondContainer.style.filter = 'none';
+                    iconSpan.textContent = '1';
+                    iconSpan.classList.remove('material-symbols-outlined');
+                    iconSpan.classList.add('font-serif', 'text-3xl', 'font-bold');
+                    
+                    setTimeout(() => {
+                        iconSpan.textContent = 'diamond';
+                        iconSpan.classList.add('material-symbols-outlined');
+                        iconSpan.classList.remove('font-serif', 'text-3xl', 'font-bold');
+                        diamondContainer.style.animation = 'rotateDiamond 8s linear infinite';
+                        isAnimating = false;
+                    }, 1500);
+                }, 1000);
+            });
+        }
+    </script>
+</body>
+</html>

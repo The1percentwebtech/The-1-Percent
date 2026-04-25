@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#343027",
+                        "on-primary": "#3c2f00",
+                        "surface-container-highest": "#38342b",
+                        "surface": "#16130b",
+                        "on-secondary-fixed": "#261a00",
+                        "on-secondary": "#402d00",
+                        "primary-container": "#d4af37",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#110e07",
+                        "on-tertiary-fixed-variant": "#27438a",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#00174b",
+                        "surface-dim": "#16130b",
+                        "secondary-fixed": "#ffdfa0",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "on-primary-fixed-variant": "#574500",
+                        "tertiary-fixed": "#dbe1ff",
+                        "surface-container-low": "#1f1b13",
+                        "on-surface": "#eae1d4",
+                        "background": "#16130b",
+                        "primary": "#f2ca50",
+                        "on-tertiary": "#082b72",
+                        "on-surface-variant": "#d0c5af",
+                        "on-background": "#eae1d4",
+                        "tertiary-fixed-dim": "#b4c5ff",
+                        "primary-fixed-dim": "#e9c349",
+                        "on-tertiary-container": "#254188",
+                        "surface-variant": "#38342b",
+                        "tertiary": "#bfcdff",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-error": "#690005",
+                        "secondary": "#ffe2ab",
+                        "error": "#ffb4ab",
+                        "on-primary-container": "#554300",
+                        "inverse-surface": "#eae1d4",
+                        "outline-variant": "#4d4635",
+                        "tertiary-container": "#97b0ff",
+                        "surface-tint": "#e9c349",
+                        "surface-bright": "#3d392f",
+                        "inverse-primary": "#735c00",
+                        "surface-container": "#231f17",
+                        "primary-fixed": "#ffe088",
+                        "on-secondary-container": "#6d5000",
+                        "outline": "#99907c",
+                        "surface-container-high": "#2d2a21",
+                        "secondary-container": "#ffbf00",
+                        "on-primary-fixed": "#241a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "80px",
+                        "sm": "12px",
+                        "container-max": "1280px",
+                        "md": "24px",
+                        "gutter": "32px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "lg": "48px"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Noto Serif"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg": ["Noto Serif"],
+                        "label-sm": ["Manrope"],
+                        "headline-md": ["Noto Serif"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "display-xl": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .custom-cursor {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #D4AF37;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+        .bloom-shadow {
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+        }
+        .pop-hover {
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.4s ease;
+        }
+        .pop-hover:hover {
+            transform: scale(1.02) translateY(-4px);
+            border-color: rgba(212, 175, 55, 0.5) !important;
+        }
+        .diamond-rotate {
+            animation: rotateDiamond 8s linear infinite;
+        }
+        @keyframes rotateDiamond {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .pulse-light {
+            animation: pulseLight 4s ease-in-out infinite;
+        }
+        @keyframes pulseLight {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container cursor-none">
+<!-- Custom Cursor -->
+<div class="custom-cursor hidden md:block" id="cursor"></div>
+<!-- TopNavBar -->
+<nav class="bg-neutral-950/80 backdrop-blur-[20px] fixed top-0 w-full z-50 border-b border-[#D4AF37]/10 shadow-[0_10px_40px_rgba(212,175,55,0.1)]">
+<div class="flex justify-between items-center px-12 h-24 max-w-[1440px] mx-auto font-serif tracking-wide">
+<div class="text-4xl font-serif font-bold text-[#D4AF37] drop-shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                1
+            </div>
+<div class="hidden md:flex gap-12 items-center">
+<a class="text-neutral-400 hover:text-neutral-100 hover:text-[#D4AF37] hover:scale-105 transition-all duration-300 cubic-bezier(0.34,1.56,0.64,1) hover:translate-y-[-2px]" href="#">Home</a>
+<a class="text-neutral-400 hover:text-neutral-100 hover:text-[#D4AF37] hover:scale-105 transition-all duration-300 cubic-bezier(0.34,1.56,0.64,1) hover:translate-y-[-2px]" href="#">Concepts</a>
+<a class="text-neutral-400 hover:text-neutral-100 hover:text-[#D4AF37] hover:scale-105 transition-all duration-300 cubic-bezier(0.34,1.56,0.64,1) hover:translate-y-[-2px]" href="#">Methodology</a>
+<a class="text-[#D4AF37] border-b border-[#D4AF37] pb-1 hover:text-[#D4AF37] hover:scale-105 transition-all duration-300 cubic-bezier(0.34,1.56,0.64,1) hover:translate-y-[-2px]" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-8">
+<div class="diamond-rotate">
+<span class="material-symbols-outlined text-[#D4AF37]" data-icon="diamond">diamond</span>
+</div>
+<button class="bg-[#D4AF37] text-on-primary-container px-8 py-3 font-semibold rounded-full hover:scale-105 transition-transform">
+                    Enquire
+                </button>
+</div>
+</div>
+</nav>
+<main class="pt-40 pb-xl max-w-[1440px] mx-auto px-gutter relative">
+<!-- Background Decoration -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/5 blur-[120px] rounded-full pulse-light -z-10"></div>
+<!-- Hero Section -->
+<header class="text-center mb-xl">
+<span class="font-label-sm text-primary tracking-[0.3em] uppercase mb-gutter block">Investment tiers</span>
+<h1 class="font-display-xl text-display-xl text-on-surface mb-md">Tailored for Excellence</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                Join an elite ecosystem designed for those who demand absolute quality. Experience precision, speed, and unrivaled craftsmanship.
+            </p>
+</header>
+<!-- Pricing Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-xl">
+<!-- The Essential -->
+<div class="surface-container-low border border-outline-variant/10 p-lg rounded-xl pop-hover bloom-shadow relative flex flex-col">
+<div class="mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">The Essential</h3>
+<div class="flex items-baseline gap-xs">
+<span class="text-display-xl font-display-xl text-primary">$150</span>
+<span class="text-on-surface-variant font-label-sm">/PROJECT</span>
+</div>
+</div>
+<ul class="space-y-sm mb-xl flex-grow">
+<li class="flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check">check</span>
+                        5-day delivery
+                    </li>
+<li class="flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check">check</span>
+                        2 free trials
+                    </li>
+<li class="flex items-center gap-sm text-on-surface-variant/40">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+                        No revisions
+                    </li>
+</ul>
+<button class="w-full py-4 rounded-lg bg-surface-container-highest border border-outline-variant text-on-surface hover:bg-outline-variant transition-colors font-semibold">
+                    Select Plan
+                </button>
+</div>
+<!-- The Business -->
+<div class="surface-container border-2 border-primary/20 p-lg rounded-xl pop-hover bloom-shadow relative flex flex-col scale-105 z-10">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase">Most Popular</div>
+<div class="mb-lg">
+<h3 class="font-headline-md text-headline-md text-primary mb-xs">The Business</h3>
+<div class="flex items-baseline gap-xs">
+<span class="text-display-xl font-display-xl text-primary">$250</span>
+<span class="text-on-surface-variant font-label-sm">/PROJECT</span>
+</div>
+</div>
+<ul class="space-y-sm mb-xl flex-grow">
+<li class="flex items-center gap-sm text-on-surface">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="bolt">bolt</span>
+                        Under 3-day delivery
+                    </li>
+<li class="flex items-center gap-sm text-on-surface">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="edit">edit</span>
+                        5 revisions
+                    </li>
+<li class="flex items-center gap-sm text-on-surface-variant/40">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+                        No trials/mocks
+                    </li>
+</ul>
+<button class="w-full py-4 rounded-lg bg-gradient-to-r from-primary to-primary-container text-on-primary-container shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform font-bold">
+                    Start Now
+                </button>
+</div>
+<!-- The Absolute -->
+<div class="surface-container-low border border-outline-variant/10 p-lg rounded-xl pop-hover bloom-shadow relative flex flex-col">
+<div class="mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">The Absolute</h3>
+<div class="flex items-baseline gap-xs">
+<span class="text-display-xl font-display-xl text-primary">Custom</span>
+</div>
+</div>
+<ul class="space-y-sm mb-xl flex-grow">
+<li class="flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="schedule">schedule</span>
+                        Custom delivery
+                    </li>
+<li class="flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="all_inclusive">all_inclusive</span>
+                        Unlimited revisions
+                    </li>
+<li class="flex items-center gap-sm text-on-surface-variant/40">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+                        No trials/mocks
+                    </li>
+</ul>
+<button class="w-full py-4 rounded-lg bg-surface-container-highest border border-outline-variant text-on-surface hover:bg-outline-variant transition-colors font-semibold">
+                    Contact Us
+                </button>
+</div>
+</div>
+<!-- Comparison Matrix -->
+<section class="mt-xl overflow-x-auto">
+<h2 class="font-headline-lg text-headline-lg text-center mb-lg">Professional Matrix</h2>
+<table class="w-full border-collapse">
+<thead>
+<tr class="text-left border-b border-outline-variant/20">
+<th class="py-lg px-md font-headline-md text-on-surface">Features</th>
+<th class="py-lg px-md font-label-sm text-primary tracking-widest uppercase">Essential</th>
+<th class="py-lg px-md font-label-sm text-primary tracking-widest uppercase">Business</th>
+<th class="py-lg px-md font-label-sm text-primary tracking-widest uppercase">Absolute</th>
+</tr>
+</thead>
+<tbody class="text-on-surface-variant">
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low/50 transition-colors">
+<td class="py-md px-md font-medium text-on-surface">Delivery Speed</td>
+<td class="py-md px-md">5 Business Days</td>
+<td class="py-md px-md text-on-surface">Under 3 Days</td>
+<td class="py-md px-md">Priority Custom</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low/50 transition-colors">
+<td class="py-md px-md font-medium text-on-surface">Revision Cycle</td>
+<td class="py-md px-md">None</td>
+<td class="py-md px-md">5 Rounds</td>
+<td class="py-md px-md text-on-surface">Unlimited</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low/50 transition-colors">
+<td class="py-md px-md font-medium text-on-surface">Pre-service Trials</td>
+<td class="py-md px-md text-on-surface">2 Free Mocks</td>
+<td class="py-md px-md">—</td>
+<td class="py-md px-md">—</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low/50 transition-colors">
+<td class="py-md px-md font-medium text-on-surface">White Glove Support</td>
+<td class="py-md px-md">—</td>
+<td class="py-md px-md">—</td>
+<td class="py-md px-md text-on-surface">Dedicated Agent</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low/50 transition-colors">
+<td class="py-md px-md font-medium text-on-surface">Asset Ownership</td>
+<td class="py-md px-md">Standard</td>
+<td class="py-md px-md">Full Digital</td>
+<td class="py-md px-md text-on-surface">Exclusive Rights</td>
+</tr>
+</tbody>
+</table>
+</section>
+<!-- Decorative Section Image -->
+<section class="mt-xl grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<div class="relative rounded-xl overflow-hidden aspect-video border border-outline-variant/20 shadow-2xl">
+<img alt="Luxury technology" class="w-full h-full object-cover" data-alt="Close-up of a high-end mechanical watch movement and luxury circuit board with gold accents and moody dramatic cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzVT0NtBRoKeL1fCMjqJIGUgrXdCv71TiuJlyTxUC_WzdCPWVNadkI7IDgJClHwVrmmSsGXP-se-fq26CG5vTft7Si_0p92iATox6GWjU1W5kteD2whhCsXsnXJkd3OzDCq2MSUlk0u4wK1cK5FxCyvmpzTfsm4Qoc2z9U3wBwmQreKFokifXfizBr4VzL5BBw05-4Ys9nFjl2kAe9A2pZRFc0FICWIZwk4_3b-0PMEJ4fK1utntkGw49ary0URq1jzzop7M117W3x"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+<div class="p-lg">
+<h3 class="font-headline-lg text-headline-lg mb-md">Invest in Absolute Quality</h3>
+<p class="text-on-surface-variant text-body-lg mb-lg">
+                    We don't just provide services; we curate experiences for the most discerning clients. Every pixel, every line of code, and every strategy is forged with the precision of excellence.
+                </p>
+<div class="flex gap-md">
+<div class="flex flex-col">
+<span class="text-display-xl font-display-xl text-primary">01%</span>
+<span class="text-on-surface-variant font-label-sm uppercase tracking-widest">Global Standard</span>
+</div>
+<div class="flex flex-col">
+<span class="text-display-xl font-display-xl text-primary">24/7</span>
+<span class="text-on-surface-variant font-label-sm uppercase tracking-widest">Elite Access</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-neutral-950 w-full border-t border-[#D4AF37]/5">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-16 max-w-[1440px] mx-auto gap-8 font-serif text-xs uppercase tracking-widest">
+<div class="text-[#D4AF37] font-bold text-xl">
+                The 1 Percent
+            </div>
+<div class="flex gap-12 text-neutral-600">
+<a class="hover:text-white transition-colors duration-500 opacity-80 hover:opacity-100" href="#">Privacy</a>
+<a class="hover:text-white transition-colors duration-500 opacity-80 hover:opacity-100" href="#">Terms</a>
+<a class="hover:text-white transition-colors duration-500 opacity-80 hover:opacity-100" href="#">Contact</a>
+</div>
+<div class="text-neutral-600">
+                © 2026 Elite Excellence
+            </div>
+</div>
+</footer>
+<script>
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 12 + 'px';
+            cursor.style.top = e.clientY - 12 + 'px';
+        });
+
+        const interactables = document.querySelectorAll('a, button, .pop-hover');
+        interactables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(2.6)';
+                cursor.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
+                cursor.style.backdropFilter = 'blur(4px)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.backgroundColor = 'transparent';
+                cursor.style.backdropFilter = 'none';
+            });
+        });
+    </script>
+</body></html>

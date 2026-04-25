@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#343027",
+                    "on-primary": "#3c2f00",
+                    "surface-container-highest": "#38342b",
+                    "surface": "#16130b",
+                    "on-secondary-fixed": "#261a00",
+                    "on-secondary": "#402d00",
+                    "primary-container": "#d4af37",
+                    "error-container": "#93000a",
+                    "surface-container-lowest": "#110e07",
+                    "on-tertiary-fixed-variant": "#27438a",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#00174b",
+                    "surface-dim": "#16130b",
+                    "secondary-fixed": "#ffdfa0",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "on-primary-fixed-variant": "#574500",
+                    "tertiary-fixed": "#dbe1ff",
+                    "surface-container-low": "#1f1b13",
+                    "on-surface": "#eae1d4",
+                    "background": "#16130b",
+                    "primary": "#f2ca50",
+                    "on-tertiary": "#082b72",
+                    "on-surface-variant": "#d0c5af",
+                    "on-background": "#eae1d4",
+                    "tertiary-fixed-dim": "#b4c5ff",
+                    "primary-fixed-dim": "#e9c349",
+                    "on-tertiary-container": "#254188",
+                    "surface-variant": "#38342b",
+                    "tertiary": "#bfcdff",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "on-error": "#690005",
+                    "secondary": "#ffe2ab",
+                    "error": "#ffb4ab",
+                    "on-primary-container": "#554300",
+                    "inverse-surface": "#eae1d4",
+                    "outline-variant": "#4d4635",
+                    "tertiary-container": "#97b0ff",
+                    "surface-tint": "#e9c349",
+                    "surface-bright": "#3d392f",
+                    "inverse-primary": "#735c00",
+                    "surface-container": "#231f17",
+                    "primary-fixed": "#ffe088",
+                    "on-secondary-container": "#6d5000",
+                    "outline": "#99907c",
+                    "surface-container-high": "#2d2a21",
+                    "secondary-container": "#ffbf00",
+                    "on-primary-fixed": "#241a00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "80px",
+                    "sm": "12px",
+                    "container-max": "1280px",
+                    "md": "24px",
+                    "gutter": "32px",
+                    "base": "8px",
+                    "xs": "4px",
+                    "lg": "48px"
+            },
+            "fontFamily": {
+                    "display-xl": ["Noto Serif"],
+                    "body-lg": ["Manrope"],
+                    "headline-lg": ["Noto Serif"],
+                    "label-sm": ["Manrope"],
+                    "headline-md": ["Noto Serif"],
+                    "body-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "display-xl": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #16130b;
+            color: #eae1d4;
+            cursor: none;
+        }
+        .orb-cursor {
+            position: fixed;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #D4AF37;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+        .orb-cursor::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: #f2ca50;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #f2ca50;
+        }
+        .bloom-shadow {
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+        }
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            background: rgba(22, 19, 11, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        .pulsate-text {
+            animation: textPulse 4s infinite ease-in-out;
+        }
+        @keyframes textPulse {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+            50% { opacity: 0.8; text-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
+        }
+        .rotating-diamond {
+            display: inline-block;
+            animation: rotateDiamond 8s linear infinite;
+        }
+        @keyframes rotateDiamond {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="font-body-md bg-background">
+<!-- Custom Cursor -->
+<div class="orb-cursor hidden md:flex" id="cursor"></div>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 border-b border-[#D4AF37]/10 bg-neutral-950/80 backdrop-blur-[20px] shadow-[0_10px_40px_rgba(212,175,55,0.1)]">
+<nav class="flex justify-between items-center px-12 h-24 max-w-[1440px] mx-auto">
+<div class="text-4xl font-serif font-bold text-[#D4AF37] drop-shadow-[0_0_20px_rgba(212,175,55,0.3)] tracking-wide">
+                1
+            </div>
+<div class="hidden md:flex items-center space-x-12 font-serif tracking-wide">
+<a class="text-neutral-400 hover:text-neutral-100 hover:text-[#D4AF37] hover:scale-105 transition-all duration-300" href="#">Home</a>
+<a class="text-[#D4AF37] border-b border-[#D4AF37] pb-1 hover:text-[#D4AF37] hover:scale-105 transition-all duration-300" href="#">Concepts</a>
+<a class="text-neutral-400 hover:text-neutral-100 hover:text-[#D4AF37] hover:scale-105 transition-all duration-300" href="#">Methodology</a>
+<a class="text-neutral-400 hover:text-neutral-100 hover:text-[#D4AF37] hover:scale-105 transition-all duration-300" href="#">Pricing</a>
+</div>
+<div class="flex items-center space-x-6">
+<span class="material-symbols-outlined text-[#D4AF37] text-2xl rotating-diamond" data-icon="diamond">diamond</span>
+<button class="bg-gradient-to-tr from-[#D4AF37] to-[#f2ca50] text-on-primary-container px-8 py-3 rounded-full font-serif font-bold tracking-widest hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                    Enquire
+                </button>
+</div>
+</nav>
+</header>
+<main class="pt-32 pb-xl">
+<!-- Hero Section -->
+<section class="max-w-[1440px] mx-auto px-12 mb-xl">
+<div class="flex flex-col items-center text-center">
+<span class="font-label-sm text-primary mb-4 tracking-[0.3em] uppercase">The Concepts of 2026</span>
+<h1 class="font-display-xl text-primary drop-shadow-[0_0_30px_rgba(212,175,55,0.2)] mb-8">
+                    The 1 Percent <br/> Strategic Verticals
+                </h1>
+<p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    A curated exploration of our foundational pillars. We specialize in two high-yield domains where excellence isn't just a goal—it's the baseline.
+                </p>
+</div>
+</section>
+<!-- Vertical: Real Estate -->
+<section class="max-w-[1440px] mx-auto px-12 mb-xl">
+<div class="grid grid-cols-12 gap-gutter items-center">
+<div class="col-span-12 lg:col-span-7 group overflow-hidden rounded-xl border border-[#D4AF37]/10 glass-panel">
+<img alt="Modern architecture" class="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Ultra-modern luxury villa at sunset with infinity pool and dramatic architectural lighting against a deep indigo sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaouaHQNrkK_QScZbuK9VlmuPTrOoRJ6g4_XJUJWix8LSCbJTF7Qnc7vB8GSA6aeQ9yea0-zG4N6UuPX8OynmjHZ_J_RQuZdDeQtdiyrAAIOhAWxWGEAe3jM1vHmAZOyQkRyjm_IwEJHm8Ov9pp_6o8amOlZnDRIaNBnwuYvER78Z4mp-4cPjUy6LVAZTaMaDQPHgiSjUhSyn7pyewmLwUbZ6Heojag2pUxzHP378EdyBtugJI1_pZLAWVsUoqhM-eSV0fKL8VvqN7"/>
+</div>
+<div class="col-span-12 lg:col-span-5 px-lg">
+<div class="flex items-center space-x-4 mb-6">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="home_work">home_work</span>
+<h2 class="font-headline-lg text-on-surface">Real Estate</h2>
+</div>
+<h3 class="font-headline-md text-primary mb-6">Architectural Sovereignty</h3>
+<div class="space-y-6 font-body-md text-on-surface-variant">
+<p>
+                            Our real estate concepts transcend traditional development. We focus on "Invisible Luxury"—spaces that adapt to the occupant's physiological and mental states using kinetic architecture and bio-responsive environments.
+                        </p>
+<div class="p-6 border-l-2 border-primary bg-surface-container-low rounded-r-lg">
+<span class="font-label-sm text-primary uppercase block mb-2">Strategic Value</span>
+<p class="text-on-surface italic">
+                                "Real estate is the ultimate canvas for permanent legacy. By 2026, the definition of wealth is control over one's immediate environment."
+                            </p>
+</div>
+<ul class="space-y-3">
+<li class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
+<span>Yield-Optimization AI Protocols</span>
+</li>
+<li class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
+<span>Zero-Carbon Luxury Frameworks</span>
+</li>
+<li class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
+<span>Private Equity Syndication Models</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Vertical: Restaurants -->
+<section class="max-w-[1440px] mx-auto px-12 mb-xl">
+<div class="grid grid-cols-12 gap-gutter items-center">
+<div class="col-span-12 lg:col-span-5 order-2 lg:order-1 px-lg text-right">
+<div class="flex items-center justify-end space-x-4 mb-6">
+<h2 class="font-headline-lg text-on-surface">Restaurants</h2>
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="restaurant">restaurant</span>
+</div>
+<h3 class="font-headline-md text-primary mb-6">Epicurean Mastery</h3>
+<div class="space-y-6 font-body-md text-on-surface-variant">
+<p>
+                            The future of dining is hyper-personalized. Our concepts focus on 'Molecular Connection'—utilizing biometric feedback to tailor nutritional profiles and sensory atmospheric triggers to the guest's specific needs.
+                        </p>
+<div class="p-6 border-r-2 border-primary bg-surface-container-low rounded-l-lg text-right">
+<span class="font-label-sm text-primary uppercase block mb-2">Strategic Value</span>
+<p class="text-on-surface italic">
+                                "Hospitality is the last frontier of human connection. We invest in sensory experiences that cannot be replicated by digital substitutes."
+                            </p>
+</div>
+<ul class="space-y-3 flex flex-col items-end">
+<li class="flex items-center space-x-3">
+<span>Nutri-Genomic Menu Mapping</span>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
+</li>
+<li class="flex items-center space-x-3">
+<span>Sensory Immersion Pods</span>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
+</li>
+<li class="flex items-center space-x-3">
+<span>Hyper-Local Micro-Farm Integration</span>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-7 order-1 lg:order-2 group overflow-hidden rounded-xl border border-[#D4AF37]/10 glass-panel">
+<img alt="Fine dining table" class="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Exquisite fine dining setting with dark marble table, gold cutlery, and crystalline wine glasses illuminated by warm pinpoint spotlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqzHEercwF_ObgQzd5XsY0HLc2wwPSeGUFXLCiTLS5TBQPjJ_ijt79gw9mpMQ39_jKCVw82KXTpQzMnVefUG91oghvA-qBanRar4_Okv5fo2Z2whfO6w2ObQZsEfOIKZmfwTq3Tje79hLZQE4g7wFTw2HpeEC2pOcbGTrZ-aRVMPTW9QSZe7Yq3zCVmWp4RzWSUi-M9JJ7SqCiMBfmlO_yjjry5axSePQbWtEyLReXkV6XN4V-PqceiAjbUYa8AyyYWu5-ms55YQf9"/>
+</div>
+</div>
+</section>
+<!-- Call to Action -->
+<section class="max-w-[1440px] mx-auto px-12">
+<div class="glass-panel p-24 rounded-xl text-center bloom-shadow relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+<h2 class="font-display-xl text-primary mb-8 pulsate-text">Join the Vanguard</h2>
+<p class="font-body-lg text-on-surface-variant max-w-xl mx-auto mb-12">
+                    Access to 'The 1 Percent' concepts is restricted to verified accredited partners. We are currently accepting applications for the Q3 2026 intake.
+                </p>
+<button class="bg-primary text-on-primary-container px-12 py-5 rounded-full font-serif font-bold text-xl tracking-widest hover:scale-110 transition-all duration-500 shadow-[0_0_40px_rgba(212,175,55,0.4)]">
+                    APPLY FOR ACCESS
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-[#D4AF37]/5 bg-neutral-950 mt-xl">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-16 max-w-[1440px] mx-auto gap-8 font-serif text-xs uppercase tracking-widest">
+<div class="text-[#D4AF37] font-bold text-2xl">
+                1
+            </div>
+<div class="flex space-x-12">
+<a class="text-neutral-600 hover:text-white transition-colors duration-500" href="#">Privacy</a>
+<a class="text-neutral-600 hover:text-white transition-colors duration-500" href="#">Terms</a>
+<a class="text-neutral-600 hover:text-white transition-colors duration-500" href="#">Contact</a>
+</div>
+<div class="text-neutral-600">
+                © 2026 Elite Excellence
+            </div>
+</div>
+</footer>
+<script>
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.getElementById('cursor');
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        const interactables = document.querySelectorAll('a, button, .group');
+        interactables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                const cursor = document.getElementById('cursor');
+                cursor.style.width = '64px';
+                cursor.style.height = '64px';
+                cursor.style.backgroundColor = 'rgba(212, 175, 55, 0.2)';
+                cursor.style.backdropFilter = 'blur(4px)';
+            });
+            el.addEventListener('mouseleave', () => {
+                const cursor = document.getElementById('cursor');
+                cursor.style.width = '24px';
+                cursor.style.height = '24px';
+                cursor.style.backgroundColor = 'transparent';
+                cursor.style.backdropFilter = 'none';
+            });
+        });
+    </script>
+</body></html>

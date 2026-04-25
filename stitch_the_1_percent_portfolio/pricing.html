@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Pricing & Contact | The 1 Percent</title>
+    <meta name="description" content="Investment tiers tailored for excellence. Join an elite ecosystem designed for those who demand absolute quality.">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#16130b",
+                        "primary-container": "#d4af37",
+                        "on-surface": "#eae1d4",
+                        "background": "#16130b",
+                        "primary": "#f2ca50",
+                        "on-surface-variant": "#d0c5af",
+                        "outline-variant": "#4d4635",
+                        "surface-container-highest": "#38342b",
+                        "surface-container-low": "#1f1b13",
+                        "surface-container": "#231f17"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Noto Serif"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg": ["Noto Serif"],
+                        "label-sm": ["Manrope"],
+                        "headline-md": ["Noto Serif"],
+                        "body-md": ["Manrope"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #16130b;
+            color: #eae1d4;
+            cursor: none;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Sleeker Navigation Links */
+        .nav-link {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            position: relative;
+            background: linear-gradient(90deg, #a3a3a3 0%, #ffffff 50%, #a3a3a3 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link:hover {
+            background-position: right center;
+            background: linear-gradient(90deg, #D4AF37 0%, #fff6d6 50%, #D4AF37 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            transform: translateY(-2px);
+        }
+        .nav-link.active {
+            background: linear-gradient(90deg, #D4AF37 0%, #f2ca50 50%, #D4AF37 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+            padding-bottom: 2px;
+        }
+
+        .custom-cursor {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #D4AF37;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            transition: transform 0.2s, background-color 0.2s, backdrop-filter 0.2s;
+        }
+        .bloom-shadow {
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+        }
+        .pop-hover {
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.4s ease;
+        }
+        .pop-hover:hover {
+            transform: scale(1.02) translateY(-4px);
+            border-color: rgba(212, 175, 55, 0.5) !important;
+        }
+        .diamond-rotate {
+            display: inline-block;
+            animation: rotateDiamond 8s linear infinite;
+            transform-style: preserve-3d;
+        }
+        @keyframes rotateDiamond {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+        .pulse-light {
+            animation: pulseLight 4s ease-in-out infinite;
+        }
+        @keyframes pulseLight {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Shiny Email Box */
+        .shiny-email-box {
+            position: relative;
+            overflow: hidden;
+        }
+        .shiny-gloss {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle 200px at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(212, 175, 55, 0.15), transparent 80%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .shiny-email-box:hover .shiny-gloss {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container cursor-none">
+    <!-- Custom Cursor -->
+    <div class="custom-cursor hidden md:block" id="cursor"></div>
+
+    <!-- TopNavBar -->
+    <header class="fixed top-0 w-full z-50 border-b border-[#D4AF37]/10 bg-neutral-950/80 backdrop-blur-[20px] shadow-[0_10px_40px_rgba(212,175,55,0.1)]">
+        <div class="flex justify-between items-center px-12 h-24 max-w-[1440px] mx-auto">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-4">
+                <div class="diamond-rotate flex items-center cursor-pointer" id="interactive-diamond">
+                    <span class="material-symbols-outlined text-[#D4AF37] text-2xl transition-all duration-300" data-icon="diamond">diamond</span>
+                </div>
+                <a href="index.html" class="flex items-baseline gap-2 text-xl font-bold text-[#D4AF37] tracking-[0.2em] uppercase font-serif antialiased drop-shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:opacity-80 transition-opacity">
+                    <span>The</span>
+                    <span class="text-4xl text-[#f2ca50] animate-pulse drop-shadow-[0_0_15px_rgba(242,202,80,0.8)]">1</span>
+                    <span>Percent</span>
+                </a>
+            </div>
+            <!-- Navigation -->
+            <nav class="hidden md:flex items-center gap-12">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="concepts.html">Concepts</a>
+                <a class="nav-link" href="methodology.html">Methodology</a>
+                <a class="nav-link active" href="pricing.html">Pricing</a>
+            </nav>
+            <!-- Action -->
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com" target="_blank">
+                <button class="bg-gradient-to-tr from-[#D4AF37] to-[#f2ca50] text-[#3c2f00] px-8 py-3 rounded-full font-serif font-bold tracking-[0.2em] uppercase hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                    ENQUIRE
+                </button>
+            </a>
+        </div>
+    </header>
+
+    <main class="pt-40 pb-xl max-w-[1440px] mx-auto px-12 relative flex-grow">
+        <!-- Background Decoration -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/5 blur-[120px] rounded-full pulse-light -z-10"></div>
+
+        <!-- Hero Section -->
+        <header class="text-center mb-24 mt-8">
+            <span class="font-label-sm text-primary tracking-[0.3em] uppercase mb-8 block">Investment tiers</span>
+            <h1 class="text-6xl md:text-8xl font-display-xl font-bold mb-6 tracking-tight leading-none text-transparent bg-clip-text bg-gradient-to-b from-[#f2ca50] to-[#b38815] drop-shadow-[0_0_30px_rgba(212,175,55,0.5)]">Tailored for Excellence</h1>
+            <p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                Join an elite ecosystem designed for those who demand absolute quality. Experience precision, speed, and unrivaled craftsmanship.
+            </p>
+        </header>
+
+        <!-- Pricing Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+            <!-- The Essential -->
+            <div class="bg-[#1f1b13] border border-[#4d4635]/10 p-12 rounded-xl pop-hover bloom-shadow relative flex flex-col">
+                <div class="mb-12">
+                    <h3 class="font-headline-md text-on-surface mb-2">The Essential</h3>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-7xl md:text-8xl font-bold text-primary drop-shadow-[0_0_20px_rgba(242,202,80,0.4)]">$150</span>
+                        <span class="text-on-surface-variant font-label-sm">/PROJECT</span>
+                    </div>
+                </div>
+                <ul class="space-y-4 mb-16 flex-grow">
+                    <li class="flex items-center gap-4 text-on-surface-variant">
+                        <span class="material-symbols-outlined text-primary text-sm" data-icon="check">check</span>
+                        5-day delivery
+                    </li>
+                    <li class="flex items-center gap-4 text-on-surface-variant">
+                        <span class="material-symbols-outlined text-primary text-sm" data-icon="check">check</span>
+                        1 Mockup
+                    </li>
+                    <li class="flex items-center gap-4 text-on-surface-variant">
+                        <span class="material-symbols-outlined text-primary text-sm" data-icon="edit">edit</span>
+                        2 revisions
+                    </li>
+                </ul>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com" target="_blank" class="w-full">
+                    <button class="w-full py-4 rounded-lg bg-[#38342b] border border-[#4d4635] text-on-surface hover:bg-[#4d4635] transition-colors font-semibold">
+                        Select Plan
+                    </button>
+                </a>
+            </div>
+
+            <!-- The Business -->
+            <div class="bg-[#231f17] border-2 border-primary/20 p-12 rounded-xl pop-hover bloom-shadow relative flex flex-col scale-105 z-10">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-[#3c2f00] px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase">Most Popular</div>
+                <div class="mb-12">
+                    <h3 class="font-headline-md text-primary mb-2">The Business</h3>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-7xl md:text-8xl font-bold text-primary drop-shadow-[0_0_20px_rgba(242,202,80,0.4)]">$250</span>
+                        <span class="text-on-surface-variant font-label-sm">/PROJECT</span>
+                    </div>
+                </div>
+                <ul class="space-y-4 mb-16 flex-grow">
+                    <li class="flex items-center gap-4 text-on-surface">
+                        <span class="material-symbols-outlined text-primary text-sm" data-icon="bolt">bolt</span>
+                        Under 3-day delivery
+                    </li>
+                    <li class="flex items-center gap-4 text-on-surface">
+                        <span class="material-symbols-outlined text-primary text-sm" data-icon="edit">edit</span>
+                        5 revisions
+                    </li>
+                    <li class="flex items-center gap-4 text-on-surface">
+                        <span class="material-symbols-outlined text-primary text-sm" data-icon="check">check</span>
+                        2 Mockups + Custom File
+                    </li>
+                </ul>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com" target="_blank" class="w-full">
+                    <button class="w-full py-4 rounded-lg bg-gradient-to-r from-primary to-[#d4af37] text-[#554300] shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform font-bold">
+                        Start Now
+                    </button>
+                </a>
+            </div>
+
+            <!-- The Absolute -->
+            <div class="bg-[#1f1b13] border border-[#4d4635]/10 p-12 rounded-xl pop-hover bloom-shadow relative flex flex-col">
+                <div class="mb-12">
+                    <h3 class="font-headline-md text-on-surface mb-2">The Absolute</h3>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-6xl md:text-7xl font-bold text-primary drop-shadow-[0_0_20px_rgba(242,202,80,0.4)]">Custom</span>
+                    </div>
+                </div>
+                <ul class="space-y-4 mb-16 flex-grow">
+                    <li class="flex items-center gap-4 text-on-surface-variant">
+                        <span class="material-symbols-outlined text-primary text-sm" data-icon="schedule">schedule</span>
+                        Custom delivery
+                    </li>
+                    <li class="flex items-center gap-4 text-on-surface-variant">
+                        <span class="material-symbols-outlined text-primary text-sm" data-icon="all_inclusive">all_inclusive</span>
+                        Unlimited revisions
+                    </li>
+                    <li class="flex items-center gap-4 text-on-surface-variant">
+                        <span class="material-symbols-outlined text-primary text-sm" data-icon="check">check</span>
+                        Custom Mockups
+                    </li>
+                </ul>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com" target="_blank" class="w-full">
+                    <button class="w-full py-4 rounded-lg bg-[#38342b] border border-[#4d4635] text-on-surface hover:bg-[#4d4635] transition-colors font-semibold">
+                        Contact Us
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <!-- Comparison Matrix -->
+        <section class="mt-24 overflow-x-auto mb-32">
+            <h2 class="font-headline-lg text-center mb-12">Compare Feature Alignments & Select Your Pack</h2>
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr class="text-left border-b border-[#4d4635]/20">
+                        <th class="py-12 px-6 font-headline-md text-on-surface">Features</th>
+                        <th class="py-12 px-6 font-label-sm text-primary tracking-widest uppercase">Essential</th>
+                        <th class="py-12 px-6 font-label-sm text-primary tracking-widest uppercase">Business</th>
+                        <th class="py-12 px-6 font-label-sm text-primary tracking-widest uppercase">Absolute</th>
+                    </tr>
+                </thead>
+                <tbody class="text-on-surface-variant">
+                    <tr class="border-b border-[#4d4635]/10 hover:bg-[#1f1b13]/50 transition-colors">
+                        <td class="py-6 px-6 font-medium text-on-surface">Delivery Speed</td>
+                        <td class="py-6 px-6">5 Business Days</td>
+                        <td class="py-6 px-6 text-on-surface">Under 3 Days</td>
+                        <td class="py-6 px-6">Priority Custom</td>
+                    </tr>
+                    <tr class="border-b border-[#4d4635]/10 hover:bg-[#1f1b13]/50 transition-colors">
+                        <td class="py-6 px-6 font-medium text-on-surface">Revision Cycle</td>
+                        <td class="py-6 px-6">2 Rounds</td>
+                        <td class="py-6 px-6">5 Rounds</td>
+                        <td class="py-6 px-6 text-on-surface">Unlimited</td>
+                    </tr>
+                    <tr class="border-b border-[#4d4635]/10 hover:bg-[#1f1b13]/50 transition-colors">
+                        <td class="py-6 px-6 font-medium text-on-surface">Pre-service Mockups</td>
+                        <td class="py-6 px-6">1 Mockup</td>
+                        <td class="py-6 px-6 text-on-surface">2 Mockups + Custom Source</td>
+                        <td class="py-6 px-6">Custom Scope</td>
+                    </tr>
+                    <tr class="border-b border-[#4d4635]/10 hover:bg-[#1f1b13]/50 transition-colors">
+                        <td class="py-6 px-6 font-medium text-on-surface">Asset Ownership</td>
+                        <td class="py-6 px-6">Standard</td>
+                        <td class="py-6 px-6">Full Digital</td>
+                        <td class="py-6 px-6 text-on-surface">Exclusive Rights</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Interactive Email Section -->
+        <section class="mt-24">
+            <h3 class="font-headline-lg mb-6 text-center text-[#D4AF37] drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">Invest for the best</h3>
+            <p class="text-on-surface-variant text-body-lg mb-12 text-center max-w-2xl mx-auto">
+                We don't just provide services; we curate experiences for the most discerning clients. Every pixel, every line of code, and every strategy is forged with the precision of excellence.
+            </p>
+            
+            <div class="relative max-w-3xl mx-auto group mt-16">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/20 via-[#fff6d6]/20 to-[#D4AF37]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div class="relative w-full overflow-hidden rounded-2xl border border-[#D4AF37]/30 bg-[#38342b] p-16 cursor-pointer shiny-email-box" id="emailBox" onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com', '_blank')">
+                    <div class="shiny-gloss" id="glossEffect"></div>
+                    <div class="relative z-10 flex flex-col items-center justify-center pointer-events-none">
+                        <span class="material-symbols-outlined text-[#D4AF37] text-6xl mb-6 drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">mail</span>
+                        <span class="font-serif text-3xl md:text-4xl text-[#D4AF37] tracking-wider mb-4 drop-shadow-[0_0_10px_rgba(212,175,55,0.2)]">the1percentwebtech@gmail.com</span>
+                        <span class="font-label-sm uppercase tracking-[0.3em] text-on-surface-variant">Click to initiate correspondence</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-950 w-full border-t border-[#D4AF37]/5 mt-auto relative z-10">
+        <div class="flex flex-col md:flex-row justify-between items-center w-full max-w-7xl mx-auto px-12 py-12">
+            <div class="flex flex-col gap-xs items-center md:items-start mb-8 md:mb-0">
+                <span class="flex items-baseline gap-2 text-xl font-bold text-[#D4AF37] tracking-[0.2em] uppercase font-serif antialiased">
+                    <span>The</span>
+                    <span class="text-3xl text-[#f2ca50] animate-pulse drop-shadow-[0_0_15px_rgba(242,202,80,0.8)]">1</span>
+                    <span>Percent</span>
+                </span>
+                <span class="font-serif text-sm tracking-normal text-neutral-500 mt-1">© 2026 The 1 Percent. All rights reserved.</span>
+            </div>
+            <div class="flex gap-8 items-center">
+                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#D4AF37] transition-colors ease-in-out duration-300" href="privacy.html">Privacy Policy</a>
+                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#D4AF37] transition-colors ease-in-out duration-300" href="terms.html">Terms of Service</a>
+                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#D4AF37] transition-colors ease-in-out duration-300" href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com" target="_blank">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 12 + 'px';
+            cursor.style.top = e.clientY - 12 + 'px';
+        });
+
+        const interactables = document.querySelectorAll('a, button, .pop-hover, .shiny-email-box');
+        interactables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(2.6)';
+                cursor.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
+                cursor.style.backdropFilter = 'blur(4px)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.backgroundColor = 'transparent';
+                cursor.style.backdropFilter = 'none';
+            });
+        });
+
+        // Shiny Email Box cursor tracking
+        const emailBox = document.getElementById('emailBox');
+        if (emailBox) {
+            emailBox.addEventListener('mousemove', e => {
+                const rect = emailBox.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                emailBox.style.setProperty('--mouse-x', `${x}px`);
+                emailBox.style.setProperty('--mouse-y', `${y}px`);
+            });
+        }
+
+        // Diamond Animation Logic
+        const diamondContainer = document.getElementById('interactive-diamond');
+        if (diamondContainer) {
+            let isAnimating = false;
+            diamondContainer.addEventListener('click', () => {
+                if (isAnimating) return;
+                isAnimating = true;
+                const iconSpan = diamondContainer.querySelector('.material-symbols-outlined');
+                
+                diamondContainer.style.animation = 'rotateDiamond 0.5s linear infinite';
+                diamondContainer.style.filter = 'blur(2px)';
+                
+                setTimeout(() => {
+                    diamondContainer.style.animation = 'none';
+                    diamondContainer.style.transform = 'rotateY(0deg)';
+                    diamondContainer.style.filter = 'none';
+                    iconSpan.textContent = '1';
+                    iconSpan.classList.remove('material-symbols-outlined');
+                    iconSpan.classList.add('font-serif', 'text-3xl', 'font-bold');
+                    
+                    setTimeout(() => {
+                        iconSpan.textContent = 'diamond';
+                        iconSpan.classList.add('material-symbols-outlined');
+                        iconSpan.classList.remove('font-serif', 'text-3xl', 'font-bold');
+                        diamondContainer.style.animation = 'rotateDiamond 8s linear infinite';
+                        isAnimating = false;
+                    }, 1500);
+                }, 1000);
+            });
+        }
+    </script>
+</body>
+</html>

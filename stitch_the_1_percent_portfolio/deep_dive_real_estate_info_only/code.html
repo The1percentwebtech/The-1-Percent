@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Parametric Design &amp; Biophilic Core | Elite Excellence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#343027",
+                        "on-primary": "#3c2f00",
+                        "surface-container-highest": "#38342b",
+                        "surface": "#16130b",
+                        "on-secondary-fixed": "#261a00",
+                        "on-secondary": "#402d00",
+                        "primary-container": "#d4af37",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#110e07",
+                        "on-tertiary-fixed-variant": "#27438a",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#00174b",
+                        "surface-dim": "#16130b",
+                        "secondary-fixed": "#ffdfa0",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "on-primary-fixed-variant": "#574500",
+                        "tertiary-fixed": "#dbe1ff",
+                        "surface-container-low": "#1f1b13",
+                        "on-surface": "#eae1d4",
+                        "background": "#16130b",
+                        "primary": "#f2ca50",
+                        "on-tertiary": "#082b72",
+                        "on-surface-variant": "#d0c5af",
+                        "on-background": "#eae1d4",
+                        "tertiary-fixed-dim": "#b4c5ff",
+                        "primary-fixed-dim": "#e9c349",
+                        "on-tertiary-container": "#254188",
+                        "surface-variant": "#38342b",
+                        "tertiary": "#bfcdff",
+                        "secondary-fixed-dim": "#fbbc00",
+                        "on-error": "#690005",
+                        "secondary": "#ffe2ab",
+                        "error": "#ffb4ab",
+                        "on-primary-container": "#554300",
+                        "inverse-surface": "#eae1d4",
+                        "outline-variant": "#4d4635",
+                        "tertiary-container": "#97b0ff",
+                        "surface-tint": "#e9c349",
+                        "surface-bright": "#3d392f",
+                        "inverse-primary": "#735c00",
+                        "surface-container": "#231f17",
+                        "primary-fixed": "#ffe088",
+                        "on-secondary-container": "#6d5000",
+                        "outline": "#99907c",
+                        "surface-container-high": "#2d2a21",
+                        "secondary-container": "#ffbf00",
+                        "on-primary-fixed": "#241a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "80px",
+                        "sm": "12px",
+                        "container-max": "1280px",
+                        "md": "24px",
+                        "gutter": "32px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "lg": "48px"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Noto Serif"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg": ["Noto Serif"],
+                        "label-sm": ["Manrope"],
+                        "headline-md": ["Noto Serif"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "display-xl": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #16130b;
+            color: #eae1d4;
+            cursor: none;
+        }
+        .custom-cursor {
+            position: fixed;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #d4af37;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            transition: width 0.3s, height 0.3s, background 0.3s, transform 0.1s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .custom-cursor::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: #f2ca50;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #f2ca50;
+        }
+        .glass-panel {
+            background: rgba(22, 19, 11, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        .bloom-shadow {
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.15);
+        }
+        .pulsate-gold {
+            animation: pulsate 3s infinite ease-in-out;
+        }
+        @keyframes pulsate {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        .diamond-rotate {
+            animation: rotateDiamond 8s infinite linear;
+        }
+        @keyframes rotateDiamond {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="font-body-md bg-background text-on-background">
+<div class="custom-cursor hidden md:flex" id="cursor"></div>
+<nav class="fixed top-0 w-full z-50 border-b border-[#D4AF37]/10 bg-neutral-950/80 backdrop-blur-[20px] shadow-[0_10px_40px_rgba(212,175,55,0.1)]">
+<div class="flex justify-between items-center px-12 h-24 max-w-[1440px] mx-auto">
+<div class="text-4xl font-serif font-bold text-[#D4AF37] drop-shadow-[0_0_20px_rgba(212,175,55,0.3)] font-display-xl tracking-wide">
+                1
+            </div>
+<div class="hidden md:flex items-center gap-gutter font-serif tracking-wide">
+<a class="text-neutral-400 hover:text-neutral-100 hover:text-[#D4AF37] hover:scale-105 transition-all duration-300" href="#">Home</a>
+<a class="text-[#D4AF37] border-b border-[#D4AF37] pb-1 hover:scale-105 transition-all duration-300" href="#">Concepts</a>
+<a class="text-neutral-400 hover:text-neutral-100 hover:text-[#D4AF37] hover:scale-105 transition-all duration-300" href="#">Methodology</a>
+<a class="text-neutral-400 hover:text-neutral-100 hover:text-[#D4AF37] hover:scale-105 transition-all duration-300" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-[#D4AF37] diamond-rotate text-2xl" data-icon="diamond">diamond</span>
+<span class="font-serif tracking-widest uppercase text-xs text-[#D4AF37] opacity-80">Enquire</span>
+</div>
+</div>
+</nav>
+<main class="pt-24 min-h-screen">
+<section class="relative h-[819px] flex items-center justify-center overflow-hidden px-12">
+<div class="absolute inset-0 z-0">
+<img alt="Architectural Masterpiece" class="w-full h-full object-cover opacity-40 scale-105" data-alt="Ultra-modern parametric architectural structure with sweeping white curves and glass facades at twilight, reflected in a serene pool of water." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1791o6HgWjwyVMpGOAs1S0yam47FdzS6ROARmOU9QSa8wLNl8yfLiClI-7X0f_hK8SD2lAvTEuXOxA-p7MPapQSDbC5Na5cQ7B3gCPBhcfgBAQm3CyLHiJUR8Da9vaPh2Y9DjC95zjhIGa7SZb1gqfeZ3m8c1QYlGtRiTWmS6brQKBctnbqkmgfKZbf_RJQ2rJHsFUyiWMmAPZXHsIA3ehFUbiLpfiB3IxNvcjXouRndyLGqNrlHVKr6y8kJQjQdWjKCjfor-ANtx"/>
+<div class="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background"></div>
+</div>
+<div class="relative z-10 text-center max-w-4xl space-y-md">
+<h1 class="font-display-xl text-display-xl text-primary drop-shadow-2xl">
+                    The Architecture of <span class="text-on-surface">Intent</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto opacity-80">
+                    A visual deep dive into the dual pillars of modern luxury: where computational precision meets the organic pulse of nature.
+                </p>
+</div>
+</section>
+<section class="py-xl px-12 max-w-[1440px] mx-auto grid grid-cols-12 gap-gutter">
+<div class="col-span-12 md:col-span-7 space-y-lg">
+<div class="group relative overflow-hidden rounded-xl border border-[#D4AF37]/10 glass-panel bloom-shadow p-base transition-all duration-700 hover:border-[#D4AF37]/50 hover:translate-y-[-4px] cubic-bezier(0.34, 1.56, 0.64, 1)">
+<img alt="Parametric Facade" class="w-full aspect-[16/10] object-cover rounded-lg" data-alt="Extreme close-up of a parametric building facade showing intricate geometric patterns and interlocking gold-tinted metallic structures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBY2nBJaUOstMFSfg2TT6Qtk7leh5mrfrdDA_lVBrLK2NWGY5iC7ffu2v19kM534EBNkhLrDlR1OpCNQXW0PmtioHXbvD1HGzJGxWqVb8BBCoQlCuvPlHus1oTpd_LFbs7NUaFH14qniItgSOr5tbbnwNfmqxq8J8C3WW9qztjdGa6Po1tKojis78Ot3yQpRr9aabfwZBrij-EuxUcdxOtO5zFV-Kf2QnLgxaPNNgBt6uWgi1cJp1vs6RL2BN6Khnhzfmn71UlcOteK"/>
+</div>
+<div class="space-y-md pr-gutter">
+<h2 class="font-headline-lg text-headline-lg text-primary">Parametric Design Integrity</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md text-on-surface-variant font-body-md">
+<p>
+                            At the intersection of mathematics and art lies our core philosophy. We utilize advanced algorithmic modeling to ensure that every structural curve is not just aesthetically arresting, but mathematically optimized for structural efficiency and environmental performance.
+                        </p>
+<p>
+                            This computational rigor allows for unprecedented formal freedom. It ensures that the integrity of the design is maintained from the initial digital scan to the final physical extrusion, creating a seamless narrative of continuous surfaces.
+                        </p>
+</div>
+<div class="pt-md flex gap-gutter border-t border-outline-variant/30">
+<div class="space-y-xs">
+<span class="block font-label-sm text-label-sm text-primary uppercase tracking-widest">Precision</span>
+<span class="block text-2xl font-serif text-on-surface">0.001mm Tolerance</span>
+</div>
+<div class="space-y-xs">
+<span class="block font-label-sm text-label-sm text-primary uppercase tracking-widest">Logic</span>
+<span class="block text-2xl font-serif text-on-surface">Recursive Iteration</span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-5 flex flex-col justify-end space-y-lg">
+<div class="space-y-md">
+<h2 class="font-headline-lg text-headline-lg text-primary text-right md:text-left">Biophilic Core</h2>
+<p class="font-body-md text-on-surface-variant text-right md:text-left">
+                        Luxury is defined by our connection to the living world. The Biophilic Core integrates living ecosystems directly into the structural spine, utilizing vertical hydro-gardens and natural air filtration.
+                    </p>
+</div>
+<div class="group relative overflow-hidden rounded-xl border border-[#D4AF37]/10 glass-panel bloom-shadow p-base transition-all duration-700 hover:border-[#D4AF37]/50 hover:translate-y-[-4px] cubic-bezier(0.34, 1.56, 0.64, 1)">
+<img alt="Biophilic Interior" class="w-full aspect-[4/5] object-cover rounded-lg" data-alt="Interior courtyard of a luxury villa featuring a multi-story vertical garden, waterfall feature, and soft ambient gold lighting filtering through leaves." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWc2wwgtszeLBhe5cu1l-1KBiMpQAK_SsXZSB-JEDhyhFcDKpv6QMS6_6Bg3LrvxzygHs5ra-gBxGQZwWtsfBgkTNN5Fn2O1uMNB17YqPJox1ugeo4CCbavvF96wXLukP55_3FbMqhD7bYevYrZsBGgUxEMVeptSMfl07tXKD__-XCdapYlNBQKEKasdhUrz9Driov6sZMkcpad_AcmqixiDi3qZKLBeoc96EUjBm5dEZDr9AYXhzraDDDCYnR7d8G4BY46gR1US_A"/>
+<div class="absolute bottom-md right-md bg-background/60 backdrop-blur-md p-md rounded-lg border border-[#D4AF37]/20">
+<span class="material-symbols-outlined text-primary mb-xs block" data-icon="energy_savings_leaf">energy_savings_leaf</span>
+<p class="text-xs font-label-sm uppercase tracking-widest text-on-surface">Pulse Oxygenation</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-xl px-12 bg-surface-container-low/30">
+<div class="max-w-[1440px] mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="p-lg space-y-md border-l border-[#D4AF37]/20">
+<span class="text-primary font-display-xl opacity-30">01</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Thermal Equilibrium</h3>
+<p class="text-on-surface-variant font-body-md">Utilizing the high thermal mass of specialized obsidian composites to maintain year-round internal comfort without mechanical reliance.</p>
+</div>
+<div class="p-lg space-y-md border-l border-[#D4AF37]/20">
+<span class="text-primary font-display-xl opacity-30">02</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Kinetic Luminance</h3>
+<p class="text-on-surface-variant font-body-md">Smart facades that track the solar path, adjusting transparency and shadow-play to create a living tapestry of light within the residence.</p>
+</div>
+<div class="p-lg space-y-md border-l border-[#D4AF37]/20">
+<span class="text-primary font-display-xl opacity-30">03</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Acoustic Void</h3>
+<p class="text-on-surface-variant font-body-md">Geometric dampening systems inspired by anechoic chambers, providing a sanctuary of absolute silence amidst the urban pulse.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-xl px-12 text-center">
+<div class="max-w-3xl mx-auto space-y-lg">
+<div class="inline-block p-4 rounded-full border border-[#D4AF37]/20 glass-panel pulsate-gold">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="architecture">architecture</span>
+</div>
+<h2 class="font-display-xl text-headline-lg text-on-surface">The Future of Excellence</h2>
+<div class="h-px w-24 bg-[#D4AF37] mx-auto opacity-50"></div>
+<p class="text-on-surface-variant font-body-lg italic">
+                    "Architecture should speak of its time and place, but yearn for timelessness."
+                </p>
+</div>
+</section>
+</main>
+<footer class="w-full border-t border-[#D4AF37]/5 bg-neutral-950 border-t border-neutral-900">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-16 max-w-[1440px] mx-auto gap-8">
+<div class="text-[#D4AF37] font-bold font-serif text-2xl tracking-tighter">
+                Elite Excellence
+            </div>
+<div class="flex gap-gutter font-serif text-xs uppercase tracking-widest text-neutral-600">
+<a class="hover:text-white transition-colors duration-500" href="#">Privacy</a>
+<a class="hover:text-white transition-colors duration-500" href="#">Terms</a>
+<a class="hover:text-white transition-colors duration-500" href="#">Contact</a>
+</div>
+<div class="text-neutral-600 font-serif text-xs uppercase tracking-widest">
+                © 2026 Elite Excellence
+            </div>
+</div>
+</footer>
+<script>
+        const cursor = document.getElementById('cursor');
+        
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        const interactables = document.querySelectorAll('a, button, .group, .material-symbols-outlined');
+        interactables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.width = '64px';
+                cursor.style.height = '64px';
+                cursor.style.background = 'rgba(212, 175, 55, 0.15)';
+                cursor.style.backdropFilter = 'blur(4px)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.width = '24px';
+                cursor.style.height = '24px';
+                cursor.style.background = 'transparent';
+                cursor.style.backdropFilter = 'none';
+            });
+        });
+    </script>
+</body></html>

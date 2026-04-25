@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#3d392f",
+                    "on-primary-fixed-variant": "#574500",
+                    "on-error": "#690005",
+                    "inverse-surface": "#eae1d4",
+                    "on-background": "#eae1d4",
+                    "inverse-primary": "#735c00",
+                    "primary-fixed-dim": "#e9c349",
+                    "on-secondary-container": "#6d5000",
+                    "on-surface-variant": "#d0c5af",
+                    "primary-fixed": "#ffe088",
+                    "surface-tint": "#e9c349",
+                    "primary-container": "#d4af37",
+                    "on-tertiary": "#082b72",
+                    "tertiary-container": "#97b0ff",
+                    "inverse-on-surface": "#343027",
+                    "on-secondary-fixed": "#261a00",
+                    "tertiary-fixed": "#dbe1ff",
+                    "primary": "#f2ca50",
+                    "on-primary": "#3c2f00",
+                    "surface-dim": "#16130b",
+                    "surface": "#16130b",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "outline-variant": "#4d4635",
+                    "surface-container-high": "#2d2a21",
+                    "outline": "#99907c",
+                    "surface-container-highest": "#38342b",
+                    "on-tertiary-fixed": "#00174b",
+                    "on-primary-fixed": "#241a00",
+                    "surface-variant": "#38342b",
+                    "on-error-container": "#ffdad6",
+                    "secondary-fixed": "#ffdfa0",
+                    "on-tertiary-container": "#254188",
+                    "secondary": "#ffe2ab",
+                    "background": "#16130b",
+                    "on-secondary": "#402d00",
+                    "error": "#ffb4ab",
+                    "secondary-fixed-dim": "#fbbc00",
+                    "tertiary": "#bfcdff",
+                    "surface-container-lowest": "#110e07",
+                    "surface-container": "#231f17",
+                    "error-container": "#93000a",
+                    "on-primary-container": "#554300",
+                    "on-tertiary-fixed-variant": "#27438a",
+                    "tertiary-fixed-dim": "#b4c5ff",
+                    "surface-container-low": "#1f1b13",
+                    "secondary-container": "#ffbf00",
+                    "on-surface": "#eae1d4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "container-max": "1280px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "lg": "48px",
+                    "gutter": "32px",
+                    "xl": "80px",
+                    "sm": "12px"
+            },
+            "fontFamily": {
+                    "display-xl": ["Noto Serif"],
+                    "headline-lg": ["Noto Serif"],
+                    "body-md": ["Manrope"],
+                    "headline-md": ["Noto Serif"],
+                    "label-sm": ["Manrope"],
+                    "body-lg": ["Manrope"]
+            },
+            "fontSize": {
+                    "display-xl": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #16130b;
+            cursor: none;
+            overflow-x: hidden;
+        }
+
+        .custom-cursor {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #d4af37;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .galaxy-bg {
+            background: radial-gradient(circle at center, #1a1710 0%, #16130b 100%);
+            position: relative;
+        }
+
+        .galaxy-bg::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .gold-ray {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            width: 40%;
+            left: -50%;
+            animation: move-ray 12s infinite linear;
+        }
+
+        @keyframes move-ray {
+            from { transform: translateX(0); }
+            to { transform: translateX(400%); }
+        }
+
+        .ticker-scroll {
+            animation: ticker 30s linear infinite;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .bloom-shadow {
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+        }
+
+        .diamond-rotate {
+            display: inline-block;
+            animation: rotate-y 4s infinite linear;
+        }
+
+        @keyframes rotate-y {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        .glow-pulse {
+            animation: glow-pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { text-shadow: 0 0 5px rgba(212, 175, 55, 0.2); }
+            50% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.6); }
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Custom Cursor Orb -->
+<div class="custom-cursor" id="cursor">
+<div class="absolute inset-0 bg-primary-container opacity-20 rounded-full animate-ping"></div>
+</div>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full border-b border-yellow-600/10 bg-neutral-950/80 backdrop-blur-[20px] z-50 shadow-[0_0_40px_rgba(212,175,55,0.1)]">
+<div class="flex justify-between items-center w-full max-w-7xl mx-auto px-12 py-6">
+<!-- Brand Logo -->
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-yellow-600 diamond-rotate" data-icon="diamond" style="font-variation-settings: 'FILL' 1;">diamond</span>
+<span class="text-xl font-bold text-yellow-600 tracking-[0.2em] uppercase font-serif antialiased">The 1 Percent</span>
+</div>
+<!-- Navigation -->
+<nav class="hidden md:flex items-center gap-gutter">
+<a class="text-yellow-600 border-b-2 border-yellow-600 pb-1 font-serif antialiased tracking-wide cursor-pointer active:scale-95 duration-200" href="#">Home</a>
+<a class="text-neutral-400 hover:text-yellow-500/80 transition-colors font-serif antialiased tracking-wide cursor-pointer active:scale-95 duration-200" href="#">Concepts</a>
+<a class="text-neutral-400 hover:text-yellow-500/80 transition-colors font-serif antialiased tracking-wide cursor-pointer active:scale-95 duration-200" href="#">Methodology</a>
+<a class="text-neutral-400 hover:text-yellow-500/80 transition-colors font-serif antialiased tracking-wide cursor-pointer active:scale-95 duration-200" href="#">Pricing</a>
+</nav>
+<!-- Action -->
+<button class="bg-gradient-to-r from-primary-container to-primary-fixed-dim text-on-primary font-serif font-bold px-8 py-2 rounded-full hover:scale-105 transition-all duration-300 ease-out bloom-shadow">
+                Enquire
+            </button>
+</div>
+</header>
+<!-- Hero Section -->
+<main class="relative min-h-screen galaxy-bg flex flex-col justify-center overflow-hidden">
+<!-- Rays of Light -->
+<div class="gold-ray" style="top: 20%; animation-delay: 0s;"></div>
+<div class="gold-ray" style="top: 45%; animation-delay: 4s;"></div>
+<div class="gold-ray" style="top: 75%; animation-delay: 8s;"></div>
+<div class="max-w-7xl mx-auto px-12 w-full grid grid-cols-12 relative z-10 pt-20">
+<!-- Content Area -->
+<div class="col-span-12 md:col-span-7 flex flex-col items-start gap-lg">
+<div class="relative">
+<span class="font-display-xl text-[160px] leading-none text-primary-container opacity-20 absolute -top-12 -left-8 pointer-events-none select-none">1</span>
+<h1 class="font-display-xl text-display-xl text-on-surface mb-xs relative">
+                        Elite expansion for the <span class="text-primary-container glow-pulse">visionary</span>.
+                    </h1>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                    Exclusive strategy and implementation for high-caliber assets. Measured excellence for those who define the threshold of success. 
+                </p>
+<div class="flex gap-md mt-sm">
+<button class="bg-gradient-to-r from-primary-container to-primary-fixed-dim text-on-primary px-10 py-4 font-bold tracking-widest uppercase text-label-sm rounded-none border-l-2 border-primary-fixed transition-all hover:translate-x-2">
+                        Enter Inner Circle
+                    </button>
+<div class="flex items-center gap-xs px-6 border-b border-outline-variant">
+<span class="text-label-sm font-bold text-primary tracking-widest uppercase">2026 Registry</span>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="lock">lock</span>
+</div>
+</div>
+</div>
+<!-- Empty Right Space (as requested for future additions) -->
+<div class="hidden md:block col-span-5 relative">
+<div class="absolute inset-0 bg-gradient-to-l from-primary-container/5 to-transparent opacity-30 rounded-full blur-[100px]"></div>
+</div>
+</div>
+<!-- Glassmorphic Revolving Banner -->
+<div class="absolute bottom-0 w-full overflow-hidden bg-neutral-950/40 backdrop-blur-md border-t border-yellow-600/10 py-12">
+<div class="flex ticker-scroll whitespace-nowrap">
+<div class="flex gap-xl px-12 items-center">
+<span class="text-headline-md font-display-xl text-neutral-500 hover:text-primary transition-colors cursor-default">HVAC Specialists</span>
+<span class="material-symbols-outlined text-primary-container opacity-30" data-icon="fiber_manual_record">fiber_manual_record</span>
+<span class="text-headline-md font-display-xl text-neutral-500 hover:text-primary transition-colors cursor-default">Local Businesses</span>
+<span class="material-symbols-outlined text-primary-container opacity-30" data-icon="fiber_manual_record">fiber_manual_record</span>
+<span class="text-headline-md font-display-xl text-neutral-500 hover:text-primary transition-colors cursor-default">Privatized Business</span>
+<span class="material-symbols-outlined text-primary-container opacity-30" data-icon="fiber_manual_record">fiber_manual_record</span>
+<span class="text-headline-md font-display-xl text-neutral-500 hover:text-primary transition-colors cursor-default">New Startups</span>
+<span class="material-symbols-outlined text-primary-container opacity-30" data-icon="fiber_manual_record">fiber_manual_record</span>
+</div>
+<!-- Repeat for seamless scroll -->
+<div class="flex gap-xl px-12 items-center">
+<span class="text-headline-md font-display-xl text-neutral-500 hover:text-primary transition-colors cursor-default">HVAC Specialists</span>
+<span class="material-symbols-outlined text-primary-container opacity-30" data-icon="fiber_manual_record">fiber_manual_record</span>
+<span class="text-headline-md font-display-xl text-neutral-500 hover:text-primary transition-colors cursor-default">Local Businesses</span>
+<span class="material-symbols-outlined text-primary-container opacity-30" data-icon="fiber_manual_record">fiber_manual_record</span>
+<span class="text-headline-md font-display-xl text-neutral-500 hover:text-primary transition-colors cursor-default">Privatized Business</span>
+<span class="material-symbols-outlined text-primary-container opacity-30" data-icon="fiber_manual_record">fiber_manual_record</span>
+<span class="text-headline-md font-display-xl text-neutral-500 hover:text-primary transition-colors cursor-default">New Startups</span>
+<span class="material-symbols-outlined text-primary-container opacity-30" data-icon="fiber_manual_record">fiber_manual_record</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-neutral-950 w-full border-t border-yellow-600/5 mt-0">
+<div class="flex flex-col md:flex-row justify-between items-center w-full max-w-7xl mx-auto px-12 py-12">
+<div class="flex flex-col gap-xs items-center md:items-start mb-lg md:mb-0">
+<span class="text-lg font-bold text-yellow-600 font-serif">The 1 Percent</span>
+<span class="font-serif text-sm tracking-normal text-neutral-500">© 2026 The 1 Percent. All rights reserved.</span>
+</div>
+<div class="flex gap-gutter items-center">
+<a class="font-serif text-sm tracking-normal text-neutral-500 hover:text-yellow-500 transition-colors ease-in-out duration-300" href="#">Privacy Policy</a>
+<a class="font-serif text-sm tracking-normal text-neutral-500 hover:text-yellow-500 transition-colors ease-in-out duration-300" href="#">Terms of Service</a>
+<a class="font-serif text-sm tracking-normal text-neutral-500 hover:text-yellow-500 transition-colors ease-in-out duration-300" href="#">Methodology</a>
+<a class="font-serif text-sm tracking-normal text-neutral-500 hover:text-yellow-500 transition-colors ease-in-out duration-300" href="#">Contact</a>
+</div>
+</div>
+</footer>
+<!-- Interactive Cursor Logic -->
+<script>
+        const cursor = document.getElementById('cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 12 + 'px';
+            cursor.style.top = e.clientY - 12 + 'px';
+        });
+
+        document.querySelectorAll('a, button, .ticker-scroll span').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.width = '64px';
+                cursor.style.height = '64px';
+                cursor.style.background = 'rgba(212, 175, 55, 0.1)';
+                cursor.style.border = '1px solid rgba(212, 175, 55, 0.8)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.width = '24px';
+                cursor.style.height = '24px';
+                cursor.style.background = 'transparent';
+                cursor.style.border = '2px solid #d4af37';
+            });
+        });
+
+        // Periodic Pulsate
+        setInterval(() => {
+            cursor.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                cursor.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    cursor.style.transform = 'scale(1)';
+                }, 500);
+            }, 500);
+        }, 2000);
+    </script>
+</body></html>

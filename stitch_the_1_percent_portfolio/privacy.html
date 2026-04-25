@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Privacy Policy | The 1 Percent</title>
+    <meta name="description" content="Privacy Policy for The 1 Percent portfolio and elite ecosystem.">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#16130b",
+                        "primary-container": "#d4af37",
+                        "surface-container-highest": "#38342b",
+                        "surface-container-low": "#1f1b13",
+                        "on-surface": "#eae1d4",
+                        "background": "#16130b",
+                        "primary": "#f2ca50",
+                        "on-surface-variant": "#d0c5af",
+                        "on-primary-container": "#554300",
+                        "outline-variant": "#4d4635"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Noto Serif"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg": ["Noto Serif"],
+                        "label-sm": ["Manrope"],
+                        "headline-md": ["Noto Serif"],
+                        "body-md": ["Manrope"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #16130b;
+            color: #eae1d4;
+            cursor: none;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Sleeker Navigation Links */
+        .nav-link {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            position: relative;
+            background: linear-gradient(90deg, #a3a3a3 0%, #ffffff 50%, #a3a3a3 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link:hover {
+            background-position: right center;
+            background: linear-gradient(90deg, #D4AF37 0%, #fff6d6 50%, #D4AF37 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            transform: translateY(-2px);
+        }
+
+        .custom-cursor {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #D4AF37;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            transition: transform 0.2s, background-color 0.2s, backdrop-filter 0.2s;
+        }
+        .diamond-rotate {
+            display: inline-block;
+            animation: rotateDiamond 8s linear infinite;
+            transform-style: preserve-3d;
+        }
+        @keyframes rotateDiamond {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+    <!-- Custom Cursor -->
+    <div class="custom-cursor hidden md:block" id="cursor"></div>
+
+    <!-- TopNavBar -->
+    <header class="fixed top-0 w-full z-50 border-b border-[#D4AF37]/10 bg-neutral-950/80 backdrop-blur-[20px] shadow-[0_10px_40px_rgba(212,175,55,0.1)]">
+        <div class="flex justify-between items-center px-12 h-24 max-w-[1440px] mx-auto">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-4">
+                <div class="diamond-rotate flex items-center cursor-pointer" id="interactive-diamond">
+                    <span class="material-symbols-outlined text-[#D4AF37] text-2xl transition-all duration-300" data-icon="diamond">diamond</span>
+                </div>
+                <a href="index.html" class="flex items-baseline gap-2 text-xl font-bold text-[#D4AF37] tracking-[0.2em] uppercase font-serif antialiased drop-shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:opacity-80 transition-opacity">
+                    <span>The</span>
+                    <span class="text-4xl text-[#f2ca50] animate-pulse drop-shadow-[0_0_15px_rgba(242,202,80,0.8)]">1</span>
+                    <span>Percent</span>
+                </a>
+            </div>
+            <!-- Navigation -->
+            <nav class="hidden md:flex items-center gap-12">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="concepts.html">Concepts</a>
+                <a class="nav-link" href="methodology.html">Methodology</a>
+                <a class="nav-link" href="pricing.html">Pricing</a>
+            </nav>
+            <!-- Action -->
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com" target="_blank">
+                <button class="bg-gradient-to-tr from-[#D4AF37] to-[#f2ca50] text-[#3c2f00] px-8 py-3 rounded-full font-serif font-bold tracking-[0.2em] uppercase hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                    ENQUIRE
+                </button>
+            </a>
+        </div>
+    </header>
+
+    <main class="pt-40 pb-xl max-w-4xl mx-auto px-8 relative flex-grow">
+        <h1 class="font-display-xl text-[#D4AF37] mb-8">Privacy Policy</h1>
+        
+        <div class="space-y-8 font-body-lg text-on-surface-variant leading-relaxed">
+            <p><strong>Effective Date:</strong> January 1, 2026</p>
+
+            <h2 class="font-headline-md text-on-surface">1. Introduction</h2>
+            <p>Welcome to The 1 Percent ("Company", "we", "our", "us"). We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website (regardless of where you visit it from) and tell you about your privacy rights and how the law protects you.</p>
+
+            <h2 class="font-headline-md text-on-surface">2. The Data We Collect About You</h2>
+            <p>Personal data, or personal information, means any information about an individual from which that person can be identified. We may collect, use, store and transfer different kinds of personal data about you which we have grouped together as follows:</p>
+            <ul class="list-disc pl-8 space-y-2">
+                <li><strong>Identity Data</strong> includes first name, maiden name, last name, username or similar identifier.</li>
+                <li><strong>Contact Data</strong> includes email address and telephone numbers.</li>
+                <li><strong>Technical Data</strong> includes internet protocol (IP) address, your login data, browser type and version, time zone setting and location.</li>
+            </ul>
+
+            <h2 class="font-headline-md text-on-surface">3. How We Use Your Personal Data</h2>
+            <p>We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following circumstances:</p>
+            <ul class="list-disc pl-8 space-y-2">
+                <li>Where we need to perform the contract we are about to enter into or have entered into with you.</li>
+                <li>Where it is necessary for our legitimate interests (or those of a third party) and your interests and fundamental rights do not override those interests.</li>
+                <li>Where we need to comply with a legal obligation.</li>
+            </ul>
+
+            <h2 class="font-headline-md text-on-surface">4. Data Security</h2>
+            <p>We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorised way, altered or disclosed. In addition, we limit access to your personal data to those employees, agents, contractors and other third parties who have a business need to know.</p>
+            
+            <h2 class="font-headline-md text-on-surface">5. Contact Details</h2>
+            <p>If you have any questions about this privacy policy or our privacy practices, please contact us at:</p>
+            <p class="text-[#D4AF37] font-semibold">the1percentwebtech@gmail.com</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-950 w-full border-t border-[#D4AF37]/5 mt-auto relative z-10">
+        <div class="flex flex-col md:flex-row justify-between items-center w-full max-w-7xl mx-auto px-12 py-12">
+            <div class="flex flex-col gap-xs items-center md:items-start mb-8 md:mb-0">
+                <span class="flex items-baseline gap-2 text-xl font-bold text-[#D4AF37] tracking-[0.2em] uppercase font-serif antialiased">
+                    <span>The</span>
+                    <span class="text-3xl text-[#f2ca50] animate-pulse drop-shadow-[0_0_15px_rgba(242,202,80,0.8)]">1</span>
+                    <span>Percent</span>
+                </span>
+                <span class="font-serif text-sm tracking-normal text-neutral-500 mt-1">© 2026 The 1 Percent. All rights reserved.</span>
+            </div>
+            <div class="flex gap-8 items-center">
+                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#D4AF37] transition-colors ease-in-out duration-300" href="privacy.html">Privacy Policy</a>
+                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#D4AF37] transition-colors ease-in-out duration-300" href="terms.html">Terms of Service</a>
+                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#D4AF37] transition-colors ease-in-out duration-300" href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com" target="_blank">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 12 + 'px';
+            cursor.style.top = e.clientY - 12 + 'px';
+        });
+
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(2.6)';
+                cursor.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
+                cursor.style.backdropFilter = 'blur(4px)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.backgroundColor = 'transparent';
+                cursor.style.backdropFilter = 'none';
+            });
+        });
+
+        // Diamond Animation Logic
+        const diamondContainer = document.getElementById('interactive-diamond');
+        if (diamondContainer) {
+            let isAnimating = false;
+            diamondContainer.addEventListener('click', () => {
+                if (isAnimating) return;
+                isAnimating = true;
+                const iconSpan = diamondContainer.querySelector('.material-symbols-outlined');
+                
+                diamondContainer.style.animation = 'rotateDiamond 0.5s linear infinite';
+                diamondContainer.style.filter = 'blur(2px)';
+                
+                setTimeout(() => {
+                    diamondContainer.style.animation = 'none';
+                    diamondContainer.style.transform = 'rotateY(0deg)';
+                    diamondContainer.style.filter = 'none';
+                    iconSpan.textContent = '1';
+                    iconSpan.classList.remove('material-symbols-outlined');
+                    iconSpan.classList.add('font-serif', 'text-3xl', 'font-bold');
+                    
+                    setTimeout(() => {
+                        iconSpan.textContent = 'diamond';
+                        iconSpan.classList.add('material-symbols-outlined');
+                        iconSpan.classList.remove('font-serif', 'text-3xl', 'font-bold');
+                        diamondContainer.style.animation = 'rotateDiamond 8s linear infinite';
+                        isAnimating = false;
+                    }, 1500);
+                }, 1000);
+            });
+        }
+    </script>
+</body>
+</html>
