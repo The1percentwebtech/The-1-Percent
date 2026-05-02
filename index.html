@@ -8,6 +8,9 @@
     <meta name="description"
         content="Exclusive strategy and implementation for high-caliber assets. Measured excellence for those who define the threshold of success.">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Firebase Compat SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600&amp;display=swap"
         rel="stylesheet" />
@@ -60,18 +63,6 @@
             flex-direction: column;
             min-height: 100vh;
             color: #eae1d4;
-        }
-
-        .custom-cursor {
-            width: 24px;
-            height: 24px;
-            border: 2px solid #d4af37;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease, background 0.3s ease;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
         .nav-link {
@@ -288,10 +279,10 @@
 
 <body class="font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container">
 
-    <!-- Custom Cursor Orb -->
-    <div class="custom-cursor hidden md:flex items-center justify-center" id="cursor">
-        <div class="w-1 h-1 bg-[#f2ca50] rounded-full shadow-[0_0_8px_#f2ca50] absolute"></div>
-        <div class="absolute inset-0 bg-primary-container opacity-20 rounded-full animate-ping"></div>
+    <!-- Custom Cursor -->
+    <div class="hidden md:block pointer-events-none fixed inset-0 z-[9999]">
+        <div id="cursor-dot" class="w-1.5 h-1.5 bg-[#f2ca50] rounded-full absolute -translate-x-1/2 -translate-y-1/2 shadow-[0_0_8px_#f2ca50]"></div>
+        <div id="cursor-ring" class="w-10 h-10 border border-[#d4af37]/40 bg-[#d4af37]/5 rounded-full absolute -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 ease-out"></div>
     </div>
 
     <!-- TopNavBar -->
@@ -304,7 +295,7 @@
                     <span class="material-symbols-outlined text-[#D4AF37] text-2xl transition-all duration-300"
                         data-icon="diamond">diamond</span>
                 </div>
-                <a href="#home" data-target="home"
+                <a href="#home" data-target="home" id="brand-logo-text"
                     class="flex items-baseline gap-2 text-lg md:text-xl font-bold text-[#D4AF37] tracking-[0.2em] uppercase font-serif antialiased drop-shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:opacity-80 transition-opacity">
                     <span>The</span>
                     <span
@@ -987,7 +978,177 @@
             </div>
         </div>
 
+        <!-- ================= ADMIN SECTION ================= -->
+        <div id="admin-section" class="page-section hidden flex-col pt-32 pb-24 max-w-[1440px] mx-auto px-6 md:px-12 w-full min-h-screen relative">
+            <div class="flex justify-between items-end mb-12 border-b border-red-500/20 pb-6">
+                <div>
+                    <span class="font-label-sm text-red-500 tracking-[0.3em] uppercase block mb-2">Restricted Access</span>
+                    <h1 class="font-display-xl text-3xl md:text-5xl text-red-500/90 drop-shadow-[0_0_20px_rgba(239,68,68,0.4)]">Host Protocol</h1>
+                </div>
+                <button onclick="navigate('home')" class="text-neutral-500 hover:text-white flex items-center gap-2"><span class="material-symbols-outlined">logout</span> Exit</button>
+            </div>
+
+            <div class="bg-[#1f1b13] border border-red-500/20 rounded-xl p-6 md:p-8 shadow-[0_0_40px_rgba(239,68,68,0.05)] overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[800px]">
+                    <thead>
+                        <tr class="border-b border-neutral-800 text-xs tracking-widest uppercase text-neutral-500 font-bold">
+                            <th class="pb-4 px-4">#</th>
+                            <th class="pb-4 px-4">Name</th>
+                            <th class="pb-4 px-4">Email</th>
+                            <th class="pb-4 px-4">Work Type</th>
+                            <th class="pb-4 px-4">Days</th>
+                            <th class="pb-4 px-4">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-table-body" class="text-on-surface">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </main>
+
+    <!-- Form Overlay -->
+    <div id="form-overlay" class="fixed inset-0 bg-neutral-950/95 backdrop-blur-xl z-[100] hidden flex-col items-center justify-center p-4 md:p-12 transition-opacity duration-500 opacity-0 overflow-y-auto">
+        <button onclick="closeFormOverlay()" class="absolute top-8 right-6 text-[#D4AF37] hover:opacity-80 transition-opacity z-10">
+            <span class="material-symbols-outlined text-4xl">close</span>
+        </button>
+        
+        <div class="max-w-3xl w-full bg-[#16130b] border border-[#d4af37]/20 rounded-2xl shadow-[0_0_40px_rgba(212,175,55,0.15)] p-6 md:p-12 relative overflow-hidden my-auto mt-24 mb-12">
+            <div class="absolute top-0 left-0 w-full h-1 bg-neutral-900">
+                <div id="form-progress" class="h-full bg-gradient-to-r from-[#d4af37] to-[#f2ca50] w-1/3 transition-all duration-500"></div>
+            </div>
+            
+            <!-- Page 1: Project Details -->
+            <div id="form-page-1" class="form-page flex flex-col gap-8">
+                <div class="text-center mb-4">
+                    <span class="font-label-sm text-primary tracking-[0.3em] uppercase block mb-2">Step 1 of 3</span>
+                    <h2 class="font-display-xl text-3xl md:text-4xl text-[#d4af37]">Project Architecture</h2>
+                </div>
+                
+                <div class="flex flex-col gap-4">
+                    <label class="font-headline-md text-lg text-on-surface">What type of digital architecture do you require?</label>
+                    <div class="flex flex-wrap gap-3" id="work-type-list">
+                        <div class="form-card work-card flex-1 min-w-[140px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-4 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Banner">Banner</div>
+                        <div class="form-card work-card flex-1 min-w-[140px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-4 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Startups">Startups</div>
+                        <div class="form-card work-card flex-1 min-w-[140px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-4 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Offices">Offices</div>
+                        <div class="form-card work-card flex-1 min-w-[140px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-4 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Plumbing">Plumbing</div>
+                        <div class="form-card work-card flex-1 min-w-[140px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-4 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Local Business">Local Business</div>
+                        <div class="form-card work-card flex-1 min-w-[140px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-4 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Administrative">Administrative</div>
+                        <div class="form-card work-card flex-1 min-w-[140px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-4 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Custom Web Design">Custom Web Design</div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col gap-3">
+                    <label class="font-headline-md text-lg text-on-surface">Estimated days required for completion?</label>
+                    <input type="number" id="input-days" class="w-full bg-[#1f1b13] border border-[#d4af37]/30 rounded-lg p-4 text-on-surface focus:outline-none focus:border-[#d4af37] transition-colors" placeholder="e.g. 14" min="1" required>
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <label class="font-headline-md text-lg text-on-surface">How did you hear about us? <span class="text-sm text-neutral-500">(Optional)</span></label>
+                    <div class="flex flex-wrap gap-3" id="source-list">
+                        <div class="form-card source-card flex-1 min-w-[100px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-3 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Advertise">Advertise</div>
+                        <div class="form-card source-card flex-1 min-w-[100px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-3 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Representative">Rep</div>
+                        <div class="form-card source-card flex-1 min-w-[100px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-3 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Friends">Friends</div>
+                        <div class="form-card source-card flex-1 min-w-[100px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-3 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Business">Business</div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 text-right">
+                    <button onclick="nextPage(2)" class="bg-[#d4af37] text-[#16130b] px-10 py-3 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform">Proceed</button>
+                </div>
+            </div>
+
+            <!-- Page 2: Client Info -->
+            <div id="form-page-2" class="form-page hidden flex-col gap-6">
+                <div class="text-center mb-4">
+                    <span class="font-label-sm text-primary tracking-[0.3em] uppercase block mb-2">Step 2 of 3</span>
+                    <h2 class="font-display-xl text-3xl md:text-4xl text-[#d4af37]">Identity & Objectives</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex flex-col gap-2">
+                        <label class="text-xs font-bold text-[#d4af37] uppercase tracking-widest">First Name *</label>
+                        <input type="text" id="input-firstname" class="w-full bg-[#1f1b13] border border-[#d4af37]/30 rounded-lg p-3 text-on-surface focus:outline-none focus:border-[#d4af37] transition-colors" required>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-xs font-bold text-[#d4af37] uppercase tracking-widest">Last Name *</label>
+                        <input type="text" id="input-lastname" class="w-full bg-[#1f1b13] border border-[#d4af37]/30 rounded-lg p-3 text-on-surface focus:outline-none focus:border-[#d4af37] transition-colors" required>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex flex-col gap-2">
+                        <label class="text-xs font-bold text-[#d4af37] uppercase tracking-widest">Email Address *</label>
+                        <input type="email" id="input-email" class="w-full bg-[#1f1b13] border border-[#d4af37]/30 rounded-lg p-3 text-on-surface focus:outline-none focus:border-[#d4af37] transition-colors" required>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-xs font-bold text-[#d4af37] uppercase tracking-widest">Phone Number <span class="text-neutral-500 font-normal">(Opt)</span></label>
+                        <input type="tel" id="input-phone" class="w-full bg-[#1f1b13] border border-[#d4af37]/30 rounded-lg p-3 text-on-surface focus:outline-none focus:border-[#d4af37] transition-colors">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex flex-col gap-2">
+                        <label class="text-xs font-bold text-[#d4af37] uppercase tracking-widest">Company/Business Name <span class="text-neutral-500 font-normal">(Opt)</span></label>
+                        <input type="text" id="input-company" class="w-full bg-[#1f1b13] border border-[#d4af37]/30 rounded-lg p-3 text-on-surface focus:outline-none focus:border-[#d4af37] transition-colors">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-xs font-bold text-[#d4af37] uppercase tracking-widest">Backup Email <span class="text-neutral-500 font-normal">(Opt)</span></label>
+                        <input type="email" id="input-backup-email" class="w-full bg-[#1f1b13] border border-[#d4af37]/30 rounded-lg p-3 text-on-surface focus:outline-none focus:border-[#d4af37] transition-colors">
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-2 mt-2">
+                    <label class="text-xs font-bold text-[#d4af37] uppercase tracking-widest">What is the primary goal or expected outcome for this project? *</label>
+                    <textarea id="input-goal" rows="3" class="w-full bg-[#1f1b13] border border-[#d4af37]/30 rounded-lg p-3 text-on-surface focus:outline-none focus:border-[#d4af37] transition-colors resize-none" required></textarea>
+                </div>
+
+                <div class="mt-6 flex justify-between items-center">
+                    <button onclick="nextPage(1)" class="text-[#d4af37] px-6 py-3 font-bold uppercase tracking-widest hover:opacity-80 transition-opacity">Back</button>
+                    <button onclick="nextPage(3)" class="bg-[#d4af37] text-[#16130b] px-10 py-3 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform">Proceed</button>
+                </div>
+            </div>
+
+            <!-- Page 3: Terms -->
+            <div id="form-page-3" class="form-page hidden flex-col gap-8">
+                <div class="text-center mb-4">
+                    <span class="font-label-sm text-primary tracking-[0.3em] uppercase block mb-2">Step 3 of 3</span>
+                    <h2 class="font-display-xl text-3xl md:text-4xl text-[#d4af37]">Mutual Consent</h2>
+                </div>
+                
+                <div class="bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-6 h-48 overflow-y-auto text-on-surface-variant font-body-md text-sm">
+                    <p class="mb-4">By proceeding, you agree to the terms of engagement with The 1 Percent.</p>
+                    <p class="mb-4"><strong>1. Legitimacy & Integrity:</strong> Both parties agree to operate with absolute transparency, legitimacy, and professional integrity throughout the duration of the project.</p>
+                    <p class="mb-4"><strong>2. Leniency & Respect:</strong> We understand the dynamic nature of business. We offer leniency within reasonable bounds and expect mutual respect for time and resources.</p>
+                    <p class="mb-4"><strong>3. Commitment:</strong> This application signifies a serious intent to collaborate. Our resources are dedicated to executing high-caliber digital architecture.</p>
+                    <p><strong>4. Confidentiality:</strong> All shared business details, strategies, and intellectual property remain strictly confidential between both parties.</p>
+                </div>
+
+                <label class="flex items-start gap-4 cursor-pointer group p-2">
+                    <div class="relative flex items-center justify-center mt-1">
+                        <input type="checkbox" id="input-consent" class="peer appearance-none w-6 h-6 border-2 border-[#d4af37]/50 rounded checked:bg-[#d4af37] checked:border-[#d4af37] transition-colors cursor-pointer" required>
+                        <span class="material-symbols-outlined absolute text-[#16130b] text-lg opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity">check</span>
+                    </div>
+                    <span class="text-on-surface text-base group-hover:text-[#d4af37] transition-colors leading-snug">I agree to the terms and would like to work with The 1 Percent on mutual consent and formality. *</span>
+                </label>
+
+                <div class="mt-6 flex justify-between items-center">
+                    <button onclick="nextPage(2)" class="text-[#d4af37] px-6 py-3 font-bold uppercase tracking-widest hover:opacity-80 transition-opacity">Back</button>
+                    <button onclick="submitForm()" class="bg-gradient-to-r from-[#d4af37] to-[#f2ca50] text-[#16130b] px-8 py-3 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform shadow-[0_0_20px_rgba(212,175,55,0.4)]">Submit Application</button>
+                </div>
+            </div>
+            
+            <!-- Success Screen -->
+            <div id="form-success" class="form-page hidden flex-col items-center justify-center text-center gap-6 py-12">
+                <span class="material-symbols-outlined text-6xl text-[#d4af37] mb-4">task_alt</span>
+                <h2 class="font-display-xl text-3xl md:text-4xl text-[#d4af37]">Application Received</h2>
+                <p class="text-on-surface-variant max-w-md mx-auto text-lg">Your details have been securely recorded. We will review your project parameters and contact you shortly.</p>
+                <button onclick="closeFormOverlay()" class="mt-8 border border-[#d4af37] text-[#d4af37] px-10 py-3 rounded-full font-bold uppercase tracking-widest hover:bg-[#d4af37] hover:text-[#16130b] transition-all">Return Home</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-neutral-950 w-full border-t border-[#D4AF37]/5 mt-auto relative z-10">
@@ -1017,10 +1178,10 @@
     </footer>
 
     <script>
-        const cursor = document.getElementById('cursor');
+
 
         // ------------------ ROUTING LOGIC ------------------
-        const sections = ['home', 'concepts', 'methodology', 'pricing', 'terms', 'privacy'];
+        const sections = ['home', 'concepts', 'methodology', 'pricing', 'terms', 'privacy', 'admin'];
         const navLinks = document.querySelectorAll('.nav-link, footer a[data-target]');
 
         // Mobile Menu Logic
@@ -1109,28 +1270,54 @@
         navigate(initialHash);
 
         // ------------------ CURSOR LOGIC ------------------
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorRing = document.getElementById('cursor-ring');
+        
+        let mouseX = 0;
+        let mouseY = 0;
+        let ringX = 0;
+        let ringY = 0;
+
         document.addEventListener('mousemove', (e) => {
-            if (cursor) {
-                cursor.style.left = e.clientX - 12 + 'px';
-                cursor.style.top = e.clientY - 12 + 'px';
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            if (cursorDot) {
+                cursorDot.style.left = mouseX + 'px';
+                cursorDot.style.top = mouseY + 'px';
             }
         });
 
-        const interactables = document.querySelectorAll('a, button, .ticker-scroll span, .group, .pop-hover, .shiny-email-box, .glass-card, .glass-panel');
+        function animateCursor() {
+            let distX = mouseX - ringX;
+            let distY = mouseY - ringY;
+            ringX += distX * 0.15;
+            ringY += distY * 0.15;
+            
+            if (cursorRing) {
+                cursorRing.style.left = ringX + 'px';
+                cursorRing.style.top = ringY + 'px';
+            }
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        const interactables = document.querySelectorAll('a, button, .ticker-scroll span, .group, .pop-hover, .shiny-email-box, .glass-card, .glass-panel, .carousel-dot, select, input');
         interactables.forEach(el => {
             el.addEventListener('mouseenter', () => {
-                cursor.style.width = '64px';
-                cursor.style.height = '64px';
-                cursor.style.background = 'rgba(212, 175, 55, 0.1)';
-                cursor.style.border = '1px solid rgba(212, 175, 55, 0.8)';
-                cursor.style.backdropFilter = 'blur(4px)';
+                if (cursorRing) {
+                    cursorRing.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursorRing.style.backgroundColor = 'rgba(212, 175, 55, 0.15)';
+                    cursorRing.style.borderColor = 'rgba(212, 175, 55, 0.8)';
+                    cursorRing.style.backdropFilter = 'blur(4px)';
+                }
             });
             el.addEventListener('mouseleave', () => {
-                cursor.style.width = '24px';
-                cursor.style.height = '24px';
-                cursor.style.background = 'transparent';
-                cursor.style.border = '2px solid #d4af37';
-                cursor.style.backdropFilter = 'none';
+                if (cursorRing) {
+                    cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorRing.style.backgroundColor = 'rgba(212, 175, 55, 0.05)';
+                    cursorRing.style.borderColor = 'rgba(212, 175, 55, 0.4)';
+                    cursorRing.style.backdropFilter = 'none';
+                }
             });
         });
 
@@ -1329,7 +1516,220 @@
                 emailBox.style.setProperty('--mouse-y', `${y}px`);
             });
         }
+
+        // ------------------ FIREBASE SETUP ------------------
+        const firebaseConfig = {
+            apiKey: "AIzaSyAu7YOeCeate7oMvi5aRMlprOkZd42KJ-E",
+            authDomain: "the1percent-portfolio.firebaseapp.com",
+            projectId: "the1percent-portfolio",
+            storageBucket: "the1percent-portfolio.firebasestorage.app",
+            messagingSenderId: "54481295093",
+            appId: "1:54481295093:web:87b6e837be618c834b17bc"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // ------------------ FORM LOGIC ------------------
+        const formOverlay = document.getElementById('form-overlay');
+        const formProgress = document.getElementById('form-progress');
+        let currentFormPage = 1;
+        let currentLeadId = null;
+
+        document.querySelectorAll('a[href*="mail.google.com"], .shiny-email-box').forEach(el => {
+            if (el.tagName === 'A') {
+                el.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openFormOverlay();
+                });
+            } else {
+                el.removeAttribute('onclick');
+                el.addEventListener('click', () => openFormOverlay());
+            }
+        });
+
+        function openFormOverlay() {
+            formOverlay.classList.remove('hidden');
+            formOverlay.classList.add('flex');
+            setTimeout(() => formOverlay.classList.remove('opacity-0'), 10);
+            currentFormPage = 1;
+            currentLeadId = null; // Reset for new entry
+            showFormPage(1);
+        }
+
+        function closeFormOverlay() {
+            formOverlay.classList.add('opacity-0');
+            setTimeout(() => {
+                formOverlay.classList.add('hidden');
+                formOverlay.classList.remove('flex');
+            }, 500);
+        }
+
+        document.querySelectorAll('.work-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.work-card').forEach(c => c.classList.remove('bg-[#d4af37]/20', 'border-[#d4af37]'));
+                this.classList.add('bg-[#d4af37]/20', 'border-[#d4af37]');
+                document.getElementById('work-type-list').setAttribute('data-selected', this.dataset.value);
+            });
+        });
+
+        document.querySelectorAll('.source-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.source-card').forEach(c => c.classList.remove('bg-[#d4af37]/20', 'border-[#d4af37]'));
+                this.classList.add('bg-[#d4af37]/20', 'border-[#d4af37]');
+                document.getElementById('source-list').setAttribute('data-selected', this.dataset.value);
+            });
+        });
+
+        function showFormPage(pageNumber) {
+            document.querySelectorAll('.form-page').forEach(p => p.classList.add('hidden'));
+            document.querySelectorAll('.form-page').forEach(p => p.classList.remove('flex'));
+            
+            const targetPage = document.getElementById('form-page-' + pageNumber);
+            if(targetPage) {
+                targetPage.classList.remove('hidden');
+                targetPage.classList.add('flex');
+            }
+            
+            formProgress.style.width = (pageNumber / 3) * 100 + '%';
+        }
+
+        function nextPage(pageNumber) {
+            // Validation
+            if (pageNumber === 2 && currentFormPage === 1) {
+                const workType = document.getElementById('work-type-list').getAttribute('data-selected');
+                const days = document.getElementById('input-days').value;
+                if (!workType) { alert('Please select an architecture type.'); return; }
+                if (!days) { alert('Please enter estimated days.'); return; }
+                
+                // Create "dead" lead
+                saveLead('dead');
+            }
+            if (pageNumber === 3 && currentFormPage === 2) {
+                const fname = document.getElementById('input-firstname').value;
+                const lname = document.getElementById('input-lastname').value;
+                const email = document.getElementById('input-email').value;
+                const goal = document.getElementById('input-goal').value;
+                if (!fname || !lname || !email || !goal) {
+                    alert('Please fill out all required fields (*).');
+                    return;
+                }
+                saveLead('dead');
+            }
+
+            currentFormPage = pageNumber;
+            showFormPage(pageNumber);
+        }
+
+        function submitForm() {
+            const consent = document.getElementById('input-consent').checked;
+            if(!consent) {
+                alert('You must agree to the terms to proceed.');
+                return;
+            }
+            saveLead('active');
+            
+            document.querySelectorAll('.form-page').forEach(p => { p.classList.add('hidden'); p.classList.remove('flex'); });
+            const successPage = document.getElementById('form-success');
+            successPage.classList.remove('hidden');
+            successPage.classList.add('flex');
+            formProgress.style.width = '100%';
+        }
+
+        async function saveLead(status) {
+            const leadData = {
+                workType: document.getElementById('work-type-list').getAttribute('data-selected') || '',
+                days: document.getElementById('input-days').value || '',
+                source: document.getElementById('source-list').getAttribute('data-selected') || '',
+                firstName: document.getElementById('input-firstname').value || '',
+                lastName: document.getElementById('input-lastname').value || '',
+                email: document.getElementById('input-email').value || '',
+                phone: document.getElementById('input-phone').value || '',
+                company: document.getElementById('input-company').value || '',
+                backupEmail: document.getElementById('input-backup-email').value || '',
+                goal: document.getElementById('input-goal').value || '',
+                status: status,
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                if (currentLeadId) {
+                    await db.collection('leads').doc(currentLeadId).set(leadData, { merge: true });
+                } else {
+                    leadData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                    const docRef = await db.collection('leads').add(leadData);
+                    currentLeadId = docRef.id;
+                }
+            } catch (e) {
+                console.error("Error saving lead: ", e);
+            }
+        }
+
+        // ------------------ SECRET ADMIN LOGIC ------------------
+        let logoClicks = 0;
+        let logoClickTimer;
+        const brandLogo = document.getElementById('brand-logo-text');
+        
+        if (brandLogo) {
+            brandLogo.addEventListener('click', (e) => {
+                logoClicks++;
+                clearTimeout(logoClickTimer);
+                
+                if (logoClicks >= 17) {
+                    logoClicks = 0;
+                    const pwd = prompt("HOST PROTOCOL. ENTER AUTHORIZATION KEY:");
+                    if (pwd === "%1%rim.") {
+                        navigate('admin');
+                        window.history.pushState(null, '', '#admin');
+                        renderAdminTable();
+                    } else {
+                        alert("ACCESS DENIED.");
+                    }
+                } else {
+                    logoClickTimer = setTimeout(() => { logoClicks = 0; }, 4000);
+                }
+            });
+        }
+
+        function renderAdminTable() {
+            const tbody = document.getElementById('admin-table-body');
+            if(!tbody) return;
+            
+            tbody.innerHTML = '<tr><td colspan="6" class="py-6 px-4 text-center text-neutral-500">Loading Host Data...</td></tr>';
+            
+            db.collection('leads').orderBy('createdAt', 'desc').onSnapshot((snapshot) => {
+                tbody.innerHTML = '';
+                
+                if(snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="py-6 px-4 text-center text-neutral-500">No records found.</td></tr>';
+                    return;
+                }
+
+                let index = snapshot.size;
+                snapshot.forEach((doc) => {
+                    const lead = doc.data();
+                    const tr = document.createElement('tr');
+                    tr.className = 'border-b border-neutral-800 hover:bg-white/5 transition-colors';
+                    
+                    const statusColor = lead.status === 'active' ? 'text-green-500' : 'text-red-500';
+                    const statusText = lead.status === 'active' ? 'Active' : 'Dead';
+                    const name = (lead.firstName + ' ' + lead.lastName).trim() || 'Unknown';
+                    
+                    tr.innerHTML = `
+                        <td class="py-4 px-4 font-mono text-neutral-400">${index}</td>
+                        <td class="py-4 px-4 font-medium">${name}</td>
+                        <td class="py-4 px-4 text-neutral-400">${lead.email || '-'}</td>
+                        <td class="py-4 px-4">${lead.workType || '-'}</td>
+                        <td class="py-4 px-4 text-neutral-400">${lead.days || '-'}</td>
+                        <td class="py-4 px-4 font-bold tracking-widest uppercase text-xs ${statusColor}">${statusText}</td>
+                    `;
+                    tbody.appendChild(tr);
+                    index--;
+                });
+            }, (error) => {
+                console.error("Error fetching leads: ", error);
+                tbody.innerHTML = '<tr><td colspan="6" class="py-6 px-4 text-center text-red-500">Error loading data. Check console.</td></tr>';
+            });
+        }
     </script>
 </body>
-
 </html>
