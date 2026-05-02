@@ -1067,142 +1067,136 @@
     </main>
 
     <!-- Form Overlay -->
-    <div id="form-overlay" class="fixed inset-0 bg-neutral-950/95 backdrop-blur-xl z-[100] hidden flex-col items-center justify-center p-4 md:p-12 transition-opacity duration-500 opacity-0 overflow-y-auto">
-        <button onclick="closeFormOverlay()" class="absolute top-8 right-6 text-[#D4AF37] hover:opacity-80 transition-opacity z-10">
-            <span class="material-symbols-outlined text-4xl">close</span>
+    <div id="form-overlay" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center overflow-y-auto transition-opacity duration-500 opacity-0" style="background: rgba(5,5,5,0.97); backdrop-filter: blur(24px);">
+        <button onclick="closeFormOverlay()" class="absolute top-8 right-8 w-10 h-10 flex items-center justify-center border border-white/10 rounded-full text-neutral-400 hover:text-white hover:border-white/30 transition-all z-10">
+            <span class="material-symbols-outlined text-xl">close</span>
         </button>
         
-        <div class="max-w-3xl w-full bg-[#16130b] border border-[#d4af37]/20 rounded-2xl shadow-[0_0_40px_rgba(212,175,55,0.15)] p-6 md:p-12 relative overflow-hidden my-auto mt-24 mb-12">
-            <div class="absolute top-0 left-0 w-full h-1 bg-neutral-900">
-                <div id="form-progress" class="h-full bg-gradient-to-r from-[#d4af37] to-[#f2ca50] w-1/3 transition-all duration-500"></div>
-            </div>
-            
-            <!-- Page 1: Project Details -->
-            <div id="form-page-1" class="form-page flex flex-col gap-8">
-                <div class="text-center mb-4">
-                    <span class="font-label-sm text-primary tracking-[0.3em] uppercase block mb-2">Step 1 of 3</span>
-                    <h2 class="font-display-xl text-3xl md:text-4xl text-[#d4af37]">Project Architecture</h2>
-                </div>
-                
-                <div class="flex flex-col gap-4">
-                    <label class="font-headline-md text-lg text-on-surface">What type of digital architecture do you require?</label>
-                    <div class="flex flex-wrap gap-3" id="work-type-list">
-                        <div class="form-card work-card flex-1 min-w-[140px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-4 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Banner">Banner</div>
-                        <div class="form-card work-card flex-1 min-w-[140px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-4 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Startups">Startups</div>
-                        <div class="form-card work-card flex-1 min-w-[140px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-4 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Offices">Offices</div>
-                        <div class="form-card work-card flex-1 min-w-[140px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-4 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Plumbing">Plumbing</div>
-                        <div class="form-card work-card flex-1 min-w-[140px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-4 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Local Business">Local Business</div>
-                        <div class="form-card work-card flex-1 min-w-[140px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-4 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Administrative">Administrative</div>
-                        <div class="form-card work-card flex-1 min-w-[140px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-4 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Custom Web Design">Custom Web Design</div>
-                    </div>
-                </div>
-                
-                <div class="flex flex-col gap-3">
-                    <label class="font-headline-md text-lg text-on-surface">Estimated days required for completion?</label>
-                    <input type="number" id="input-days" class="w-full bg-[#1f1b13] border border-[#d4af37]/30 rounded-lg p-4 text-on-surface focus:outline-none focus:border-[#d4af37] transition-colors" placeholder="e.g. 14" min="1" required>
-                </div>
-
-                <div class="flex flex-col gap-4">
-                    <label class="font-headline-md text-lg text-on-surface">How did you hear about us? <span class="text-sm text-neutral-500">(Optional)</span></label>
-                    <div class="flex flex-wrap gap-3" id="source-list">
-                        <div class="form-card source-card flex-1 min-w-[100px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-3 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Advertise">Advertise</div>
-                        <div class="form-card source-card flex-1 min-w-[100px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-3 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Representative">Rep</div>
-                        <div class="form-card source-card flex-1 min-w-[100px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-3 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Friends">Friends</div>
-                        <div class="form-card source-card flex-1 min-w-[100px] bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-3 cursor-pointer hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-all text-center" data-value="Business">Business</div>
-                    </div>
-                </div>
-                
-                <div class="mt-6 text-right">
-                    <button onclick="nextPage(2)" class="bg-[#d4af37] text-[#16130b] px-10 py-3 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform">Proceed</button>
+        <div class="max-w-2xl w-full px-6 md:px-0 my-auto pt-24 pb-16">
+            <!-- Progress bar -->
+            <div class="w-full h-px bg-white/10 mb-16 relative">
+                <div id="form-progress" class="absolute top-0 left-0 h-px bg-gradient-to-r from-[#d4af37] to-[#f2ca50] transition-all duration-700" style="width:33%"></div>
+                <div class="flex justify-between mt-4">
+                    <span id="step-label" class="text-[10px] tracking-[0.3em] uppercase text-neutral-500">Step 1 / 3 — Architecture</span>
+                    <span id="step-pct" class="text-[10px] tracking-[0.3em] uppercase text-neutral-500">33%</span>
                 </div>
             </div>
 
-            <!-- Page 2: Client Info -->
-            <div id="form-page-2" class="form-page hidden flex-col gap-6">
-                <div class="text-center mb-4">
-                    <span class="font-label-sm text-primary tracking-[0.3em] uppercase block mb-2">Step 2 of 3</span>
-                    <h2 class="font-display-xl text-3xl md:text-4xl text-[#d4af37]">Identity & Objectives</h2>
+            <!-- Page 1 -->
+            <div id="form-page-1" class="form-page flex flex-col gap-10">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-display-xl text-white mb-3">What are you <span class="text-[#d4af37] italic">building?</span></h2>
+                    <p class="text-neutral-500 text-sm">Select your project type — this advances automatically.</p>
                 </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="flex flex-col gap-2">
-                        <label class="text-xs font-bold text-[#d4af37] uppercase tracking-widest">First Name *</label>
-                        <input type="text" id="input-firstname" class="w-full bg-[#1f1b13] border border-[#d4af37]/30 rounded-lg p-3 text-on-surface focus:outline-none focus:border-[#d4af37] transition-colors" required>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <label class="text-xs font-bold text-[#d4af37] uppercase tracking-widest">Last Name *</label>
-                        <input type="text" id="input-lastname" class="w-full bg-[#1f1b13] border border-[#d4af37]/30 rounded-lg p-3 text-on-surface focus:outline-none focus:border-[#d4af37] transition-colors" required>
-                    </div>
+                <div class="flex flex-col gap-3" id="work-type-list">
+                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#d4af37]/60 hover:bg-[#d4af37]/5 transition-all duration-300" data-value="Banner"><span class="text-white font-medium">Banner / Ad Creative</span><span class="material-symbols-outlined text-neutral-600 group-hover:text-[#d4af37] transition-colors">arrow_forward</span></div>
+                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#d4af37]/60 hover:bg-[#d4af37]/5 transition-all duration-300" data-value="Startups"><span class="text-white font-medium">Startup Platform</span><span class="material-symbols-outlined text-neutral-600 group-hover:text-[#d4af37] transition-colors">arrow_forward</span></div>
+                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#d4af37]/60 hover:bg-[#d4af37]/5 transition-all duration-300" data-value="Local Business"><span class="text-white font-medium">Local Business Site</span><span class="material-symbols-outlined text-neutral-600 group-hover:text-[#d4af37] transition-colors">arrow_forward</span></div>
+                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#d4af37]/60 hover:bg-[#d4af37]/5 transition-all duration-300" data-value="Custom Web Design"><span class="text-white font-medium">Custom Web Design</span><span class="material-symbols-outlined text-neutral-600 group-hover:text-[#d4af37] transition-colors">arrow_forward</span></div>
+                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#d4af37]/60 hover:bg-[#d4af37]/5 transition-all duration-300" data-value="Administrative"><span class="text-white font-medium">Administrative / Office</span><span class="material-symbols-outlined text-neutral-600 group-hover:text-[#d4af37] transition-colors">arrow_forward</span></div>
+                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#d4af37]/60 hover:bg-[#d4af37]/5 transition-all duration-300" data-value="Other"><span class="text-white font-medium">Other / Not Listed</span><span class="material-symbols-outlined text-neutral-600 group-hover:text-[#d4af37] transition-colors">arrow_forward</span></div>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Optional source + days revealed after selection -->
+                <div id="p1-extra" class="hidden flex-col gap-8">
                     <div class="flex flex-col gap-2">
-                        <label class="text-xs font-bold text-[#d4af37] uppercase tracking-widest">Email Address *</label>
-                        <input type="email" id="input-email" class="w-full bg-[#1f1b13] border border-[#d4af37]/30 rounded-lg p-3 text-on-surface focus:outline-none focus:border-[#d4af37] transition-colors" required>
+                        <label class="text-[10px] tracking-[0.3em] uppercase text-[#d4af37] font-bold">Estimated Days Required *</label>
+                        <input type="number" id="input-days" min="1" placeholder="e.g. 14" class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#d4af37] transition-colors text-lg">
                     </div>
-                    <div class="flex flex-col gap-2">
-                        <label class="text-xs font-bold text-[#d4af37] uppercase tracking-widest">Phone Number <span class="text-neutral-500 font-normal">(Opt)</span></label>
-                        <input type="tel" id="input-phone" class="w-full bg-[#1f1b13] border border-[#d4af37]/30 rounded-lg p-3 text-on-surface focus:outline-none focus:border-[#d4af37] transition-colors">
+                    <div class="flex flex-col gap-3">
+                        <label class="text-[10px] tracking-[0.3em] uppercase text-neutral-500 font-bold">How did you hear about us? <span class="text-neutral-600">(Optional)</span></label>
+                        <div class="flex flex-wrap gap-2" id="source-list">
+                            <div class="source-card text-xs border border-white/10 rounded-full px-4 py-2 cursor-pointer hover:border-[#d4af37]/60 text-neutral-400 hover:text-white transition-all" data-value="Advertise">Advertise</div>
+                            <div class="source-card text-xs border border-white/10 rounded-full px-4 py-2 cursor-pointer hover:border-[#d4af37]/60 text-neutral-400 hover:text-white transition-all" data-value="Representative">Representative</div>
+                            <div class="source-card text-xs border border-white/10 rounded-full px-4 py-2 cursor-pointer hover:border-[#d4af37]/60 text-neutral-400 hover:text-white transition-all" data-value="Friends">Friends</div>
+                            <div class="source-card text-xs border border-white/10 rounded-full px-4 py-2 cursor-pointer hover:border-[#d4af37]/60 text-neutral-400 hover:text-white transition-all" data-value="Business">Business</div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="flex flex-col gap-2">
-                        <label class="text-xs font-bold text-[#d4af37] uppercase tracking-widest">Company/Business Name <span class="text-neutral-500 font-normal">(Opt)</span></label>
-                        <input type="text" id="input-company" class="w-full bg-[#1f1b13] border border-[#d4af37]/30 rounded-lg p-3 text-on-surface focus:outline-none focus:border-[#d4af37] transition-colors">
+                    <div class="flex justify-between items-center pt-4">
+                        <div></div>
+                        <button id="p1-next-btn" onclick="nextPage(2)" class="flex items-center gap-3 text-white border border-white/20 rounded-full px-8 py-3 hover:border-[#d4af37] hover:text-[#d4af37] transition-all text-sm font-bold tracking-widest uppercase">Continue <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
                     </div>
-                    <div class="flex flex-col gap-2">
-                        <label class="text-xs font-bold text-[#d4af37] uppercase tracking-widest">Backup Email <span class="text-neutral-500 font-normal">(Opt)</span></label>
-                        <input type="email" id="input-backup-email" class="w-full bg-[#1f1b13] border border-[#d4af37]/30 rounded-lg p-3 text-on-surface focus:outline-none focus:border-[#d4af37] transition-colors">
-                    </div>
-                </div>
-
-                <div class="flex flex-col gap-2 mt-2">
-                    <label class="text-xs font-bold text-[#d4af37] uppercase tracking-widest">What is the primary goal or expected outcome for this project? *</label>
-                    <textarea id="input-goal" rows="3" class="w-full bg-[#1f1b13] border border-[#d4af37]/30 rounded-lg p-3 text-on-surface focus:outline-none focus:border-[#d4af37] transition-colors resize-none" required></textarea>
-                </div>
-
-                <div class="mt-6 flex justify-between items-center">
-                    <button onclick="nextPage(1)" class="text-[#d4af37] px-6 py-3 font-bold uppercase tracking-widest hover:opacity-80 transition-opacity">Back</button>
-                    <button onclick="nextPage(3)" class="bg-[#d4af37] text-[#16130b] px-10 py-3 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform">Proceed</button>
                 </div>
             </div>
 
-            <!-- Page 3: Terms -->
+            <!-- Page 2 -->
+            <div id="form-page-2" class="form-page hidden flex-col gap-8">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-display-xl text-white mb-3">Who are <span class="text-[#d4af37] italic">you?</span></h2>
+                    <p class="text-neutral-500 text-sm">Your details are encrypted and never shared.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-x-8 gap-y-8">
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[10px] tracking-[0.3em] uppercase text-[#d4af37] font-bold">First Name *</label>
+                        <input type="text" id="input-firstname" class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#d4af37] transition-colors text-lg" placeholder="John">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[10px] tracking-[0.3em] uppercase text-[#d4af37] font-bold">Last Name *</label>
+                        <input type="text" id="input-lastname" class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#d4af37] transition-colors text-lg" placeholder="Doe">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[10px] tracking-[0.3em] uppercase text-[#d4af37] font-bold">Email Address *</label>
+                        <input type="email" id="input-email" class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#d4af37] transition-colors text-lg" placeholder="you@company.com">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[10px] tracking-[0.3em] uppercase text-neutral-500 font-bold">Phone <span class="text-neutral-600">(Opt)</span></label>
+                        <input type="tel" id="input-phone" class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#d4af37] transition-colors text-lg" placeholder="+1 000 000 0000">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[10px] tracking-[0.3em] uppercase text-neutral-500 font-bold">Company <span class="text-neutral-600">(Opt)</span></label>
+                        <input type="text" id="input-company" class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#d4af37] transition-colors text-lg" placeholder="Acme Corp">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[10px] tracking-[0.3em] uppercase text-neutral-500 font-bold">Backup Email <span class="text-neutral-600">(Opt)</span></label>
+                        <input type="email" id="input-backup-email" class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#d4af37] transition-colors text-lg" placeholder="backup@email.com">
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2 col-span-2">
+                    <label class="text-[10px] tracking-[0.3em] uppercase text-[#d4af37] font-bold">Primary Goal *</label>
+                    <textarea id="input-goal" rows="3" placeholder="What outcome do you expect from this project?" class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#d4af37] transition-colors text-lg resize-none"></textarea>
+                </div>
+                <div id="p2-next-row" class="flex justify-between items-center pt-4 hidden">
+                    <button onclick="nextPage(1)" class="flex items-center gap-2 text-neutral-500 hover:text-white transition-colors text-sm font-bold tracking-widest uppercase"><span class="material-symbols-outlined text-sm">arrow_back</span> Back</button>
+                    <button onclick="nextPage(3)" class="flex items-center gap-3 text-white border border-white/20 rounded-full px-8 py-3 hover:border-[#d4af37] hover:text-[#d4af37] transition-all text-sm font-bold tracking-widest uppercase">Continue <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
+                </div>
+                <div id="p2-back-only" class="flex justify-between items-center pt-4">
+                    <button onclick="nextPage(1)" class="flex items-center gap-2 text-neutral-500 hover:text-white transition-colors text-sm font-bold tracking-widest uppercase"><span class="material-symbols-outlined text-sm">arrow_back</span> Back</button>
+                    <div></div>
+                </div>
+            </div>
+
+            <!-- Page 3 -->
             <div id="form-page-3" class="form-page hidden flex-col gap-8">
-                <div class="text-center mb-4">
-                    <span class="font-label-sm text-primary tracking-[0.3em] uppercase block mb-2">Step 3 of 3</span>
-                    <h2 class="font-display-xl text-3xl md:text-4xl text-[#d4af37]">Mutual Consent</h2>
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-display-xl text-white mb-3">Mutual <span class="text-[#d4af37] italic">Consent.</span></h2>
+                    <p class="text-neutral-500 text-sm">Review and confirm your intent to collaborate.</p>
                 </div>
-                
-                <div class="bg-[#1f1b13] border border-[#d4af37]/20 rounded-xl p-6 h-48 overflow-y-auto text-on-surface-variant font-body-md text-sm">
-                    <p class="mb-4">By proceeding, you agree to the terms of engagement with The 1 Percent.</p>
-                    <p class="mb-4"><strong>1. Legitimacy & Integrity:</strong> Both parties agree to operate with absolute transparency, legitimacy, and professional integrity throughout the duration of the project.</p>
-                    <p class="mb-4"><strong>2. Leniency & Respect:</strong> We understand the dynamic nature of business. We offer leniency within reasonable bounds and expect mutual respect for time and resources.</p>
-                    <p class="mb-4"><strong>3. Commitment:</strong> This application signifies a serious intent to collaborate. Our resources are dedicated to executing high-caliber digital architecture.</p>
-                    <p><strong>4. Confidentiality:</strong> All shared business details, strategies, and intellectual property remain strictly confidential between both parties.</p>
+                <div class="border border-white/10 rounded-2xl p-6 text-neutral-400 text-sm leading-relaxed space-y-4 h-44 overflow-y-auto">
+                    <p><strong class="text-white">1. Legitimacy & Integrity:</strong> Both parties agree to operate with absolute transparency and professional integrity throughout the duration of the project.</p>
+                    <p><strong class="text-white">2. Leniency & Respect:</strong> We offer leniency within reasonable bounds and expect mutual respect for time and resources.</p>
+                    <p><strong class="text-white">3. Commitment:</strong> This application signifies a serious intent to collaborate. Our resources are dedicated to executing high-caliber digital architecture.</p>
+                    <p><strong class="text-white">4. Confidentiality:</strong> All shared business details, strategies, and intellectual property remain strictly confidential between both parties.</p>
                 </div>
-
-                <label class="flex items-start gap-4 cursor-pointer group p-2">
-                    <div class="relative flex items-center justify-center mt-1">
-                        <input type="checkbox" id="input-consent" class="peer appearance-none w-6 h-6 border-2 border-[#d4af37]/50 rounded checked:bg-[#d4af37] checked:border-[#d4af37] transition-colors cursor-pointer" required>
-                        <span class="material-symbols-outlined absolute text-[#16130b] text-lg opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity">check</span>
+                <label class="flex items-start gap-4 cursor-pointer group">
+                    <div class="relative flex-shrink-0 mt-1">
+                        <input type="checkbox" id="input-consent" class="peer appearance-none w-5 h-5 border border-white/30 rounded checked:bg-[#d4af37] checked:border-[#d4af37] transition-colors cursor-pointer">
+                        <span class="material-symbols-outlined absolute top-0 left-0 text-[#16130b] text-base opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity leading-none">check</span>
                     </div>
-                    <span class="text-on-surface text-base group-hover:text-[#d4af37] transition-colors leading-snug">I agree to the terms and would like to work with The 1 Percent on mutual consent and formality. *</span>
+                    <span class="text-neutral-400 group-hover:text-white transition-colors text-sm leading-relaxed">I agree to these terms and would like to proceed with The 1 Percent on mutual consent and formality. *</span>
                 </label>
-
-                <div class="mt-6 flex justify-between items-center">
-                    <button onclick="nextPage(2)" class="text-[#d4af37] px-6 py-3 font-bold uppercase tracking-widest hover:opacity-80 transition-opacity">Back</button>
-                    <button onclick="submitForm()" class="bg-gradient-to-r from-[#d4af37] to-[#f2ca50] text-[#16130b] px-8 py-3 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform shadow-[0_0_20px_rgba(212,175,55,0.4)]">Submit Application</button>
+                <div class="flex justify-between items-center pt-4">
+                    <button onclick="nextPage(2)" class="flex items-center gap-2 text-neutral-500 hover:text-white transition-colors text-sm font-bold tracking-widest uppercase"><span class="material-symbols-outlined text-sm">arrow_back</span> Back</button>
+                    <button onclick="submitForm()" class="bg-[#d4af37] text-[#0a0a0a] px-10 py-4 rounded-full font-bold tracking-widest uppercase text-sm hover:bg-[#f2ca50] transition-colors shadow-[0_0_30px_rgba(212,175,55,0.3)]">Submit Application</button>
                 </div>
             </div>
-            
-            <!-- Success Screen -->
-            <div id="form-success" class="form-page hidden flex-col items-center justify-center text-center gap-6 py-12">
-                <span class="material-symbols-outlined text-6xl text-[#d4af37] mb-4">task_alt</span>
-                <h2 class="font-display-xl text-3xl md:text-4xl text-[#d4af37]">Application Received</h2>
-                <p class="text-on-surface-variant max-w-md mx-auto text-lg">Your details have been securely recorded. We will review your project parameters and contact you shortly.</p>
-                <button onclick="closeFormOverlay()" class="mt-8 border border-[#d4af37] text-[#d4af37] px-10 py-3 rounded-full font-bold uppercase tracking-widest hover:bg-[#d4af37] hover:text-[#16130b] transition-all">Return Home</button>
+
+            <!-- Success -->
+            <div id="form-success" class="form-page hidden flex-col items-center text-center gap-6 py-16">
+                <div class="w-16 h-16 rounded-full border border-[#d4af37]/40 flex items-center justify-center mb-4">
+                    <span class="material-symbols-outlined text-[#d4af37] text-3xl">task_alt</span>
+                </div>
+                <h2 class="text-4xl font-display-xl text-white">Application <span class="text-[#d4af37] italic">Received.</span></h2>
+                <p class="text-neutral-500 max-w-sm">Your details have been securely recorded. We will review your project parameters and contact you shortly.</p>
+                <button onclick="closeFormOverlay()" class="mt-8 border border-white/20 text-white px-10 py-3 rounded-full text-sm font-bold tracking-widest uppercase hover:border-[#d4af37] hover:text-[#d4af37] transition-all">Return</button>
             </div>
         </div>
     </div>
@@ -1552,15 +1546,21 @@
         // ------------------ FORM LOGIC ------------------
         const formOverlay = document.getElementById('form-overlay');
         const formProgress = document.getElementById('form-progress');
+        const stepLabel = document.getElementById('step-label');
+        const stepPct = document.getElementById('step-pct');
         let currentFormPage = 1;
         let currentLeadId = null;
 
+        const stepMeta = [
+            null,
+            { label: 'Step 1 / 3 — Architecture', pct: '33%', width: '33%' },
+            { label: 'Step 2 / 3 — Identity', pct: '66%', width: '66%' },
+            { label: 'Step 3 / 3 — Consent', pct: '99%', width: '99%' }
+        ];
+
         document.querySelectorAll('a[href*="mail.google.com"], .shiny-email-box').forEach(el => {
             if (el.tagName === 'A') {
-                el.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    openFormOverlay();
-                });
+                el.addEventListener('click', (e) => { e.preventDefault(); openFormOverlay(); });
             } else {
                 el.removeAttribute('onclick');
                 el.addEventListener('click', () => openFormOverlay());
@@ -1572,7 +1572,7 @@
             formOverlay.classList.add('flex');
             setTimeout(() => formOverlay.classList.remove('opacity-0'), 10);
             currentFormPage = 1;
-            currentLeadId = null; // Reset for new entry
+            currentLeadId = null;
             showFormPage(1);
         }
 
@@ -1584,75 +1584,113 @@
             }, 500);
         }
 
+        // Work cards - click to select, then reveal extra fields
         document.querySelectorAll('.work-card').forEach(card => {
             card.addEventListener('click', function() {
-                document.querySelectorAll('.work-card').forEach(c => c.classList.remove('bg-[#d4af37]/20', 'border-[#d4af37]'));
-                this.classList.add('bg-[#d4af37]/20', 'border-[#d4af37]');
+                document.querySelectorAll('.work-card').forEach(c => {
+                    c.classList.remove('border-[#d4af37]', 'bg-[#d4af37]/10', '!border-[#d4af37]');
+                    c.style.borderColor = '';
+                    c.style.backgroundColor = '';
+                });
+                this.style.borderColor = '#d4af37';
+                this.style.backgroundColor = 'rgba(212,175,55,0.1)';
                 document.getElementById('work-type-list').setAttribute('data-selected', this.dataset.value);
+                // Show the extra fields panel
+                const extra = document.getElementById('p1-extra');
+                if (extra) { extra.classList.remove('hidden'); extra.classList.add('flex'); }
+                // Check if days filled to show next button
+                checkPage1Complete();
             });
         });
 
         document.querySelectorAll('.source-card').forEach(card => {
             card.addEventListener('click', function() {
-                document.querySelectorAll('.source-card').forEach(c => c.classList.remove('bg-[#d4af37]/20', 'border-[#d4af37]'));
-                this.classList.add('bg-[#d4af37]/20', 'border-[#d4af37]');
+                document.querySelectorAll('.source-card').forEach(c => { c.style.borderColor = ''; c.style.color = ''; });
+                this.style.borderColor = '#d4af37';
+                this.style.color = '#d4af37';
                 document.getElementById('source-list').setAttribute('data-selected', this.dataset.value);
             });
         });
 
-        function showFormPage(pageNumber) {
-            document.querySelectorAll('.form-page').forEach(p => p.classList.add('hidden'));
-            document.querySelectorAll('.form-page').forEach(p => p.classList.remove('flex'));
-            
-            const targetPage = document.getElementById('form-page-' + pageNumber);
-            if(targetPage) {
-                targetPage.classList.remove('hidden');
-                targetPage.classList.add('flex');
+        // Days input - check completion
+        const daysInput = document.getElementById('input-days');
+        if (daysInput) daysInput.addEventListener('input', checkPage1Complete);
+
+        function checkPage1Complete() {
+            const workType = document.getElementById('work-type-list').getAttribute('data-selected');
+            const days = document.getElementById('input-days') ? document.getElementById('input-days').value : '';
+            const btn = document.getElementById('p1-next-btn');
+            if (workType && days && parseInt(days) > 0) {
+                if (btn) btn.style.opacity = '1';
+            } else {
+                if (btn) btn.style.opacity = '0.4';
             }
-            
-            formProgress.style.width = (pageNumber / 3) * 100 + '%';
+        }
+
+        // Page 2 required fields - watch for changes
+        ['input-firstname','input-lastname','input-email','input-goal'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('input', checkPage2Complete);
+        });
+
+        function checkPage2Complete() {
+            const fn = document.getElementById('input-firstname').value.trim();
+            const ln = document.getElementById('input-lastname').value.trim();
+            const em = document.getElementById('input-email').value.trim();
+            const goal = document.getElementById('input-goal').value.trim();
+            const nextRow = document.getElementById('p2-next-row');
+            const backOnly = document.getElementById('p2-back-only');
+            const emailOk = /^[^@]+@[^@]+\.[^@]+$/.test(em);
+            if (fn && ln && emailOk && goal) {
+                if (nextRow) { nextRow.classList.remove('hidden'); }
+                if (backOnly) { backOnly.classList.add('hidden'); }
+            } else {
+                if (nextRow) { nextRow.classList.add('hidden'); }
+                if (backOnly) { backOnly.classList.remove('hidden'); }
+            }
+        }
+
+        function showFormPage(pageNumber) {
+            document.querySelectorAll('.form-page').forEach(p => {
+                p.classList.add('hidden'); p.classList.remove('flex');
+            });
+            const target = document.getElementById('form-page-' + pageNumber);
+            if (target) { target.classList.remove('hidden'); target.classList.add('flex'); }
+            if (formProgress && stepMeta[pageNumber]) {
+                formProgress.style.width = stepMeta[pageNumber].width;
+                if (stepLabel) stepLabel.textContent = stepMeta[pageNumber].label;
+                if (stepPct) stepPct.textContent = stepMeta[pageNumber].pct;
+            }
+            // Re-check page 2 state when navigating back to it
+            if (pageNumber === 2) { checkPage2Complete(); }
         }
 
         function nextPage(pageNumber) {
-            // Validation
             if (pageNumber === 2 && currentFormPage === 1) {
                 const workType = document.getElementById('work-type-list').getAttribute('data-selected');
-                const days = document.getElementById('input-days').value;
-                if (!workType) { alert('Please select an architecture type.'); return; }
-                if (!days) { alert('Please enter estimated days.'); return; }
-                
-                // Create "dead" lead
+                const days = document.getElementById('input-days') ? document.getElementById('input-days').value : '';
+                if (!workType || !days) return;
                 saveLead('dead');
             }
             if (pageNumber === 3 && currentFormPage === 2) {
-                const fname = document.getElementById('input-firstname').value;
-                const lname = document.getElementById('input-lastname').value;
-                const email = document.getElementById('input-email').value;
-                const goal = document.getElementById('input-goal').value;
-                if (!fname || !lname || !email || !goal) {
-                    alert('Please fill out all required fields (*).');
-                    return;
-                }
+                const fn = document.getElementById('input-firstname').value.trim();
+                const ln = document.getElementById('input-lastname').value.trim();
+                const em = document.getElementById('input-email').value.trim();
+                const goal = document.getElementById('input-goal').value.trim();
+                if (!fn || !ln || !em || !goal) return;
                 saveLead('dead');
             }
-
             currentFormPage = pageNumber;
             showFormPage(pageNumber);
         }
 
         function submitForm() {
-            const consent = document.getElementById('input-consent').checked;
-            if(!consent) {
-                alert('You must agree to the terms to proceed.');
-                return;
-            }
+            if (!document.getElementById('input-consent').checked) return;
             saveLead('active');
-            
             document.querySelectorAll('.form-page').forEach(p => { p.classList.add('hidden'); p.classList.remove('flex'); });
-            const successPage = document.getElementById('form-success');
-            successPage.classList.remove('hidden');
-            successPage.classList.add('flex');
-            formProgress.style.width = '100%';
+            const sp = document.getElementById('form-success');
+            if (sp) { sp.classList.remove('hidden'); sp.classList.add('flex'); }
+            if (formProgress) formProgress.style.width = '100%';
         }
 
         async function saveLead(status) {
