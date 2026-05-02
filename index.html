@@ -281,8 +281,8 @@
 
     <!-- Custom Cursor -->
     <div class="hidden md:block pointer-events-none fixed inset-0 z-[9999]">
-        <div id="cursor-dot" class="w-1.5 h-1.5 bg-[#f2ca50] rounded-full absolute -translate-x-1/2 -translate-y-1/2 shadow-[0_0_8px_#f2ca50]"></div>
-        <div id="cursor-ring" class="w-10 h-10 border border-[#d4af37]/40 bg-[#d4af37]/5 rounded-full absolute -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 ease-out"></div>
+        <div id="cursor-dot" class="w-2 h-2 bg-[#f2ca50] rounded-full absolute top-0 left-0 shadow-[0_0_10px_#f2ca50]" style="transform: translate(-50%, -50%); will-change: transform;"></div>
+        <div id="cursor-ring" class="w-10 h-10 border-2 border-[#d4af37]/60 bg-[#d4af37]/10 rounded-full absolute top-0 left-0 transition-[background-color,border-color,backdrop-filter] duration-300 ease-out" style="transform: translate(-50%, -50%); will-change: transform;" data-scale="1"></div>
     </div>
 
     <!-- TopNavBar -->
@@ -1273,17 +1273,16 @@
         const cursorDot = document.getElementById('cursor-dot');
         const cursorRing = document.getElementById('cursor-ring');
         
-        let mouseX = 0;
-        let mouseY = 0;
-        let ringX = 0;
-        let ringY = 0;
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let ringX = mouseX;
+        let ringY = mouseY;
 
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
             if (cursorDot) {
-                cursorDot.style.left = mouseX + 'px';
-                cursorDot.style.top = mouseY + 'px';
+                cursorDot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
             }
         });
 
@@ -1294,28 +1293,28 @@
             ringY += distY * 0.15;
             
             if (cursorRing) {
-                cursorRing.style.left = ringX + 'px';
-                cursorRing.style.top = ringY + 'px';
+                const currentScale = cursorRing.dataset.scale || 1;
+                cursorRing.style.transform = `translate(calc(${ringX}px - 50%), calc(${ringY}px - 50%)) scale(${currentScale})`;
             }
             requestAnimationFrame(animateCursor);
         }
         animateCursor();
 
-        const interactables = document.querySelectorAll('a, button, .ticker-scroll span, .group, .pop-hover, .shiny-email-box, .glass-card, .glass-panel, .carousel-dot, select, input');
+        const interactables = document.querySelectorAll('a, button, .ticker-scroll span, .group, .pop-hover, .shiny-email-box, .glass-card, .glass-panel, .carousel-dot, select, input, textarea');
         interactables.forEach(el => {
             el.addEventListener('mouseenter', () => {
                 if (cursorRing) {
-                    cursorRing.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                    cursorRing.style.backgroundColor = 'rgba(212, 175, 55, 0.15)';
-                    cursorRing.style.borderColor = 'rgba(212, 175, 55, 0.8)';
+                    cursorRing.dataset.scale = 1.5;
+                    cursorRing.style.backgroundColor = 'rgba(212, 175, 55, 0.2)';
+                    cursorRing.style.borderColor = 'rgba(212, 175, 55, 0.9)';
                     cursorRing.style.backdropFilter = 'blur(4px)';
                 }
             });
             el.addEventListener('mouseleave', () => {
                 if (cursorRing) {
-                    cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
-                    cursorRing.style.backgroundColor = 'rgba(212, 175, 55, 0.05)';
-                    cursorRing.style.borderColor = 'rgba(212, 175, 55, 0.4)';
+                    cursorRing.dataset.scale = 1;
+                    cursorRing.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
+                    cursorRing.style.borderColor = 'rgba(212, 175, 55, 0.6)';
                     cursorRing.style.backdropFilter = 'none';
                 }
             });
@@ -1324,7 +1323,6 @@
         // ------------------ CANVAS ANIMATION ------------------
         const canvas = document.getElementById('aurora-canvas');
         const ctx = canvas.getContext('2d');
-        let ripples = [];
         let time = 0;
 
         function resizeCanvas() {
@@ -1333,19 +1331,6 @@
         }
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
-
-        document.addEventListener('mousemove', (e) => {
-            if (document.getElementById('home-section').classList.contains('flex')) {
-                if (Math.random() > 0.5) {
-                    ripples.push({
-                        x: e.clientX,
-                        y: e.clientY + window.scrollY,
-                        radius: 5,
-                        alpha: 1
-                    });
-                }
-            }
-        });
 
         function animateCanvas() {
             if (document.getElementById('home-section').classList.contains('flex')) {
@@ -1374,27 +1359,6 @@
                     ctx.stroke();
                 }
                 ctx.restore();
-
-                for (let i = ripples.length - 1; i >= 0; i--) {
-                    let ripple = ripples[i];
-
-                    const numDots = 12;
-                    for (let d = 0; d < numDots; d++) {
-                        const angle = (Math.PI * 2 / numDots) * d + (ripple.radius * 0.05);
-                        const dotX = ripple.x + Math.cos(angle) * ripple.radius;
-                        const dotY = ripple.y - window.scrollY + Math.sin(angle) * ripple.radius;
-
-                        ctx.beginPath();
-                        ctx.arc(dotX, dotY, 1.5, 0, Math.PI * 2);
-                        ctx.fillStyle = `rgba(212, 175, 55, ${ripple.alpha})`;
-                        ctx.fill();
-                    }
-
-                    ripple.radius += 2;
-                    ripple.alpha -= 0.02;
-
-                    if (ripple.alpha <= 0) ripples.splice(i, 1);
-                }
             }
             requestAnimationFrame(animateCanvas);
         }
