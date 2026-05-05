@@ -312,7 +312,7 @@
 <body class="font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container">
 
     <!-- Custom Cursor -->
-    <div class="hidden md:block pointer-events-none fixed top-0 left-0 w-0 h-0 z-[9999]">
+    <div id="cursor-container" class="pointer-events-none fixed top-0 left-0 w-0 h-0 z-[9999] opacity-0 transition-opacity duration-300">
         <div id="cursor-dot" class="w-2 h-2 bg-[#f2ca50] rounded-full absolute top-0 left-0 shadow-[0_0_15px_rgba(242,202,80,0.8)]"
             style="will-change: transform;"></div>
         <div id="cursor-ring"
@@ -1602,19 +1602,6 @@
         const initialHash = window.location.hash.replace('#', '') || 'home';
         navigate(initialHash, false);
 
-        // ------------------ MAGNETIC ELEMENTS ------------------
-        const magneticElements = document.querySelectorAll('.nav-link, button:not(#mobile-menu-btn):not(#close-menu-btn), #interactive-diamond');
-        magneticElements.forEach(el => {
-            el.addEventListener('mousemove', (e) => {
-                const rect = el.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                gsap.to(el, { x: x * 0.3, y: y * 0.3, duration: 0.6, ease: "power2.out" });
-            });
-            el.addEventListener('mouseleave', () => {
-                gsap.to(el, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.3)" });
-            });
-        });
 
         // ------------------ PROJECT GALLERY HOVER ------------------
         const projectCards = document.querySelectorAll('.project-card');
@@ -2116,62 +2103,109 @@
         });
 
     
-                // ------------------ CURSOR ENGINE (GSAP) ------------------
-        const cursorDot = document.getElementById("cursor-dot");
-        const cursorRing = document.getElementById("cursor-ring");
+        // ------------------ CURSOR ENGINE (BULLETPROOF MOUSE & TOUCH) ------------------
+        const initCursor = () => {
+            const cursorContainer = document.getElementById("cursor-container");
+            const cursorDot = document.getElementById("cursor-dot");
+            const cursorRing = document.getElementById("cursor-ring");
 
-        if (cursorDot && cursorRing) {
-            gsap.set([cursorDot, cursorRing], { xPercent: -50, yPercent: -50 });
-            const dotSetterX = gsap.quickSetter(cursorDot, "x", "px");
-            const dotSetterY = gsap.quickSetter(cursorDot, "y", "px");
-            const ringSetterX = gsap.quickSetter(cursorRing, "x", "px");
-            const ringSetterY = gsap.quickSetter(cursorRing, "y", "px");
+            if (!cursorContainer || !cursorDot || !cursorRing) return;
 
-            let mouseX = window.innerWidth / 2;
-            let mouseY = window.innerHeight / 2;
-            let ringX = mouseX;
-            let ringY = mouseY;
+            gsap.set([cursorDot, cursorRing], { xPercent: -50, yPercent: -50, force3D: true });
+            
+            let lastX = window.innerWidth / 2;
+            let lastY = window.innerHeight / 2;
+
+            const updatePos = (x, y) => {
+                lastX = x;
+                lastY = y;
+                gsap.to(cursorContainer, { opacity: 1, duration: 0.3 });
+                // Immediate dot
+                gsap.set(cursorDot, { x: x, y: y });
+                // Smooth ring
+                gsap.to(cursorRing, { x: x, y: y, duration: 0.2, ease: "power2.out", overwrite: "auto" });
+            };
 
             window.addEventListener("mousemove", (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                dotSetterX(mouseX);
-                dotSetterY(mouseY);
+                updatePos(e.clientX, e.clientY);
             });
 
-            gsap.ticker.add(() => {
-                const dt = 1.0 - Math.pow(1.0 - 0.2, gsap.ticker.deltaRatio());
-                ringX += (mouseX - ringX) * dt;
-                ringY += (mouseY - ringY) * dt;
-                ringSetterX(ringX);
-                ringSetterY(ringY);
+            window.addEventListener("touchstart", (e) => {
+                const touch = e.touches[0];
+                updatePos(touch.clientX, touch.clientY);
+            }, { passive: true });
+
+            window.addEventListener("touchmove", (e) => {
+                const touch = e.touches[0];
+                updatePos(touch.clientX, touch.clientY);
+            }, { passive: true });
+
+            window.addEventListener("touchend", () => {
+                gsap.to(cursorContainer, { opacity: 0, duration: 0.3 });
+            }, { passive: true });
+
+            window.addEventListener("mouseout", (e) => {
+                if (!e.relatedTarget && !e.toElement) {
+                    gsap.to(cursorContainer, { opacity: 0, duration: 0.3 });
+                }
             });
 
+            // Interaction scaling
             const interactables = document.querySelectorAll("a, button, .project-card, .nav-link, .work-card, #interactive-diamond, .carousel-dot, .source-card, .shiny-email-box, .glass-card, input, textarea, select");
             interactables.forEach(el => {
-                el.addEventListener("mouseenter", () => {
+                const onEnter = () => {
                     gsap.to(cursorRing, { scale: 1.8, backgroundColor: "rgba(212,175,55,0.15)", borderColor: "rgba(242,202,80,1)", backdropFilter: "blur(4px)", duration: 0.3 });
                     gsap.to(cursorDot, { scale: 0.5, opacity: 0.5, duration: 0.3 });
-                });
-                el.addEventListener("mouseleave", () => {
+                };
+                const onLeave = () => {
                     gsap.to(cursorRing, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(212,175,55,0.6)", backdropFilter: "none", duration: 0.3 });
                     gsap.to(cursorDot, { scale: 1, opacity: 1, duration: 0.3 });
-                });
+                };
+
+                el.addEventListener("mouseenter", onEnter);
+                el.addEventListener("mouseleave", onLeave);
+                el.addEventListener("touchstart", onEnter, { passive: true });
+                el.addEventListener("touchend", onLeave, { passive: true });
             });
+        };
+
+        // Initialize on load to ensure GSAP and DOM are fully ready
+        if (document.readyState === 'complete') {
+            initCursor();
+        } else {
+            window.addEventListener('load', initCursor);
         }
 
         // ------------------ MAGNETIC ELEMENTS (UNIFIED) ------------------
-        document.querySelectorAll(".nav-link, button:not(#mobile-menu-btn):not(#close-menu-btn), #interactive-diamond, .carousel-dot, .source-card").forEach(el => {
-            el.addEventListener("mousemove", (e) => {
-                const rect = el.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                gsap.to(el, { x: x * 0.35, y: y * 0.35, duration: 0.4 });
+        const initMagnetics = () => {
+            document.querySelectorAll(".nav-link, button:not(#mobile-menu-btn):not(#close-menu-btn), #interactive-diamond, .carousel-dot, .source-card").forEach(el => {
+                const handleMove = (e) => {
+                    const rect = el.getBoundingClientRect();
+                    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+                    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+                    if (clientX === undefined || clientY === undefined) return;
+
+                    const x = clientX - rect.left - rect.width / 2;
+                    const y = clientY - rect.top - rect.height / 2;
+                    gsap.to(el, { x: x * 0.35, y: y * 0.35, duration: 0.4, ease: "power2.out" });
+                };
+
+                const handleLeave = () => {
+                    gsap.to(el, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.3)" });
+                };
+
+                el.addEventListener("mousemove", handleMove);
+                el.addEventListener("touchmove", handleMove, { passive: true });
+                el.addEventListener("mouseleave", handleLeave);
+                el.addEventListener("touchend", handleLeave);
             });
-            el.addEventListener("mouseleave", () => {
-                gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
-            });
-        });
+        };
+
+        if (document.readyState === 'complete') {
+            initMagnetics();
+        } else {
+            window.addEventListener('load', initMagnetics);
+        }
         </script>
 </body>
 </html>
