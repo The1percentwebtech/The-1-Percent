@@ -7,14 +7,350 @@
     <title>The 1 Percent | Elite Expansion</title>
     <meta name="description"
         content="Exclusive strategy and implementation for high-caliber assets. Measured excellence for those who define the threshold of success.">
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
+                // ------------------ CURSOR ENGINE (GSAP) ------------------
+        const cursorDot = document.getElementById("cursor-dot");
+        const cursorRing = document.getElementById("cursor-ring");
+
+        if (cursorDot && cursorRing) {
+            gsap.set([cursorDot, cursorRing], { xPercent: -50, yPercent: -50 });
+            const dotSetterX = gsap.quickSetter(cursorDot, "x", "px");
+            const dotSetterY = gsap.quickSetter(cursorDot, "y", "px");
+            const ringSetterX = gsap.quickSetter(cursorRing, "x", "px");
+            const ringSetterY = gsap.quickSetter(cursorRing, "y", "px");
+
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let ringX = mouseX;
+            let ringY = mouseY;
+
+            window.addEventListener("mousemove", (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                dotSetterX(mouseX);
+                dotSetterY(mouseY);
+            });
+
+            gsap.ticker.add(() => {
+                const dt = 1.0 - Math.pow(1.0 - 0.2, gsap.ticker.deltaRatio());
+                ringX += (mouseX - ringX) * dt;
+                ringY += (mouseY - ringY) * dt;
+                ringSetterX(ringX);
+                ringSetterY(ringY);
+            });
+
+            const interactables = document.querySelectorAll("a, button, .project-card, .nav-link, .work-card, #interactive-diamond");
+            interactables.forEach(el => {
+                el.addEventListener("mouseenter", () => {
+                    gsap.to(cursorRing, { scale: 1.5, backgroundColor: "rgba(212,175,55,0.15)", borderColor: "rgba(242,202,80,1)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 0.5, opacity: 0.5, duration: 0.3 });
+                });
+                el.addEventListener("mouseleave", () => {
+                    gsap.to(cursorRing, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(212,175,55,0.6)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 1, opacity: 1, duration: 0.3 });
+                });
+            });
+        }
+
+        document.querySelectorAll(".nav-link, #interactive-diamond").forEach(el => {
+            el.addEventListener("mousemove", (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(el, { x: x * 0.3, y: y * 0.3, duration: 0.4 });
+            });
+            el.addEventListener("mouseleave", () => {
+                gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+            });
+        });
+        </script>
     <!-- Firebase Compat SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js">
+                // ------------------ CURSOR ENGINE (GSAP) ------------------
+        const cursorDot = document.getElementById("cursor-dot");
+        const cursorRing = document.getElementById("cursor-ring");
+
+        if (cursorDot && cursorRing) {
+            gsap.set([cursorDot, cursorRing], { xPercent: -50, yPercent: -50 });
+            const dotSetterX = gsap.quickSetter(cursorDot, "x", "px");
+            const dotSetterY = gsap.quickSetter(cursorDot, "y", "px");
+            const ringSetterX = gsap.quickSetter(cursorRing, "x", "px");
+            const ringSetterY = gsap.quickSetter(cursorRing, "y", "px");
+
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let ringX = mouseX;
+            let ringY = mouseY;
+
+            window.addEventListener("mousemove", (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                dotSetterX(mouseX);
+                dotSetterY(mouseY);
+            });
+
+            gsap.ticker.add(() => {
+                const dt = 1.0 - Math.pow(1.0 - 0.2, gsap.ticker.deltaRatio());
+                ringX += (mouseX - ringX) * dt;
+                ringY += (mouseY - ringY) * dt;
+                ringSetterX(ringX);
+                ringSetterY(ringY);
+            });
+
+            const interactables = document.querySelectorAll("a, button, .project-card, .nav-link, .work-card, #interactive-diamond");
+            interactables.forEach(el => {
+                el.addEventListener("mouseenter", () => {
+                    gsap.to(cursorRing, { scale: 1.5, backgroundColor: "rgba(212,175,55,0.15)", borderColor: "rgba(242,202,80,1)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 0.5, opacity: 0.5, duration: 0.3 });
+                });
+                el.addEventListener("mouseleave", () => {
+                    gsap.to(cursorRing, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(212,175,55,0.6)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 1, opacity: 1, duration: 0.3 });
+                });
+            });
+        }
+
+        document.querySelectorAll(".nav-link, #interactive-diamond").forEach(el => {
+            el.addEventListener("mousemove", (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(el, { x: x * 0.3, y: y * 0.3, duration: 0.4 });
+            });
+            el.addEventListener("mouseleave", () => {
+                gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+            });
+        });
+        </script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js">
+                // ------------------ CURSOR ENGINE (GSAP) ------------------
+        const cursorDot = document.getElementById("cursor-dot");
+        const cursorRing = document.getElementById("cursor-ring");
+
+        if (cursorDot && cursorRing) {
+            gsap.set([cursorDot, cursorRing], { xPercent: -50, yPercent: -50 });
+            const dotSetterX = gsap.quickSetter(cursorDot, "x", "px");
+            const dotSetterY = gsap.quickSetter(cursorDot, "y", "px");
+            const ringSetterX = gsap.quickSetter(cursorRing, "x", "px");
+            const ringSetterY = gsap.quickSetter(cursorRing, "y", "px");
+
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let ringX = mouseX;
+            let ringY = mouseY;
+
+            window.addEventListener("mousemove", (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                dotSetterX(mouseX);
+                dotSetterY(mouseY);
+            });
+
+            gsap.ticker.add(() => {
+                const dt = 1.0 - Math.pow(1.0 - 0.2, gsap.ticker.deltaRatio());
+                ringX += (mouseX - ringX) * dt;
+                ringY += (mouseY - ringY) * dt;
+                ringSetterX(ringX);
+                ringSetterY(ringY);
+            });
+
+            const interactables = document.querySelectorAll("a, button, .project-card, .nav-link, .work-card, #interactive-diamond");
+            interactables.forEach(el => {
+                el.addEventListener("mouseenter", () => {
+                    gsap.to(cursorRing, { scale: 1.5, backgroundColor: "rgba(212,175,55,0.15)", borderColor: "rgba(242,202,80,1)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 0.5, opacity: 0.5, duration: 0.3 });
+                });
+                el.addEventListener("mouseleave", () => {
+                    gsap.to(cursorRing, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(212,175,55,0.6)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 1, opacity: 1, duration: 0.3 });
+                });
+            });
+        }
+
+        document.querySelectorAll(".nav-link, #interactive-diamond").forEach(el => {
+            el.addEventListener("mousemove", (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(el, { x: x * 0.3, y: y * 0.3, duration: 0.4 });
+            });
+            el.addEventListener("mouseleave", () => {
+                gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+            });
+        });
+        </script>
     <!-- GSAP & Lenis -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+                // ------------------ CURSOR ENGINE (GSAP) ------------------
+        const cursorDot = document.getElementById("cursor-dot");
+        const cursorRing = document.getElementById("cursor-ring");
+
+        if (cursorDot && cursorRing) {
+            gsap.set([cursorDot, cursorRing], { xPercent: -50, yPercent: -50 });
+            const dotSetterX = gsap.quickSetter(cursorDot, "x", "px");
+            const dotSetterY = gsap.quickSetter(cursorDot, "y", "px");
+            const ringSetterX = gsap.quickSetter(cursorRing, "x", "px");
+            const ringSetterY = gsap.quickSetter(cursorRing, "y", "px");
+
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let ringX = mouseX;
+            let ringY = mouseY;
+
+            window.addEventListener("mousemove", (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                dotSetterX(mouseX);
+                dotSetterY(mouseY);
+            });
+
+            gsap.ticker.add(() => {
+                const dt = 1.0 - Math.pow(1.0 - 0.2, gsap.ticker.deltaRatio());
+                ringX += (mouseX - ringX) * dt;
+                ringY += (mouseY - ringY) * dt;
+                ringSetterX(ringX);
+                ringSetterY(ringY);
+            });
+
+            const interactables = document.querySelectorAll("a, button, .project-card, .nav-link, .work-card, #interactive-diamond");
+            interactables.forEach(el => {
+                el.addEventListener("mouseenter", () => {
+                    gsap.to(cursorRing, { scale: 1.5, backgroundColor: "rgba(212,175,55,0.15)", borderColor: "rgba(242,202,80,1)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 0.5, opacity: 0.5, duration: 0.3 });
+                });
+                el.addEventListener("mouseleave", () => {
+                    gsap.to(cursorRing, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(212,175,55,0.6)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 1, opacity: 1, duration: 0.3 });
+                });
+            });
+        }
+
+        document.querySelectorAll(".nav-link, #interactive-diamond").forEach(el => {
+            el.addEventListener("mousemove", (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(el, { x: x * 0.3, y: y * 0.3, duration: 0.4 });
+            });
+            el.addEventListener("mouseleave", () => {
+                gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+            });
+        });
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js">
+                // ------------------ CURSOR ENGINE (GSAP) ------------------
+        const cursorDot = document.getElementById("cursor-dot");
+        const cursorRing = document.getElementById("cursor-ring");
+
+        if (cursorDot && cursorRing) {
+            gsap.set([cursorDot, cursorRing], { xPercent: -50, yPercent: -50 });
+            const dotSetterX = gsap.quickSetter(cursorDot, "x", "px");
+            const dotSetterY = gsap.quickSetter(cursorDot, "y", "px");
+            const ringSetterX = gsap.quickSetter(cursorRing, "x", "px");
+            const ringSetterY = gsap.quickSetter(cursorRing, "y", "px");
+
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let ringX = mouseX;
+            let ringY = mouseY;
+
+            window.addEventListener("mousemove", (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                dotSetterX(mouseX);
+                dotSetterY(mouseY);
+            });
+
+            gsap.ticker.add(() => {
+                const dt = 1.0 - Math.pow(1.0 - 0.2, gsap.ticker.deltaRatio());
+                ringX += (mouseX - ringX) * dt;
+                ringY += (mouseY - ringY) * dt;
+                ringSetterX(ringX);
+                ringSetterY(ringY);
+            });
+
+            const interactables = document.querySelectorAll("a, button, .project-card, .nav-link, .work-card, #interactive-diamond");
+            interactables.forEach(el => {
+                el.addEventListener("mouseenter", () => {
+                    gsap.to(cursorRing, { scale: 1.5, backgroundColor: "rgba(212,175,55,0.15)", borderColor: "rgba(242,202,80,1)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 0.5, opacity: 0.5, duration: 0.3 });
+                });
+                el.addEventListener("mouseleave", () => {
+                    gsap.to(cursorRing, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(212,175,55,0.6)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 1, opacity: 1, duration: 0.3 });
+                });
+            });
+        }
+
+        document.querySelectorAll(".nav-link, #interactive-diamond").forEach(el => {
+            el.addEventListener("mousemove", (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(el, { x: x * 0.3, y: y * 0.3, duration: 0.4 });
+            });
+            el.addEventListener("mouseleave", () => {
+                gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+            });
+        });
+        </script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js">
+                // ------------------ CURSOR ENGINE (GSAP) ------------------
+        const cursorDot = document.getElementById("cursor-dot");
+        const cursorRing = document.getElementById("cursor-ring");
+
+        if (cursorDot && cursorRing) {
+            gsap.set([cursorDot, cursorRing], { xPercent: -50, yPercent: -50 });
+            const dotSetterX = gsap.quickSetter(cursorDot, "x", "px");
+            const dotSetterY = gsap.quickSetter(cursorDot, "y", "px");
+            const ringSetterX = gsap.quickSetter(cursorRing, "x", "px");
+            const ringSetterY = gsap.quickSetter(cursorRing, "y", "px");
+
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let ringX = mouseX;
+            let ringY = mouseY;
+
+            window.addEventListener("mousemove", (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                dotSetterX(mouseX);
+                dotSetterY(mouseY);
+            });
+
+            gsap.ticker.add(() => {
+                const dt = 1.0 - Math.pow(1.0 - 0.2, gsap.ticker.deltaRatio());
+                ringX += (mouseX - ringX) * dt;
+                ringY += (mouseY - ringY) * dt;
+                ringSetterX(ringX);
+                ringSetterY(ringY);
+            });
+
+            const interactables = document.querySelectorAll("a, button, .project-card, .nav-link, .work-card, #interactive-diamond");
+            interactables.forEach(el => {
+                el.addEventListener("mouseenter", () => {
+                    gsap.to(cursorRing, { scale: 1.5, backgroundColor: "rgba(212,175,55,0.15)", borderColor: "rgba(242,202,80,1)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 0.5, opacity: 0.5, duration: 0.3 });
+                });
+                el.addEventListener("mouseleave", () => {
+                    gsap.to(cursorRing, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(212,175,55,0.6)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 1, opacity: 1, duration: 0.3 });
+                });
+            });
+        }
+
+        document.querySelectorAll(".nav-link, #interactive-diamond").forEach(el => {
+            el.addEventListener("mousemove", (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(el, { x: x * 0.3, y: y * 0.3, duration: 0.4 });
+            });
+            el.addEventListener("mouseleave", () => {
+                gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+            });
+        });
+        </script>
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600&amp;display=swap"
         rel="stylesheet" />
@@ -57,7 +393,63 @@
                 },
             },
         }
-    </script>
+    
+                // ------------------ CURSOR ENGINE (GSAP) ------------------
+        const cursorDot = document.getElementById("cursor-dot");
+        const cursorRing = document.getElementById("cursor-ring");
+
+        if (cursorDot && cursorRing) {
+            gsap.set([cursorDot, cursorRing], { xPercent: -50, yPercent: -50 });
+            const dotSetterX = gsap.quickSetter(cursorDot, "x", "px");
+            const dotSetterY = gsap.quickSetter(cursorDot, "y", "px");
+            const ringSetterX = gsap.quickSetter(cursorRing, "x", "px");
+            const ringSetterY = gsap.quickSetter(cursorRing, "y", "px");
+
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let ringX = mouseX;
+            let ringY = mouseY;
+
+            window.addEventListener("mousemove", (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                dotSetterX(mouseX);
+                dotSetterY(mouseY);
+            });
+
+            gsap.ticker.add(() => {
+                const dt = 1.0 - Math.pow(1.0 - 0.2, gsap.ticker.deltaRatio());
+                ringX += (mouseX - ringX) * dt;
+                ringY += (mouseY - ringY) * dt;
+                ringSetterX(ringX);
+                ringSetterY(ringY);
+            });
+
+            const interactables = document.querySelectorAll("a, button, .project-card, .nav-link, .work-card, #interactive-diamond");
+            interactables.forEach(el => {
+                el.addEventListener("mouseenter", () => {
+                    gsap.to(cursorRing, { scale: 1.5, backgroundColor: "rgba(212,175,55,0.15)", borderColor: "rgba(242,202,80,1)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 0.5, opacity: 0.5, duration: 0.3 });
+                });
+                el.addEventListener("mouseleave", () => {
+                    gsap.to(cursorRing, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(212,175,55,0.6)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 1, opacity: 1, duration: 0.3 });
+                });
+            });
+        }
+
+        document.querySelectorAll(".nav-link, #interactive-diamond").forEach(el => {
+            el.addEventListener("mousemove", (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(el, { x: x * 0.3, y: y * 0.3, duration: 0.4 });
+            });
+            el.addEventListener("mouseleave", () => {
+                gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+            });
+        });
+        </script>
     <style>
         body {
             background-color: #16130b;
@@ -313,11 +705,11 @@
 
     <!-- Custom Cursor -->
     <div class="hidden md:block pointer-events-none fixed inset-0 z-[9999]">
-        <div id="cursor-dot" class="w-2 h-2 bg-[#f2ca50] rounded-full absolute top-0 left-0 shadow-[0_0_10px_#f2ca50]"
-            style="transform: translate(-50%, -50%); will-change: transform;"></div>
+        <div id="cursor-dot" class="w-2 h-2 bg-[#f2ca50] rounded-full absolute top-0 left-0 shadow-[0_0_15px_rgba(242,202,80,0.8)]"
+            style="will-change: transform;"></div>
         <div id="cursor-ring"
-            class="w-10 h-10 border-2 border-[#d4af37]/60 bg-[#d4af37]/10 rounded-full absolute top-0 left-0 transition-[background-color,border-color,backdrop-filter] duration-300 ease-out"
-            style="transform: translate(-50%, -50%); will-change: transform;" data-scale="1"></div>
+            class="w-12 h-12 border border-[#d4af37]/60 rounded-full absolute top-0 left-0"
+            style="will-change: transform;"></div>
     </div>
 
     <!-- TopNavBar -->
@@ -2191,6 +2583,62 @@
             }
         });
 
-    </script>
+    
+                // ------------------ CURSOR ENGINE (GSAP) ------------------
+        const cursorDot = document.getElementById("cursor-dot");
+        const cursorRing = document.getElementById("cursor-ring");
+
+        if (cursorDot && cursorRing) {
+            gsap.set([cursorDot, cursorRing], { xPercent: -50, yPercent: -50 });
+            const dotSetterX = gsap.quickSetter(cursorDot, "x", "px");
+            const dotSetterY = gsap.quickSetter(cursorDot, "y", "px");
+            const ringSetterX = gsap.quickSetter(cursorRing, "x", "px");
+            const ringSetterY = gsap.quickSetter(cursorRing, "y", "px");
+
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let ringX = mouseX;
+            let ringY = mouseY;
+
+            window.addEventListener("mousemove", (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                dotSetterX(mouseX);
+                dotSetterY(mouseY);
+            });
+
+            gsap.ticker.add(() => {
+                const dt = 1.0 - Math.pow(1.0 - 0.2, gsap.ticker.deltaRatio());
+                ringX += (mouseX - ringX) * dt;
+                ringY += (mouseY - ringY) * dt;
+                ringSetterX(ringX);
+                ringSetterY(ringY);
+            });
+
+            const interactables = document.querySelectorAll("a, button, .project-card, .nav-link, .work-card, #interactive-diamond");
+            interactables.forEach(el => {
+                el.addEventListener("mouseenter", () => {
+                    gsap.to(cursorRing, { scale: 1.5, backgroundColor: "rgba(212,175,55,0.15)", borderColor: "rgba(242,202,80,1)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 0.5, opacity: 0.5, duration: 0.3 });
+                });
+                el.addEventListener("mouseleave", () => {
+                    gsap.to(cursorRing, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(212,175,55,0.6)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 1, opacity: 1, duration: 0.3 });
+                });
+            });
+        }
+
+        document.querySelectorAll(".nav-link, #interactive-diamond").forEach(el => {
+            el.addEventListener("mousemove", (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(el, { x: x * 0.3, y: y * 0.3, duration: 0.4 });
+            });
+            el.addEventListener("mouseleave", () => {
+                gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+            });
+        });
+        </script>
 </body>
 </html>
