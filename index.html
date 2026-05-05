@@ -1556,7 +1556,7 @@
             });
         }
 
-        function navigate(sectionId) {
+        function navigate(sectionId, updateHash = true) {
             if (!sections.includes(sectionId)) sectionId = 'home';
 
             sections.forEach(sec => {
@@ -1580,6 +1580,9 @@
                 }
             });
 
+            if (updateHash) {
+                window.history.pushState(null, '', '#' + sectionId);
+            }
             window.scrollTo(0, 0);
         }
 
@@ -1588,123 +1591,41 @@
                 e.preventDefault();
                 const target = link.getAttribute('data-target');
                 navigate(target);
-                window.history.pushState(null, '', '#' + target);
             });
         });
 
         window.addEventListener('popstate', () => {
             const hash = window.location.hash.replace('#', '') || 'home';
-            navigate(hash);
+            navigate(hash, false);
         });
 
         const initialHash = window.location.hash.replace('#', '') || 'home';
-        navigate(initialHash);
+        navigate(initialHash, false);
 
-        // ------------------ CURSOR LOGIC (GSAP OVERHAUL) ------------------
-        const cursorDot = document.getElementById('cursor-dot');
-        const cursorRing = document.getElementById('cursor-ring');
-
-        if (cursorDot && cursorRing) {
-            // High-performance setters
-            const dotX = gsap.quickSetter(cursorDot, "x", "px");
-            const dotY = gsap.quickSetter(cursorDot, "y", "px");
-            const ringX = gsap.quickSetter(cursorRing, "x", "px");
-            const ringY = gsap.quickSetter(cursorRing, "y", "px");
-
-            window.addEventListener("mousemove", e => {
-                const { clientX, clientY } = e;
-
-                // Immediate dot movement
-                gsap.to({}, {
-                    duration: 0,
-                    onUpdate: () => {
-                        dotX(clientX);
-                        dotY(clientY);
-                    }
-                });
-
-                // Delayed smooth ring movement (Lag effect)
-                gsap.to({}, {
-                    duration: 0.15,
-                    onUpdate: () => {
-                        ringX(clientX);
-                        ringY(clientY);
-                    }
-                });
-            });
-
-            // Interaction scaling
-            const interactables = document.querySelectorAll('a, button, .ticker-scroll span, .group, .pop-hover, .shiny-email-box, .glass-card, .glass-panel, .carousel-dot, select, input, textarea, .project-card');
-            interactables.forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    gsap.to(cursorRing, {
-                        scale: 1.8,
-                        backgroundColor: 'rgba(212, 175, 55, 0.25)',
-                        borderColor: 'rgba(212, 175, 55, 1)',
-                        backdropFilter: 'blur(6px)',
-                        duration: 0.4,
-                        ease: "power2.out"
-                    });
-                });
-                el.addEventListener('mouseleave', () => {
-                    gsap.to(cursorRing, {
-                        scale: 1,
-                        backgroundColor: 'rgba(212, 175, 55, 0.1)',
-                        borderColor: 'rgba(212, 175, 55, 0.6)',
-                        backdropFilter: 'none',
-                        duration: 0.4,
-                        ease: "power2.out"
-                    });
-                });
-            });
-        }
-
-        // Magnetic Elements Logic (Refined)
-        const magneticElements = document.querySelectorAll('.nav-link, button:not(#mobile-menu-btn):not(#close-menu-btn)');
+        // ------------------ MAGNETIC ELEMENTS ------------------
+        const magneticElements = document.querySelectorAll('.nav-link, button:not(#mobile-menu-btn):not(#close-menu-btn), #interactive-diamond');
         magneticElements.forEach(el => {
             el.addEventListener('mousemove', (e) => {
                 const rect = el.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-                const distX = e.clientX - centerX;
-                const distY = e.clientY - centerY;
-
-                gsap.to(el, {
-                    x: distX * 0.3,
-                    y: distY * 0.3,
-                    duration: 0.6,
-                    ease: "power2.out"
-                });
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(el, { x: x * 0.3, y: y * 0.3, duration: 0.6, ease: "power2.out" });
             });
-
             el.addEventListener('mouseleave', () => {
-                gsap.to(el, {
-                    x: 0,
-                    y: 0,
-                    duration: 0.8,
-                    ease: "elastic.out(1, 0.3)"
-                });
+                gsap.to(el, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.3)" });
             });
         });
 
-        // ------------------ CANVAS ANIMATION ------------------
-        // Removed canvas animation in favor of a clean, high-end static gradient background
-
-
-        // ------------------ PROJECT GALLERY HOVER LOGIC ------------------
+        // ------------------ PROJECT GALLERY HOVER ------------------
         const projectCards = document.querySelectorAll('.project-card');
         const worksBg = document.getElementById('works-bg');
 
         projectCards.forEach(card => {
             card.addEventListener('mouseenter', () => {
-                if (worksBg) {
-                    worksBg.style.backgroundColor = card.getAttribute('data-color');
-                }
+                if (worksBg) worksBg.style.backgroundColor = card.getAttribute('data-color');
             });
             card.addEventListener('mouseleave', () => {
-                if (worksBg) {
-                    worksBg.style.backgroundColor = 'transparent';
-                }
+                if (worksBg) worksBg.style.backgroundColor = 'transparent';
             });
         });
 
@@ -1988,13 +1909,19 @@
         }
 
         async function saveLead(status) {
+            const firstName = document.getElementById('input-firstname').value.trim();
+            const email = document.getElementById('input-email').value.trim();
+            
+            // Don't save if there's no minimal identifying info, unless it's the final submission
+            if (status === 'dead' && !firstName && !email) return;
+
             const leadData = {
                 workType: document.getElementById('work-type-list').getAttribute('data-selected') || '',
                 days: document.getElementById('input-days').value || '',
                 source: document.getElementById('source-list').getAttribute('data-selected') || '',
-                firstName: document.getElementById('input-firstname').value || '',
+                firstName: firstName,
                 lastName: document.getElementById('input-lastname').value || '',
-                email: document.getElementById('input-email').value || '',
+                email: email,
                 phone: document.getElementById('input-phone').value || '',
                 company: document.getElementById('input-company').value || '',
                 backupEmail: document.getElementById('input-backup-email').value || '',
@@ -2096,18 +2023,12 @@
             infinite: false,
         })
 
-        function raf(time) {
-            lenis.raf(time)
-            requestAnimationFrame(raf)
-        }
-        requestAnimationFrame(raf)
-
-        // Sync ScrollTrigger with Lenis
-        lenis.on('scroll', ScrollTrigger.update)
+        // Sync ScrollTrigger and GSAP with Lenis
         gsap.ticker.add((time) => {
             lenis.raf(time * 1000)
         })
         gsap.ticker.lagSmoothing(0)
+        lenis.on('scroll', ScrollTrigger.update)
 
         // GSAP Scroll Reveals
         gsap.registerPlugin(ScrollTrigger);
@@ -2226,28 +2147,29 @@
                 ringSetterY(ringY);
             });
 
-            const interactables = document.querySelectorAll("a, button, .project-card, .nav-link, .work-card, #interactive-diamond");
+            const interactables = document.querySelectorAll("a, button, .project-card, .nav-link, .work-card, #interactive-diamond, .carousel-dot, .source-card, .shiny-email-box, .glass-card, input, textarea, select");
             interactables.forEach(el => {
                 el.addEventListener("mouseenter", () => {
-                    gsap.to(cursorRing, { scale: 1.5, backgroundColor: "rgba(212,175,55,0.15)", borderColor: "rgba(242,202,80,1)", duration: 0.3 });
+                    gsap.to(cursorRing, { scale: 1.8, backgroundColor: "rgba(212,175,55,0.15)", borderColor: "rgba(242,202,80,1)", backdropFilter: "blur(4px)", duration: 0.3 });
                     gsap.to(cursorDot, { scale: 0.5, opacity: 0.5, duration: 0.3 });
                 });
                 el.addEventListener("mouseleave", () => {
-                    gsap.to(cursorRing, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(212,175,55,0.6)", duration: 0.3 });
+                    gsap.to(cursorRing, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(212,175,55,0.6)", backdropFilter: "none", duration: 0.3 });
                     gsap.to(cursorDot, { scale: 1, opacity: 1, duration: 0.3 });
                 });
             });
         }
 
-        document.querySelectorAll(".nav-link, #interactive-diamond").forEach(el => {
+        // ------------------ MAGNETIC ELEMENTS (UNIFIED) ------------------
+        document.querySelectorAll(".nav-link, button:not(#mobile-menu-btn):not(#close-menu-btn), #interactive-diamond, .carousel-dot, .source-card").forEach(el => {
             el.addEventListener("mousemove", (e) => {
                 const rect = el.getBoundingClientRect();
                 const x = e.clientX - rect.left - rect.width / 2;
                 const y = e.clientY - rect.top - rect.height / 2;
-                gsap.to(el, { x: x * 0.3, y: y * 0.3, duration: 0.4 });
+                gsap.to(el, { x: x * 0.35, y: y * 0.35, duration: 0.4 });
             });
             el.addEventListener("mouseleave", () => {
-                gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+                gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
             });
         });
         </script>
