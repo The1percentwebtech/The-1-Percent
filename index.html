@@ -11,6 +11,10 @@
     <!-- Firebase Compat SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600&amp;display=swap"
         rel="stylesheet" />
@@ -286,6 +290,22 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Line Reveal Utility */
+        .line-reveal {
+            overflow: hidden;
+            display: block;
+        }
+
+        .line-reveal-inner {
+            display: block;
+            transform: translateY(100%);
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .is-revealed .line-reveal-inner {
+            transform: translateY(0);
+        }
     </style>
 </head>
 
@@ -487,9 +507,7 @@
                                     class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.1),transparent)] group-hover:scale-105 transition-transform duration-1000 ease-out">
                                 </div>
                                 <div class="absolute inset-0 flex items-center justify-center">
-                                    <span
-                                        class="material-symbols-outlined text-9xl text-neutral-800 opacity-30 group-hover:opacity-100 group-hover:text-[#d4af37] transition-all duration-700 delay-100 drop-shadow-[0_0_50px_rgba(212,175,55,0.5)]"
-                                        style="font-size: 15rem;">token</span>
+                                    <img src="assets/aurelian.png" alt="Aurelian Platform" class="w-full h-full object-cover opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out project-image">
                                 </div>
                             </div>
                             <div class="mt-8 flex justify-between items-end">
@@ -517,9 +535,7 @@
                                     class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(100,181,246,0.1),transparent)] group-hover:scale-105 transition-transform duration-1000 ease-out">
                                 </div>
                                 <div class="absolute inset-0 flex items-center justify-center">
-                                    <span
-                                        class="material-symbols-outlined text-9xl text-neutral-800 opacity-30 group-hover:opacity-100 group-hover:text-[#64b5f6] transition-all duration-700 delay-100 drop-shadow-[0_0_50px_rgba(100,181,246,0.5)]"
-                                        style="font-size: 15rem;">architecture</span>
+                                    <img src="assets/obsidian.png" alt="Obsidian Digital Twin" class="w-full h-full object-cover opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out project-image">
                                 </div>
                             </div>
                             <div class="mt-8 flex justify-between items-end">
@@ -547,9 +563,7 @@
                                     class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(229,115,115,0.1),transparent)] group-hover:scale-105 transition-transform duration-1000 ease-out">
                                 </div>
                                 <div class="absolute inset-0 flex items-center justify-center">
-                                    <span
-                                        class="material-symbols-outlined text-9xl text-neutral-800 opacity-30 group-hover:opacity-100 group-hover:text-[#e57373] transition-all duration-700 delay-100 drop-shadow-[0_0_50px_rgba(229,115,115,0.5)]"
-                                        style="font-size: 15rem;">query_stats</span>
+                                    <img src="assets/aegis.png" alt="Aegis Security" class="w-full h-full object-cover opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out project-image">
                                 </div>
                             </div>
                             <div class="mt-8 flex justify-between items-end">
@@ -584,8 +598,8 @@
                     <div class="flex flex-col">
                         <span class="text-[#d4af37] text-xs font-bold tracking-[0.3em] uppercase mb-6">Phase 01</span>
                         <h1
-                            class="text-7xl md:text-[9rem] leading-none font-display-xl text-on-surface uppercase tracking-tight">
-                            The <br /> <span class="text-[#f2ca50] italic pr-4">Concepts</span>
+                            class="text-7xl md:text-[9rem] leading-none font-display-xl text-on-surface uppercase tracking-tight line-reveal">
+                            <span class="line-reveal-inner">The <br /> <span class="text-[#f2ca50] italic pr-4">Concepts</span></span>
                         </h1>
                     </div>
                     <div class="max-w-md mt-12 md:mt-0 md:text-right">
@@ -604,8 +618,8 @@
                         <span
                             class="absolute -top-12 -left-8 text-[12rem] md:text-[18rem] font-display-xl text-white/5 select-none leading-none z-0 tracking-tighter">01</span>
                         <div class="relative z-10">
-                            <h2 class="text-5xl md:text-6xl font-display-xl text-[#f2ca50] mb-8 leading-tight">
-                                Architectural<br />Sovereignty</h2>
+                            <h2 class="text-5xl md:text-6xl font-display-xl text-[#f2ca50] mb-8 leading-tight line-reveal">
+                                <span class="line-reveal-inner">Architectural<br />Sovereignty</span></h2>
                             <div class="space-y-6 font-body-md text-neutral-400">
                                 <p class="text-lg leading-relaxed">We treat code exactly like prime real estate. We
                                     don't use templates; we forge
@@ -690,8 +704,8 @@
                         <span
                             class="absolute -top-12 -right-8 text-[12rem] md:text-[18rem] font-display-xl text-white/5 select-none leading-none z-0 tracking-tighter">02</span>
                         <div class="relative z-10">
-                            <h2 class="text-5xl md:text-6xl font-display-xl text-[#f2ca50] mb-8 leading-tight">
-                                Epicurean<br />Mastery</h2>
+                            <h2 class="text-5xl md:text-6xl font-display-xl text-[#f2ca50] mb-8 leading-tight line-reveal">
+                                <span class="line-reveal-inner">Epicurean<br />Mastery</span></h2>
                             <div class="space-y-6 font-body-md text-neutral-400">
                                 <p class="text-lg leading-relaxed">The future of dining is hyper-personalized. Our
                                     concepts focus on 'Molecular Connection'.</p>
@@ -744,8 +758,8 @@
         <!-- ================= METHODOLOGY SECTION ================= -->
         <div id="methodology-section"
             class="page-section hidden flex-col pt-32 md:pt-48 pb-24 md:pb-32 max-w-[1440px] mx-auto px-6 md:px-12 w-full relative">
-            <section class="mb-20 md:mb-32 text-center w-full">
-                <h1 class="font-display-xl text-[#D4AF37] mb-8 gold-glow-text">The Architecture of Excellence</h1>
+            <section class="mb-20 md:mb-32 text-center w-full reveal-on-scroll">
+                <h1 class="font-display-xl text-[#D4AF37] mb-8 gold-glow-text line-reveal"><span class="line-reveal-inner">The Architecture of Excellence</span></h1>
                 <p class="font-body-lg text-on-surface-variant max-w-3xl mx-auto opacity-80">
                     Our methodology is not a curriculum; it is a structured evolution. Designed for the global elite, we
                     facilitate transitions from individual success to collective sovereignty.
@@ -845,8 +859,8 @@
             <header class="text-center mb-16 md:mb-24 mt-8 w-full">
                 <span class="font-label-sm text-primary tracking-[0.3em] uppercase mb-8 block">Investment tiers</span>
                 <h1
-                    class="text-5xl md:text-8xl font-display-xl font-bold mb-6 tracking-tight leading-none text-transparent bg-clip-text bg-gradient-to-b from-[#f2ca50] to-[#b38815] drop-shadow-[0_0_30px_rgba(212,175,55,0.5)]">
-                    Tailored for Excellence</h1>
+                    class="text-5xl md:text-8xl font-display-xl font-bold mb-6 tracking-tight leading-none text-transparent bg-clip-text bg-gradient-to-b from-[#f2ca50] to-[#b38815] drop-shadow-[0_0_30px_rgba(212,175,55,0.5)] line-reveal">
+                    <span class="line-reveal-inner">Tailored for Excellence</span></h1>
                 <p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto">
                     Join an elite ecosystem designed for those who demand absolute quality. Experience precision, speed,
                     and unrivaled craftsmanship.
@@ -993,8 +1007,6 @@
                             <td class="py-6 px-6 font-medium text-on-surface">Asset Ownership</td>
                             <td class="py-6 px-6">Standard</td>
                             <td class="py-6 px-6">Full Digital</td>
-                            <td class="py-6 px-6 text-on-surface">Exclusive Rights</td>
-                        </tr>
                     </tbody>
                 </table>
             </section>
@@ -1941,37 +1953,117 @@
             }, (error) => {
                 console.error("Error fetching leads: ", error);
                 tbody.innerHTML = '<tr><td colspan="6" class="py-6 px-4 text-center text-red-500">Error loading data. Check console.</td></tr>';
-            });
+            }        // ------------------ MOTION ENGINE (LENIS + GSAP) ------------------
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+            wheelMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        })
+
+        function raf(time) {
+            lenis.raf(time)
+            requestAnimationFrame(raf)
         }
-        // ------------------ PARALLAX & REVEAL LOGIC ------------------
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
-        };
+        requestAnimationFrame(raf)
 
-        const revealObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-revealed');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
+        // Sync ScrollTrigger with Lenis
+        lenis.on('scroll', ScrollTrigger.update)
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000)
+        })
+        gsap.ticker.lagSmoothing(0)
 
+        // GSAP Scroll Reveals
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Simple reveal for general elements
         document.querySelectorAll('.reveal-on-scroll').forEach(el => {
-            revealObserver.observe(el);
+            gsap.fromTo(el,
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "expo.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
         });
 
-        window.addEventListener('scroll', () => {
-            const scrolled = window.scrollY;
-            document.querySelectorAll('.parallax-img').forEach(el => {
-                const speed = 0.05;
-                el.style.transform = `translateY(${scrolled * speed}px)`;
+        // Parallax for images
+        document.querySelectorAll('.parallax-img').forEach(el => {
+            gsap.to(el, {
+                y: -100,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
             });
+        });
+
+        // Line-by-line reveal for headings
+        // Wrap words/lines in spans if needed, but for now we'll use a CSS-based approach on blocks
+        document.querySelectorAll('.line-reveal').forEach(el => {
+            const inner = el.querySelector('.line-reveal-inner');
+            if (inner) {
+                gsap.to(inner, {
+                    y: 0,
+                    duration: 1.5,
+                    ease: "expo.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 90%",
+                        toggleActions: "play none none none"
+                    }
+                });
+            }
+        });
+
+        // ------------------ MAGNETIC IMAGE SHIFT ------------------
+        document.querySelectorAll('.project-card').forEach(card => {
+            const img = card.querySelector('.project-image');
+            if (img) {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const xPercent = (x / rect.width - 0.5) * 30;
+                    const yPercent = (y / rect.height - 0.5) * 30;
+
+                    gsap.to(img, {
+                        x: xPercent,
+                        y: yPercent,
+                        scale: 1.15,
+                        duration: 0.8,
+                        ease: "power2.out"
+                    });
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(img, {
+                        x: 0,
+                        y: 0,
+                        scale: 1.1,
+                        duration: 0.8,
+                        ease: "power2.out"
+                    });
+                });
+            }
         });
 
     </script>
 </body>
-
 </html>
