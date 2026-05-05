@@ -501,7 +501,7 @@
 
                     <div class="flex flex-col gap-32">
                         <!-- Project 1 -->
-                        <div class="project-card group cursor-pointer relative" data-color="#1a120b">
+                        <div class="project-card group cursor-pointer relative" data-color="#1a120b" onclick="navigate('aurelian')">
                             <div class="w-full h-[60vh] md:h-[80vh] bg-neutral-900 overflow-hidden relative">
                                 <div
                                     class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.1),transparent)] group-hover:scale-105 transition-transform duration-1000 ease-out">
@@ -529,7 +529,7 @@
                         </div>
 
                         <!-- Project 2 -->
-                        <div class="project-card group cursor-pointer relative" data-color="#0b161a">
+                        <div class="project-card group cursor-pointer relative" data-color="#0b161a" onclick="navigate('obsidian')">
                             <div class="w-full h-[60vh] md:h-[80vh] bg-neutral-900 overflow-hidden relative">
                                 <div
                                     class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(100,181,246,0.1),transparent)] group-hover:scale-105 transition-transform duration-1000 ease-out">
@@ -557,7 +557,7 @@
                         </div>
 
                         <!-- Project 3 -->
-                        <div class="project-card group cursor-pointer relative" data-color="#1a0b0f">
+                        <div class="project-card group cursor-pointer relative" data-color="#1a0b0f" onclick="navigate('aegis')">
                             <div class="w-full h-[60vh] md:h-[80vh] bg-neutral-900 overflow-hidden relative">
                                 <div
                                     class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(229,115,115,0.1),transparent)] group-hover:scale-105 transition-transform duration-1000 ease-out">
@@ -1151,6 +1151,128 @@
             </div>
         </div>
 
+        <!-- ================= PROJECT DETAILS: AURELIAN ================= -->
+        <div id="aurelian-section" class="page-section hidden flex-col w-full relative bg-[#0a0a0a]">
+            <!-- Hero -->
+            <section class="min-h-screen flex flex-col justify-center px-6 md:px-12 relative overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <img src="assets/aurelian.png" class="w-full h-full object-cover opacity-20 scale-110 parallax-img" alt="Aurelian Background">
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a]/80 to-[#0a0a0a]"></div>
+                </div>
+                
+                <div class="max-w-7xl mx-auto w-full relative z-10 pt-32">
+                    <button onclick="navigate('home')" class="group mb-12 flex items-center gap-4 text-neutral-500 hover:text-[#d4af37] transition-colors uppercase tracking-[0.3em] text-xs font-bold">
+                        <span class="material-symbols-outlined group-hover:-translate-x-2 transition-transform">arrow_back</span>
+                        Back to Works
+                    </button>
+                    <h1 class="text-7xl md:text-[10rem] font-display-xl text-on-surface leading-none uppercase mb-8 line-reveal">
+                        <span class="line-reveal-inner">Aurelian<br/><span class="text-[#f2ca50] italic">Protocol</span></span>
+                    </h1>
+                    <div class="grid grid-cols-12 gap-8 items-end">
+                        <div class="col-span-12 md:col-span-6">
+                            <p class="text-xl md:text-2xl text-neutral-400 font-body-lg leading-relaxed reveal-on-scroll">
+                                Reimagining high-frequency trading through a minimalist, kinetic lens. A platform built for the digital sovereign.
+                            </p>
+                        </div>
+                        <div class="col-span-12 md:col-span-6 flex justify-end gap-12 border-l border-white/10 pl-12 reveal-on-scroll">
+                            <div>
+                                <span class="block text-[10px] text-neutral-500 uppercase tracking-widest mb-2 font-bold">Sector</span>
+                                <span class="text-on-surface">Fintech / Web3</span>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] text-neutral-500 uppercase tracking-widest mb-2 font-bold">Year</span>
+                                <span class="text-on-surface">2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content -->
+            <section class="py-32 px-6 md:px-12 max-w-7xl mx-auto w-full">
+                <div class="grid grid-cols-12 gap-12 lg:gap-24">
+                    <div class="col-span-12 lg:col-span-7 reveal-on-scroll">
+                        <h2 class="text-4xl md:text-5xl font-display-xl text-[#f2ca50] mb-8">The Challenge</h2>
+                        <p class="text-lg text-neutral-400 leading-relaxed mb-12">
+                            Aurelian required a bridge between the clinical nature of financial data and the luxury of elite asset management. The interface needed to be "invisible"—providing zero-friction access to complex biometric security and real-time market liquidities.
+                        </p>
+                        <div class="bg-[#16130b] border border-white/5 p-12 rounded-2xl">
+                            <h3 class="text-2xl font-display-xl text-on-surface mb-6">Execution Specs</h3>
+                            <ul class="space-y-6 text-neutral-500">
+                                <li class="flex items-center gap-4">
+                                    <span class="w-1 h-1 bg-[#d4af37] rounded-full"></span>
+                                    <span>Zero-Latency Real-Time Data Streaming</span>
+                                </li>
+                                <li class="flex items-center gap-4">
+                                    <span class="w-1 h-1 bg-[#d4af37] rounded-full"></span>
+                                    <span>Biometric Authorization Layer</span>
+                                </li>
+                                <li class="flex items-center gap-4">
+                                    <span class="w-1 h-1 bg-[#d4af37] rounded-full"></span>
+                                    <span>Custom SVG Charting Engine</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-span-12 lg:col-span-5 flex flex-col gap-12 reveal-on-scroll">
+                        <div class="h-[600px] bg-neutral-900 overflow-hidden rounded-2xl relative group">
+                            <img src="assets/aurelian.png" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000" alt="Aurelian Detail">
+                        </div>
+                        <p class="text-sm italic text-neutral-500 border-l border-[#d4af37] pl-6">
+                            "Aurelian represents the threshold of fintech aesthetics. It is where power meets precision."
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PROJECT DETAILS: OBSIDIAN ================= -->
+        <div id="obsidian-section" class="page-section hidden flex-col w-full relative bg-[#0a0a0a]">
+            <!-- Similar structure for Obsidian -->
+            <section class="min-h-screen flex flex-col justify-center px-6 md:px-12 relative overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <img src="assets/obsidian.png" class="w-full h-full object-cover opacity-20 scale-110 parallax-img" alt="Obsidian Background">
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a]/80 to-[#0a0a0a]"></div>
+                </div>
+                <div class="max-w-7xl mx-auto w-full relative z-10 pt-32">
+                    <button onclick="navigate('home')" class="group mb-12 flex items-center gap-4 text-neutral-500 hover:text-[#64b5f6] transition-colors uppercase tracking-[0.3em] text-xs font-bold">
+                        <span class="material-symbols-outlined group-hover:-translate-x-2 transition-transform">arrow_back</span>
+                        Back to Works
+                    </button>
+                    <h1 class="text-7xl md:text-[10rem] font-display-xl text-on-surface leading-none uppercase mb-8 line-reveal">
+                        <span class="line-reveal-inner">Obsidian<br/><span class="text-[#64b5f6] italic">Estate</span></span>
+                    </h1>
+                    <div class="grid grid-cols-12 gap-8 items-end">
+                        <div class="col-span-12 md:col-span-6">
+                            <p class="text-xl md:text-2xl text-neutral-400 font-body-lg leading-relaxed reveal-on-scroll">
+                                High-fidelity architectural digital twins for unlisted luxury assets. Visualizing the future of sovereignty.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PROJECT DETAILS: AEGIS ================= -->
+        <div id="aegis-section" class="page-section hidden flex-col w-full relative bg-[#0a0a0a]">
+            <!-- Similar structure for Aegis -->
+            <section class="min-h-screen flex flex-col justify-center px-6 md:px-12 relative overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <img src="assets/aegis.png" class="w-full h-full object-cover opacity-20 scale-110 parallax-img" alt="Aegis Background">
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a]/80 to-[#0a0a0a]"></div>
+                </div>
+                <div class="max-w-7xl mx-auto w-full relative z-10 pt-32">
+                    <button onclick="navigate('home')" class="group mb-12 flex items-center gap-4 text-neutral-500 hover:text-[#e57373] transition-colors uppercase tracking-[0.3em] text-xs font-bold">
+                        <span class="material-symbols-outlined group-hover:-translate-x-2 transition-transform">arrow_back</span>
+                        Back to Works
+                    </button>
+                    <h1 class="text-7xl md:text-[10rem] font-display-xl text-on-surface leading-none uppercase mb-8 line-reveal">
+                        <span class="line-reveal-inner">Aegis<br/><span class="text-[#e57373] italic">Defense</span></span>
+                    </h1>
+                </div>
+            </section>
+        </div>
+
     </main>
 
     <!-- Form Overlay -->
@@ -1399,7 +1521,7 @@
 
 
         // ------------------ ROUTING LOGIC ------------------
-        const sections = ['home', 'concepts', 'methodology', 'pricing', 'terms', 'privacy', 'admin'];
+        const sections = ['home', 'concepts', 'methodology', 'pricing', 'terms', 'privacy', 'admin', 'aurelian', 'obsidian', 'aegis'];
         const navLinks = document.querySelectorAll('.nav-link, footer a[data-target]');
 
         // Mobile Menu Logic
@@ -1478,85 +1600,90 @@
         const initialHash = window.location.hash.replace('#', '') || 'home';
         navigate(initialHash);
 
-        // ------------------ CURSOR LOGIC ------------------
+        // ------------------ CURSOR LOGIC (GSAP OVERHAUL) ------------------
         const cursorDot = document.getElementById('cursor-dot');
         const cursorRing = document.getElementById('cursor-ring');
 
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-        let ringX = mouseX;
-        let ringY = mouseY;
+        if (cursorDot && cursorRing) {
+            // High-performance setters
+            const dotX = gsap.quickSetter(cursorDot, "x", "px");
+            const dotY = gsap.quickSetter(cursorDot, "y", "px");
+            const ringX = gsap.quickSetter(cursorRing, "x", "px");
+            const ringY = gsap.quickSetter(cursorRing, "y", "px");
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            if (cursorDot) {
-                cursorDot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
-            }
-        });
+            window.addEventListener("mousemove", e => {
+                const { clientX, clientY } = e;
 
-        function animateCursor() {
-            if (cursorRing && cursorRing.dataset.snapped !== 'true') {
-                let distX = mouseX - ringX;
-                let distY = mouseY - ringY;
-                ringX += distX * 0.15;
-                ringY += distY * 0.15;
+                // Immediate dot movement
+                gsap.to({}, {
+                    duration: 0,
+                    onUpdate: () => {
+                        dotX(clientX);
+                        dotY(clientY);
+                    }
+                });
 
-                const currentScale = cursorRing.dataset.scale || 1;
-                cursorRing.style.transform = `translate(calc(${ringX}px - 50%), calc(${ringY}px - 50%)) scale(${currentScale})`;
-            }
-            requestAnimationFrame(animateCursor);
+                // Delayed smooth ring movement (Lag effect)
+                gsap.to({}, {
+                    duration: 0.15,
+                    onUpdate: () => {
+                        ringX(clientX);
+                        ringY(clientY);
+                    }
+                });
+            });
+
+            // Interaction scaling
+            const interactables = document.querySelectorAll('a, button, .ticker-scroll span, .group, .pop-hover, .shiny-email-box, .glass-card, .glass-panel, .carousel-dot, select, input, textarea, .project-card');
+            interactables.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    gsap.to(cursorRing, {
+                        scale: 1.8,
+                        backgroundColor: 'rgba(212, 175, 55, 0.25)',
+                        borderColor: 'rgba(212, 175, 55, 1)',
+                        backdropFilter: 'blur(6px)',
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                });
+                el.addEventListener('mouseleave', () => {
+                    gsap.to(cursorRing, {
+                        scale: 1,
+                        backgroundColor: 'rgba(212, 175, 55, 0.1)',
+                        borderColor: 'rgba(212, 175, 55, 0.6)',
+                        backdropFilter: 'none',
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                });
+            });
         }
-        animateCursor();
 
-        const interactables = document.querySelectorAll('a, button, .ticker-scroll span, .group, .pop-hover, .shiny-email-box, .glass-card, .glass-panel, .carousel-dot, select, input, textarea');
-        interactables.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                if (cursorRing) {
-                    cursorRing.dataset.scale = 1.5;
-                    cursorRing.style.backgroundColor = 'rgba(212, 175, 55, 0.2)';
-                    cursorRing.style.borderColor = 'rgba(212, 175, 55, 0.9)';
-                    cursorRing.style.backdropFilter = 'blur(4px)';
-                }
-            });
-            el.addEventListener('mouseleave', () => {
-                if (cursorRing) {
-                    cursorRing.dataset.scale = 1;
-                    cursorRing.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
-                    cursorRing.style.borderColor = 'rgba(212, 175, 55, 0.6)';
-                    cursorRing.style.backdropFilter = 'none';
-                }
-            });
-        });
-
-        // Magnetic Elements Logic
+        // Magnetic Elements Logic (Refined)
         const magneticElements = document.querySelectorAll('.nav-link, button:not(#mobile-menu-btn):not(#close-menu-btn)');
         magneticElements.forEach(el => {
             el.addEventListener('mousemove', (e) => {
                 const rect = el.getBoundingClientRect();
                 const centerX = rect.left + rect.width / 2;
                 const centerY = rect.top + rect.height / 2;
-
                 const distX = e.clientX - centerX;
                 const distY = e.clientY - centerY;
 
-                el.style.transition = 'none';
-                el.style.transform = `translate(${distX * 0.2}px, ${distY * 0.2}px) scale(1.02)`;
-
-                if (cursorRing) {
-                    ringX = centerX + distX * 0.1;
-                    ringY = centerY + distY * 0.1;
-                    cursorRing.dataset.snapped = 'true';
-                    cursorRing.style.transform = `translate(calc(${ringX}px - 50%), calc(${ringY}px - 50%)) scale(1.5)`;
-                }
+                gsap.to(el, {
+                    x: distX * 0.3,
+                    y: distY * 0.3,
+                    duration: 0.6,
+                    ease: "power2.out"
+                });
             });
 
             el.addEventListener('mouseleave', () => {
-                el.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
-                el.style.transform = '';
-                if (cursorRing) {
-                    cursorRing.dataset.snapped = 'false';
-                }
+                gsap.to(el, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "elastic.out(1, 0.3)"
+                });
             });
         });
 
