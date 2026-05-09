@@ -2631,20 +2631,7 @@
                 { cx: 0.85, cy: 0.55, ax: 0.12, ay: 0.20, fx: 0.00017, fy: 0.00028, r: 0.42, color: [100, 20,  110], phase: 1.0  },
             ];
 
-            // ---- Light Rays — autonomous slow rotation ----
-            const RAYS = 22;
-            const rays = Array.from({ length: RAYS }, (_, i) => ({
-                originXF: 0.35 + Math.random() * 0.30, // fixed fractional origin (not mouse)
-                originYF: 0.20 + Math.random() * 0.30,
-                angle: (i / RAYS) * Math.PI * 2,
-                length: 0.28 + Math.random() * 0.45,
-                width: Math.random() * 1.2 + 0.2,
-                alpha: Math.random() * 0.10 + 0.03,
-                rotSpeed: (Math.random() - 0.5) * 0.0003,
-                driftX: (Math.random() - 0.5) * 0.00008, // gentle origin drift
-                driftY: (Math.random() - 0.5) * 0.00008,
-                color: i % 3 === 0 ? '212,175,55' : i % 3 === 1 ? '74,32,128' : '180,160,255',
-            }));
+
 
             // ---- Draw Blobs ----
             function drawBlobs() {
@@ -2665,33 +2652,7 @@
                 });
             }
 
-            // ---- Draw Rays ----
-            function drawRays() {
-                rays.forEach(ray => {
-                    ray.angle += ray.rotSpeed;
-                    ray.originXF = Math.max(0.1, Math.min(0.9, ray.originXF + ray.driftX));
-                    ray.originYF = Math.max(0.1, Math.min(0.7, ray.originYF + ray.driftY));
 
-                    const ox = ray.originXF * W;
-                    const oy = ray.originYF * H;
-                    const ex = ox + Math.cos(ray.angle) * ray.length * W;
-                    const ey = oy + Math.sin(ray.angle) * ray.length * H;
-                    const cpx = ox + Math.cos(ray.angle + 0.35) * ray.length * 0.55 * W;
-                    const cpy = oy + Math.sin(ray.angle + 0.35) * ray.length * 0.55 * H;
-
-                    const grd = ctx.createLinearGradient(ox, oy, ex, ey);
-                    grd.addColorStop(0,   `rgba(${ray.color},${ray.alpha * 1.6})`);
-                    grd.addColorStop(0.4, `rgba(${ray.color},${ray.alpha})`);
-                    grd.addColorStop(1,   `rgba(${ray.color},0)`);
-
-                    ctx.beginPath();
-                    ctx.moveTo(ox, oy);
-                    ctx.quadraticCurveTo(cpx, cpy, ex, ey);
-                    ctx.strokeStyle = grd;
-                    ctx.lineWidth = ray.width;
-                    ctx.stroke();
-                });
-            }
 
             // ---- Draw Stars ----
             function drawStars() {
@@ -2764,11 +2725,6 @@
                 ctx.save();
                 ctx.globalCompositeOperation = 'screen';
                 drawBlobs();
-                ctx.restore();
-
-                ctx.save();
-                ctx.globalCompositeOperation = 'screen';
-                drawRays();
                 ctx.restore();
 
                 drawStars();
