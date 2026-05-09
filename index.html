@@ -16,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
@@ -27,11 +27,11 @@
             theme: {
                 extend: {
                     "colors": {
-                        "surface": "#16130b",
-                        "primary-container": "#d4af37",
+                        "surface": "#09090b",
+                        "primary-container": "#ffffff",
                         "on-surface": "#eae1d4",
-                        "background": "#16130b",
-                        "primary": "#f2ca50",
+                        "background": "#09090b",
+                        "primary": "#ffffff",
                         "on-surface-variant": "#d0c5af",
                         "outline-variant": "#4d4635",
                         "surface-container-highest": "#38342b",
@@ -39,12 +39,12 @@
                         "surface-container": "#231f17"
                     },
                     "fontFamily": {
-                        "display-xl": ["Noto Serif"],
-                        "body-lg": ["Manrope"],
-                        "headline-lg": ["Noto Serif"],
-                        "label-sm": ["Manrope"],
-                        "headline-md": ["Noto Serif"],
-                        "body-md": ["Manrope"]
+                        "display-xl": ["Space Grotesk"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Space Grotesk"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Space Grotesk"],
+                        "body-md": ["Inter"]
                     },
                     "fontSize": {
                         "display-xl": ["clamp(2.5rem, 6vw, 80px)", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
@@ -60,7 +60,7 @@
     </script>
     <style>
         body {
-            background-color: #16130b;
+            background-color: #09090b;
             cursor: none;
             overflow-x: hidden;
             display: flex;
@@ -70,36 +70,27 @@
         }
 
         .nav-link {
-            font-family: 'Manrope', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-weight: 500;
             letter-spacing: 0.15em;
             text-transform: uppercase;
             font-size: 0.85rem;
             position: relative;
-            background: linear-gradient(90deg, #a3a3a3 0%, #ffffff 50%, #a3a3a3 100%);
-            background-size: 200% auto;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #a1a1aa;
+            transition: all 0.2s ease-out;
+            padding: 8px 16px;
         }
 
         .nav-link:hover {
-            background-position: right center;
-            background: linear-gradient(90deg, #D4AF37 0%, #fff6d6 50%, #D4AF37 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
+            color: #000000;
+            background-color: #ffffff;
             transform: translateY(-2px);
         }
 
         .nav-link.active {
-            background: linear-gradient(90deg, #D4AF37 0%, #f2ca50 50%, #D4AF37 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.5);
-            padding-bottom: 2px;
+            color: #ffffff;
+            border-bottom: 1px solid #ffffff;
+            padding-bottom: 6px;
         }
 
         .ticker-scroll {
@@ -140,23 +131,23 @@
 
             0%,
             100% {
-                text-shadow: 0 0 5px rgba(212, 175, 55, 0.2);
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
             }
 
             50% {
-                text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
             }
         }
 
         /* Concepts Styles */
         .bloom-shadow {
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
         }
 
         .glass-panel {
             backdrop-filter: blur(20px);
             background: rgba(22, 19, 11, 0.8);
-            border: 1px solid rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .pulsate-text {
@@ -168,12 +159,12 @@
             0%,
             100% {
                 opacity: 1;
-                text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
             }
 
             50% {
                 opacity: 0.8;
-                text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
             }
         }
 
@@ -188,7 +179,7 @@
         }
 
         .carousel-dot.active {
-            background-color: #d4af37;
+            background-color: #ffffff;
             transform: scale(1.5);
         }
 
@@ -204,7 +195,7 @@
 
         .pop-hover:hover {
             transform: scale(1.02) translateY(-4px);
-            border-color: rgba(212, 175, 55, 0.5) !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
         }
 
         .pulse-light {
@@ -234,7 +225,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle 200px at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(212, 175, 55, 0.15), transparent 80%);
+            background: radial-gradient(circle 200px at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(255, 255, 255, 0.15), transparent 80%);
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
@@ -249,18 +240,18 @@
         .glass-card {
             background: rgba(22, 19, 11, 0.8);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .glass-card:hover {
             transform: scale(1.02) translateY(-4px);
-            border-color: rgba(212, 175, 55, 0.5);
-            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.15);
         }
 
         .gold-glow-text {
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         .heartbeat {
@@ -312,7 +303,7 @@
 <body class="font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container">
 
     <!-- High-End Typographic Preloader -->
-    <div id="preloader" class="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#0a0a0a] overflow-hidden">
+    <div id="preloader" class="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#000000] overflow-hidden">
         <div class="relative flex items-center justify-center">
             <!-- Outline Text -->
             <h1 class="font-display-xl text-6xl md:text-9xl text-transparent tracking-tighter absolute" 
@@ -320,14 +311,14 @@
                 THE 1 PERCENT
             </h1>
             <!-- Fill Text (Masked) -->
-            <h1 class="font-display-xl text-6xl md:text-9xl text-[#d4af37] tracking-tighter z-10" 
+            <h1 class="font-display-xl text-6xl md:text-9xl text-[#ffffff] tracking-tighter z-10" 
                 id="preloader-text" style="clip-path: inset(100% 0 0 0);">
                 THE 1 PERCENT
             </h1>
         </div>
         <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-4 opacity-0" id="preloader-meta">
-            <span class="font-label-sm text-[#d4af37] tracking-[0.4em] uppercase">Initializing</span>
-            <span class="w-1 h-1 bg-[#d4af37] rounded-full animate-ping"></span>
+            <span class="font-label-sm text-[#ffffff] tracking-[0.4em] uppercase">Initializing</span>
+            <span class="w-1 h-1 bg-[#ffffff] rounded-full animate-ping"></span>
             <span class="font-display-xl text-xl text-white" id="preloader-counter">0</span>
         </div>
     </div>
@@ -342,21 +333,14 @@
     </div>
 
     <!-- TopNavBar -->
-    <header
-        class="fixed top-0 w-full z-50 border-b border-[#D4AF37]/10 bg-neutral-950/80 backdrop-blur-[20px] shadow-[0_10px_40px_rgba(212,175,55,0.1)]">
-        <div class="flex justify-between items-center px-6 md:px-6 md:px-12 h-24 max-w-[1440px] mx-auto">
+    <header class="fixed top-0 w-full z-50 border-b border-[#27272a] bg-[#09090b]/90 backdrop-blur-[20px]">
+        <div class="flex justify-between items-center px-6 md:px-12 h-24 max-w-[1440px] mx-auto">
             <!-- Brand Logo -->
             <div class="flex items-center gap-4">
-                <div class="diamond-rotate flex items-center cursor-pointer" id="interactive-diamond">
-                    <span class="material-symbols-outlined text-[#D4AF37] text-2xl transition-all duration-300"
-                        data-icon="diamond">diamond</span>
-                </div>
                 <a href="#home" data-target="home" id="brand-logo-text"
-                    class="flex items-baseline gap-2 text-lg md:text-xl font-bold text-[#D4AF37] tracking-[0.2em] uppercase font-serif antialiased drop-shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:opacity-80 transition-opacity">
-                    <span>The</span>
-                    <span
-                        class="text-3xl md:text-4xl text-[#f2ca50] animate-pulse drop-shadow-[0_0_15px_rgba(242,202,80,0.8)]">1</span>
-                    <span>Percent</span>
+                    class="flex items-baseline gap-2 text-lg md:text-xl font-bold text-[#ffffff] tracking-[0.2em] uppercase font-sans antialiased hover:tracking-[0.4em] transition-all duration-300">
+                    <span class="text-3xl md:text-4xl text-[#ffffff] font-bold">1</span>
+                    <span>PERCENT</span>
                 </a>
             </div>
             <!-- Navigation -->
@@ -370,12 +354,12 @@
             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com" target="_blank"
                 class="hidden md:block">
                 <button
-                    class="bg-gradient-to-tr from-[#D4AF37] to-[#f2ca50] text-[#3c2f00] px-8 py-3 rounded-full font-serif font-bold tracking-[0.2em] uppercase hover:scale-100 md:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                    class="bg-[#ffffff] text-[#000000] px-8 py-3 font-sans font-bold tracking-[0.2em] uppercase hover:bg-[#a1a1aa] transition-colors duration-300 border border-[#ffffff]">
                     ENQUIRE
                 </button>
             </a>
             <!-- Mobile Menu Toggle -->
-            <button id="mobile-menu-btn" class="md:hidden text-[#D4AF37] hover:opacity-80 transition-opacity">
+            <button id="mobile-menu-btn" class="md:hidden text-[#ffffff] hover:text-[#a1a1aa] transition-colors">
                 <span class="material-symbols-outlined text-3xl">menu</span>
             </button>
         </div>
@@ -384,7 +368,7 @@
     <!-- Mobile Navigation Overlay -->
     <div id="mobile-nav"
         class="fixed inset-0 bg-neutral-950/95 backdrop-blur-xl z-[60] flex-col items-center justify-center gap-8 hidden opacity-0 transition-opacity duration-300">
-        <button id="close-menu-btn" class="absolute top-8 right-6 text-[#D4AF37] hover:opacity-80 transition-opacity">
+        <button id="close-menu-btn" class="absolute top-8 right-6 text-[#ffffff] hover:opacity-80 transition-opacity">
             <span class="material-symbols-outlined text-4xl">close</span>
         </button>
         <a class="nav-link text-2xl active" href="#home" data-target="home">Home</a>
@@ -394,7 +378,7 @@
         <a href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com" target="_blank"
             class="mt-8">
             <button
-                class="bg-gradient-to-tr from-[#D4AF37] to-[#f2ca50] text-[#3c2f00] px-8 py-3 rounded-full font-serif font-bold tracking-[0.2em] uppercase hover:scale-100 md:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                class="bg-gradient-to-tr from-[#ffffff] to-[#ffffff] text-[#3c2f00] px-8 py-3 rounded-full font-serif font-bold tracking-[0.2em] uppercase hover:scale-100 md:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(255, 255, 255,0.3)]">
                 ENQUIRE
             </button>
         </a>
@@ -404,13 +388,13 @@
     <main class="flex-grow flex flex-col relative w-full overflow-x-hidden">
 
         <!-- ================= HOME SECTION ================= -->
-        <div id="home-section" class="page-section flex flex-col relative overflow-hidden bg-[#0a0a0a]">
+        <div id="home-section" class="page-section flex flex-col relative overflow-hidden bg-[#000000]">
 
             <!-- HERO BLOCK (100vh) -->
             <div class="relative w-full min-h-screen flex flex-col justify-center">
                 <!-- Apple-style subtle static gradient background -->
                 <div
-                    class="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(212,175,55,0.15),rgba(10,10,10,1))]">
+                    class="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(255, 255, 255,0.15),rgba(10,10,10,1))]">
                 </div>
                 <!-- Subtle noise overlay for texture -->
                 <div class="absolute inset-0 pointer-events-none z-0 opacity-[0.03]"
@@ -518,7 +502,7 @@
                     id="works-bg"></div>
 
                 <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-                    <h2 class="text-[#d4af37] text-xs font-bold tracking-[0.3em] uppercase mb-16">Selected Archives</h2>
+                    <h2 class="text-[#ffffff] text-xs font-bold tracking-[0.3em] uppercase mb-16">Selected Archives</h2>
 
                     <div class="flex flex-col gap-32">
                         <!-- Project 1 -->
@@ -526,7 +510,7 @@
                             onclick="navigate('aurelian')">
                             <div class="w-full h-[60vh] md:h-[80vh] bg-neutral-900 overflow-hidden relative">
                                 <div
-                                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.1),transparent)] group-hover:scale-105 transition-transform duration-1000 ease-out">
+                                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255, 255, 255,0.1),transparent)] group-hover:scale-105 transition-transform duration-1000 ease-out">
                                 </div>
                                 <div class="absolute inset-0 flex items-center justify-center">
                                     <img src="assets/aurelian.png" alt="Aurelian Platform"
@@ -536,16 +520,16 @@
                             <div class="mt-8 flex justify-between items-end">
                                 <div>
                                     <h3
-                                        class="text-5xl md:text-7xl font-display-xl text-on-surface group-hover:text-[#d4af37] transition-colors duration-500">
+                                        class="text-5xl md:text-7xl font-display-xl text-on-surface group-hover:text-[#ffffff] transition-colors duration-500">
                                         AURELIAN</h3>
                                     <p class="text-neutral-500 mt-2 tracking-widest uppercase text-sm">Fintech / Web
                                         Platform</p>
                                 </div>
                                 <div class="hidden md:block">
                                     <button
-                                        class="w-16 h-16 rounded-full border border-neutral-700 flex items-center justify-center group-hover:border-[#d4af37] group-hover:bg-[#d4af37]/10 transition-colors duration-500">
+                                        class="w-16 h-16 rounded-full border border-neutral-700 flex items-center justify-center group-hover:border-[#ffffff] group-hover:bg-[#ffffff]/10 transition-colors duration-500">
                                         <span
-                                            class="material-symbols-outlined text-[#d4af37] -rotate-45 group-hover:rotate-0 transition-transform duration-500">arrow_forward</span>
+                                            class="material-symbols-outlined text-[#ffffff] -rotate-45 group-hover:rotate-0 transition-transform duration-500">arrow_forward</span>
                                     </button>
                                 </div>
                             </div>
@@ -623,11 +607,11 @@
             <section class="px-6 md:px-12 mb-24 md:mb-40 w-full mt-16 reveal-on-scroll">
                 <div class="flex flex-col md:flex-row justify-between items-end border-b border-white/10 pb-12">
                     <div class="flex flex-col">
-                        <span class="text-[#d4af37] text-xs font-bold tracking-[0.3em] uppercase mb-6">Phase 01</span>
+                        <span class="text-[#ffffff] text-xs font-bold tracking-[0.3em] uppercase mb-6">Phase 01</span>
                         <h1
                             class="text-7xl md:text-[9rem] leading-none font-display-xl text-on-surface uppercase tracking-tight line-reveal">
                             <span class="line-reveal-inner">The <br /> <span
-                                    class="text-[#f2ca50] italic pr-4">Concepts</span></span>
+                                    class="text-[#ffffff] italic pr-4">Concepts</span></span>
                         </h1>
                     </div>
                     <div class="max-w-md mt-12 md:mt-0 md:text-right">
@@ -647,14 +631,14 @@
                             class="absolute -top-12 -left-8 text-[12rem] md:text-[18rem] font-display-xl text-white/5 select-none leading-none z-0 tracking-tighter">01</span>
                         <div class="relative z-10">
                             <h2
-                                class="text-5xl md:text-6xl font-display-xl text-[#f2ca50] mb-8 leading-tight line-reveal">
+                                class="text-5xl md:text-6xl font-display-xl text-[#ffffff] mb-8 leading-tight line-reveal">
                                 <span class="line-reveal-inner">Architectural<br />Sovereignty</span>
                             </h2>
                             <div class="space-y-6 font-body-md text-neutral-400">
                                 <p class="text-lg leading-relaxed">We treat code exactly like prime real estate. We
                                     don't use templates; we forge
                                     high-performance, kinetic digital environments from the ground up.</p>
-                                <div class="pl-6 border-l-2 border-[#d4af37] py-2 my-8">
+                                <div class="pl-6 border-l-2 border-[#ffffff] py-2 my-8">
                                     <p class="text-on-surface italic text-xl">"In 2026, the definition of wealth is
                                         control over
                                         one's immediate environment."</p>
@@ -662,13 +646,13 @@
                                 <ul class="space-y-4 mt-8 pt-8 border-t border-white/10">
                                     <li class="flex items-center space-x-4 group">
                                         <span
-                                            class="w-1.5 h-1.5 bg-[#d4af37] rounded-full group-hover:scale-150 transition-transform"></span>
+                                            class="w-1.5 h-1.5 bg-[#ffffff] rounded-full group-hover:scale-150 transition-transform"></span>
                                         <span class="uppercase tracking-widest text-xs font-bold text-white">Kinetic
                                             UI/UX Architecture</span>
                                     </li>
                                     <li class="flex items-center space-x-4 group">
                                         <span
-                                            class="w-1.5 h-1.5 bg-[#d4af37] rounded-full group-hover:scale-150 transition-transform"></span>
+                                            class="w-1.5 h-1.5 bg-[#ffffff] rounded-full group-hover:scale-150 transition-transform"></span>
                                         <span
                                             class="uppercase tracking-widest text-xs font-bold text-white">Zero-Friction
                                             Conversion Funnels</span>
@@ -678,9 +662,9 @@
                         </div>
                     </div>
                     <div
-                        class="col-span-12 lg:col-span-7 order-1 lg:order-2 group overflow-hidden h-[500px] lg:h-[700px] flex flex-col justify-center items-center relative bg-[#0a0a0a] border border-white/10 rounded-2xl reveal-on-scroll parallax-img">
+                        class="col-span-12 lg:col-span-7 order-1 lg:order-2 group overflow-hidden h-[500px] lg:h-[700px] flex flex-col justify-center items-center relative bg-[#000000] border border-white/10 rounded-2xl reveal-on-scroll parallax-img">
                         <div
-                            class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.05),transparent_70%)]">
+                            class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255, 255, 255,0.05),transparent_70%)]">
                         </div>
                         <div
                             class="coding-ui w-3/4 max-w-[500px] bg-[#1e1e1e] rounded-xl shadow-2xl border border-white/10 overflow-hidden flex flex-col relative z-10 transition-transform duration-700 ease-out group-hover:scale-105">
@@ -708,7 +692,7 @@
             <section class="px-6 md:px-12 mb-24 md:mb-40 w-full">
                 <div class="grid grid-cols-12 gap-12 lg:gap-24 items-center">
                     <div
-                        class="col-span-12 lg:col-span-7 group overflow-hidden h-[500px] lg:h-[700px] flex flex-col justify-center items-center relative bg-[#0a0a0a] border border-white/10 rounded-2xl reveal-on-scroll parallax-img">
+                        class="col-span-12 lg:col-span-7 group overflow-hidden h-[500px] lg:h-[700px] flex flex-col justify-center items-center relative bg-[#000000] border border-white/10 rounded-2xl reveal-on-scroll parallax-img">
                         <div class="carousel-container w-full h-full" id="carousel">
                             <img class="w-full h-full object-cover flex-shrink-0 opacity-80"
                                 src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1974&auto=format&fit=crop"
@@ -735,13 +719,13 @@
                             class="absolute -top-12 -right-8 text-[12rem] md:text-[18rem] font-display-xl text-white/5 select-none leading-none z-0 tracking-tighter">02</span>
                         <div class="relative z-10">
                             <h2
-                                class="text-5xl md:text-6xl font-display-xl text-[#f2ca50] mb-8 leading-tight line-reveal">
+                                class="text-5xl md:text-6xl font-display-xl text-[#ffffff] mb-8 leading-tight line-reveal">
                                 <span class="line-reveal-inner">Epicurean<br />Mastery</span>
                             </h2>
                             <div class="space-y-6 font-body-md text-neutral-400">
                                 <p class="text-lg leading-relaxed">The future of dining is hyper-personalized. Our
                                     concepts focus on 'Molecular Connection'.</p>
-                                <div class="pr-6 border-r-2 border-[#d4af37] py-2 my-8">
+                                <div class="pr-6 border-r-2 border-[#ffffff] py-2 my-8">
                                     <p class="text-on-surface italic text-xl">"Hospitality is the last frontier of human
                                         connection. We invest in digital sensory experiences."</p>
                                 </div>
@@ -751,13 +735,13 @@
                                             class="uppercase tracking-widest text-xs font-bold text-white">Nutri-Genomic
                                             Mapping</span>
                                         <span
-                                            class="w-1.5 h-1.5 bg-[#d4af37] rounded-full group-hover:scale-150 transition-transform"></span>
+                                            class="w-1.5 h-1.5 bg-[#ffffff] rounded-full group-hover:scale-150 transition-transform"></span>
                                     </li>
                                     <li class="flex items-center space-x-4 group">
                                         <span class="uppercase tracking-widest text-xs font-bold text-white">Sensory
                                             Immersion</span>
                                         <span
-                                            class="w-1.5 h-1.5 bg-[#d4af37] rounded-full group-hover:scale-150 transition-transform"></span>
+                                            class="w-1.5 h-1.5 bg-[#ffffff] rounded-full group-hover:scale-150 transition-transform"></span>
                                     </li>
                                 </ul>
                             </div>
@@ -779,7 +763,7 @@
                     <a href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com"
                         target="_blank">
                         <button
-                            class="bg-primary text-[#3c2f00] px-6 md:px-12 py-5 rounded-full font-serif font-bold text-xl tracking-widest hover:scale-110 transition-all duration-500 shadow-[0_0_40px_rgba(212,175,55,0.4)]">
+                            class="bg-primary text-[#3c2f00] px-6 md:px-12 py-5 rounded-full font-serif font-bold text-xl tracking-widest hover:scale-110 transition-all duration-500 shadow-[0_0_40px_rgba(255, 255, 255,0.4)]">
                             APPLY FOR ACCESS
                         </button>
                     </a>
@@ -791,7 +775,7 @@
         <div id="methodology-section"
             class="page-section hidden flex-col pt-32 md:pt-48 pb-24 md:pb-32 max-w-[1440px] mx-auto px-6 md:px-12 w-full relative">
             <section class="mb-20 md:mb-32 text-center w-full reveal-on-scroll">
-                <h1 class="font-display-xl text-[#D4AF37] mb-8 gold-glow-text line-reveal"><span
+                <h1 class="font-display-xl text-[#ffffff] mb-8 gold-glow-text line-reveal"><span
                         class="line-reveal-inner">The Architecture of Excellence</span></h1>
                 <p class="font-body-lg text-on-surface-variant max-w-3xl mx-auto opacity-80">
                     Our methodology is not a curriculum; it is a structured evolution. Designed for the global elite, we
@@ -801,11 +785,11 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20 md:mb-32 w-full">
                 <div class="glass-card p-8 md:p-12 rounded-xl flex flex-col items-center justify-center text-center">
-                    <span class="text-6xl font-display-xl text-[#D4AF37] mb-2">99%</span>
+                    <span class="text-6xl font-display-xl text-[#ffffff] mb-2">99%</span>
                     <span class="font-label-sm uppercase tracking-[0.2em] text-on-surface-variant">Retention Rate</span>
                 </div>
                 <div class="glass-card p-8 md:p-12 rounded-xl flex flex-col items-center justify-center text-center">
-                    <span class="text-6xl font-display-xl text-[#D4AF37] mb-2">24/7</span>
+                    <span class="text-6xl font-display-xl text-[#ffffff] mb-2">24/7</span>
                     <span class="font-label-sm uppercase tracking-[0.2em] text-on-surface-variant">Elite Support
                         Ecosystem</span>
                 </div>
@@ -814,10 +798,10 @@
             <div class="grid grid-cols-12 gap-8 w-full">
                 <div class="col-span-12 md:col-span-8 glass-card p-8 md:p-12 rounded-xl relative overflow-hidden group">
                     <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-                        <span class="material-symbols-outlined text-[120px] text-[#D4AF37]">handshake</span>
+                        <span class="material-symbols-outlined text-[120px] text-[#ffffff]">handshake</span>
                     </div>
-                    <h2 class="font-headline-lg text-[#D4AF37] mb-6">Mutual Sovereignty</h2>
-                    <div class="w-12 h-1 bg-[#D4AF37] mb-8"></div>
+                    <h2 class="font-headline-lg text-[#ffffff] mb-6">Mutual Sovereignty</h2>
+                    <div class="w-12 h-1 bg-[#ffffff] mb-8"></div>
                     <p class="font-body-lg text-on-surface-variant leading-relaxed max-w-2xl">
                         Focusing on formal, non-hierarchical relationships within the ecosystem. We facilitate
                         frameworks where independent powerhouses align without compromising autonomy. This is the
@@ -827,8 +811,8 @@
 
                 <div
                     class="col-span-12 md:col-span-4 glass-card p-8 md:p-12 rounded-xl flex flex-col justify-end group">
-                    <span class="material-symbols-outlined text-4xl text-[#D4AF37] mb-6 heartbeat">bolt</span>
-                    <h2 class="font-headline-md text-[#D4AF37] mb-4">Kinetic Efficiency</h2>
+                    <span class="material-symbols-outlined text-4xl text-[#ffffff] mb-6 heartbeat">bolt</span>
+                    <h2 class="font-headline-md text-[#ffffff] mb-4">Kinetic Efficiency</h2>
                     <p class="font-body-md text-on-surface-variant opacity-70">
                         Optimizing the transfer of energy and resources across global borders. Minimizing friction in
                         execution through elite-level process mapping.
@@ -836,12 +820,12 @@
                 </div>
 
                 <div class="col-span-12 md:col-span-5 glass-card p-8 md:p-12 rounded-xl group">
-                    <div class="mb-8 w-full h-48 bg-[#231f17] rounded-lg overflow-hidden border border-[#D4AF37]/10">
+                    <div class="mb-8 w-full h-48 bg-[#231f17] rounded-lg overflow-hidden border border-[#ffffff]/10">
                         <img alt="Collaborative workspace"
                             class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBUkZOZyDwTCisJJfaZT0IlLvY1O9KnP2syeRrtku4Ulu6EjaxwwRYKBgA9CYlbsK9piwHA30n-0ezx2PjjdDdYPFdIyslXQfpRfT1MtwTKSQUe2mqKHMByvlyWBjywJ-KUYuw880u1ARXBKr1133p-_8P_R683Sc5dFWnQpYjLd1RK8VPLJF9VnzfnWlcd6XvMVw7dLa-d4AHaKBFyuTOYj2Kt0Zq5M1hbJ_N4NcSEq0ktslrqTyPdcYCvpGDVY8QlUcLCW4brZGM" />
                     </div>
-                    <h2 class="font-headline-md text-[#D4AF37] mb-4">Learning Together</h2>
+                    <h2 class="font-headline-md text-[#ffffff] mb-4">Learning Together</h2>
                     <p class="font-body-md text-on-surface-variant opacity-70">
                         Collaborative intelligence systems where insights from one industry illuminate the blind spots
                         of another. Shared mastery through curated focus groups.
@@ -849,9 +833,9 @@
                 </div>
 
                 <div class="col-span-12 md:col-span-7 glass-card p-8 md:p-12 rounded-xl relative group">
-                    <div class="absolute inset-0 bg-gradient-to-br from-[#D4AF37]/5 to-transparent pointer-events-none">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#ffffff]/5 to-transparent pointer-events-none">
                     </div>
-                    <h2 class="font-headline-md text-[#D4AF37] mb-6">Newer Experiences</h2>
+                    <h2 class="font-headline-md text-[#ffffff] mb-6">Newer Experiences</h2>
                     <div class="grid grid-cols-2 gap-8">
                         <div>
                             <p class="font-body-md text-on-surface-variant opacity-80 leading-relaxed mb-4">
@@ -862,17 +846,17 @@
                                 Our designs are highly interactive, immersive, and fundamentally friendly to navigate.
                             </p>
                         </div>
-                        <div class="flex flex-col gap-4 border-l border-[#D4AF37]/20 pl-8">
+                        <div class="flex flex-col gap-4 border-l border-[#ffffff]/20 pl-8">
                             <div class="flex items-center gap-3">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#D4AF37]"></span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#ffffff]"></span>
                                 <span class="font-label-sm text-on-surface-variant uppercase">Unlisted Assets</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#D4AF37]"></span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#ffffff]"></span>
                                 <span class="font-label-sm text-on-surface-variant uppercase">Spatial Evolution</span>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#D4AF37]"></span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#ffffff]"></span>
                                 <span class="font-label-sm text-on-surface-variant uppercase">Zero-Friction
                                     Access</span>
                             </div>
@@ -892,7 +876,7 @@
             <header class="text-center mb-16 md:mb-24 mt-8 w-full">
                 <span class="font-label-sm text-primary tracking-[0.3em] uppercase mb-8 block">Investment tiers</span>
                 <h1
-                    class="text-5xl md:text-8xl font-display-xl font-bold mb-6 tracking-tight leading-none text-transparent bg-clip-text bg-gradient-to-b from-[#f2ca50] to-[#b38815] drop-shadow-[0_0_30px_rgba(212,175,55,0.5)] line-reveal">
+                    class="text-5xl md:text-8xl font-display-xl font-bold mb-6 tracking-tight leading-none text-transparent bg-clip-text bg-gradient-to-b from-[#ffffff] to-[#b38815] drop-shadow-[0_0_30px_rgba(255, 255, 255,0.5)] line-reveal">
                     <span class="line-reveal-inner">Tailored for Excellence</span>
                 </h1>
                 <p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto">
@@ -909,7 +893,7 @@
                         <h3 class="font-headline-md text-on-surface mb-2">The Essential</h3>
                         <div class="flex items-baseline gap-2">
                             <span
-                                class="text-7xl md:text-8xl font-bold text-primary drop-shadow-[0_0_20px_rgba(242,202,80,0.4)]">$150</span>
+                                class="text-7xl md:text-8xl font-bold text-primary drop-shadow-[0_0_20px_rgba(255, 255, 255,0.4)]">$150</span>
                             <span class="text-on-surface-variant font-label-sm">/PROJECT</span>
                         </div>
                     </div>
@@ -946,7 +930,7 @@
                         <h3 class="font-headline-md text-primary mb-2">The Business</h3>
                         <div class="flex items-baseline gap-2">
                             <span
-                                class="text-7xl md:text-8xl font-bold text-primary drop-shadow-[0_0_20px_rgba(242,202,80,0.4)]">$250</span>
+                                class="text-7xl md:text-8xl font-bold text-primary drop-shadow-[0_0_20px_rgba(255, 255, 255,0.4)]">$250</span>
                             <span class="text-on-surface-variant font-label-sm">/PROJECT</span>
                         </div>
                     </div>
@@ -967,7 +951,7 @@
                     <a href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com" target="_blank"
                         class="w-full">
                         <button
-                            class="w-full py-4 rounded-lg bg-gradient-to-r from-primary to-[#d4af37] text-[#554300] shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform font-bold">
+                            class="w-full py-4 rounded-lg bg-gradient-to-r from-primary to-[#ffffff] text-[#554300] shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform font-bold">
                             Start Now
                         </button>
                     </a>
@@ -980,7 +964,7 @@
                         <h3 class="font-headline-md text-on-surface mb-2">The Absolute</h3>
                         <div class="flex items-baseline gap-2">
                             <span
-                                class="text-6xl md:text-7xl font-bold text-primary drop-shadow-[0_0_20px_rgba(242,202,80,0.4)]">Custom</span>
+                                class="text-6xl md:text-7xl font-bold text-primary drop-shadow-[0_0_20px_rgba(255, 255, 255,0.4)]">Custom</span>
                         </div>
                     </div>
                     <ul class="space-y-4 mb-16 flex-grow">
@@ -1047,7 +1031,7 @@
 
             <section class="mt-24 w-full">
                 <h3
-                    class="font-headline-lg mb-6 text-center text-[#D4AF37] drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+                    class="font-headline-lg mb-6 text-center text-[#ffffff] drop-shadow-[0_0_15px_rgba(255, 255, 255,0.3)]">
                     Invest for the best</h3>
                 <p class="text-on-surface-variant text-body-lg mb-12 text-center max-w-2xl mx-auto">
                     We don't just provide services; we curate experiences for the most discerning clients. Every pixel,
@@ -1055,17 +1039,17 @@
                 </p>
                 <div class="relative max-w-3xl mx-auto group mt-16">
                     <div
-                        class="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/20 via-[#fff6d6]/20 to-[#D4AF37]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                        class="absolute inset-0 bg-gradient-to-r from-[#ffffff]/20 via-[#fff6d6]/20 to-[#ffffff]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
-                    <div class="relative w-full overflow-hidden rounded-2xl border border-[#D4AF37]/30 bg-[#38342b] p-10 md:p-16 cursor-pointer shiny-email-box"
+                    <div class="relative w-full overflow-hidden rounded-2xl border border-[#ffffff]/30 bg-[#38342b] p-10 md:p-16 cursor-pointer shiny-email-box"
                         id="emailBox"
                         onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com', '_blank')">
                         <div class="shiny-gloss" id="glossEffect"></div>
                         <div class="relative z-10 flex flex-col items-center justify-center pointer-events-none">
                             <span
-                                class="material-symbols-outlined text-[#D4AF37] text-6xl mb-6 drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">mail</span>
+                                class="material-symbols-outlined text-[#ffffff] text-6xl mb-6 drop-shadow-[0_0_15px_rgba(255, 255, 255,0.4)]">mail</span>
                             <span
-                                class="font-serif text-3xl md:text-4xl text-[#D4AF37] tracking-wider mb-4 drop-shadow-[0_0_10px_rgba(212,175,55,0.2)]">the1percentwebtech@gmail.com</span>
+                                class="font-serif text-3xl md:text-4xl text-[#ffffff] tracking-wider mb-4 drop-shadow-[0_0_10px_rgba(255, 255, 255,0.2)]">the1percentwebtech@gmail.com</span>
                             <span class="font-label-sm uppercase tracking-[0.3em] text-on-surface-variant">Click to
                                 initiate correspondence</span>
                         </div>
@@ -1077,7 +1061,7 @@
         <!-- ================= TERMS SECTION ================= -->
         <div id="terms-section"
             class="page-section hidden flex-col pt-32 md:pt-40 pb-24 md:pb-32 max-w-4xl mx-auto px-6 md:px-8 w-full relative">
-            <h1 class="font-display-xl text-[#D4AF37] mb-8">Terms of Service</h1>
+            <h1 class="font-display-xl text-[#ffffff] mb-8">Terms of Service</h1>
             <div class="space-y-8 font-body-lg text-on-surface-variant leading-relaxed">
                 <p><strong>Effective Date:</strong> January 1, 2026</p>
                 <h2 class="font-headline-md text-on-surface">1. Agreement to Terms</h2>
@@ -1100,14 +1084,14 @@
                     resulting from your access to or use of or inability to access or use the Service.</p>
                 <h2 class="font-headline-md text-on-surface">5. Contact Information</h2>
                 <p>If you have any questions about these Terms, please contact us at:</p>
-                <p class="text-[#D4AF37] font-semibold">the1percentwebtech@gmail.com</p>
+                <p class="text-[#ffffff] font-semibold">the1percentwebtech@gmail.com</p>
             </div>
         </div>
 
         <!-- ================= PRIVACY SECTION ================= -->
         <div id="privacy-section"
             class="page-section hidden flex-col pt-32 md:pt-40 pb-24 md:pb-32 max-w-4xl mx-auto px-6 md:px-8 w-full relative">
-            <h1 class="font-display-xl text-[#D4AF37] mb-8">Privacy Policy</h1>
+            <h1 class="font-display-xl text-[#ffffff] mb-8">Privacy Policy</h1>
             <div class="space-y-8 font-body-lg text-on-surface-variant leading-relaxed">
                 <p><strong>Effective Date:</strong> January 1, 2026</p>
                 <h2 class="font-headline-md text-on-surface">1. Introduction</h2>
@@ -1144,7 +1128,7 @@
                 <h2 class="font-headline-md text-on-surface">5. Contact Details</h2>
                 <p>If you have any questions about this privacy policy or our privacy practices, please contact us at:
                 </p>
-                <p class="text-[#D4AF37] font-semibold">the1percentwebtech@gmail.com</p>
+                <p class="text-[#ffffff] font-semibold">the1percentwebtech@gmail.com</p>
             </div>
         </div>
 
@@ -1186,18 +1170,18 @@
         </div>
 
         <!-- ================= PROJECT DETAILS: AURELIAN ================= -->
-        <div id="aurelian-section" class="page-section hidden flex-col w-full relative bg-[#0a0a0a]">
+        <div id="aurelian-section" class="page-section hidden flex-col w-full relative bg-[#000000]">
             <!-- Hero -->
             <section class="min-h-screen flex flex-col justify-center px-6 md:px-12 relative overflow-hidden">
                 <div class="absolute inset-0 z-0">
                     <img src="assets/aurelian.png" class="w-full h-full object-cover opacity-20 scale-110 parallax-img"
                         alt="Aurelian Background">
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a]/80 to-[#0a0a0a]"></div>
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#000000]/80 to-[#000000]"></div>
                 </div>
 
                 <div class="max-w-7xl mx-auto w-full relative z-10 pt-32">
                     <button onclick="navigate('home')"
-                        class="group mb-12 flex items-center gap-4 text-neutral-500 hover:text-[#d4af37] transition-colors uppercase tracking-[0.3em] text-xs font-bold">
+                        class="group mb-12 flex items-center gap-4 text-neutral-500 hover:text-[#ffffff] transition-colors uppercase tracking-[0.3em] text-xs font-bold">
                         <span
                             class="material-symbols-outlined group-hover:-translate-x-2 transition-transform">arrow_back</span>
                         Back to Works
@@ -1205,7 +1189,7 @@
                     <h1
                         class="text-7xl md:text-[10rem] font-display-xl text-on-surface leading-none uppercase mb-8 line-reveal">
                         <span class="line-reveal-inner">Aurelian<br /><span
-                                class="text-[#f2ca50] italic">Protocol</span></span>
+                                class="text-[#ffffff] italic">Protocol</span></span>
                     </h1>
                     <div class="grid grid-cols-12 gap-8 items-end">
                         <div class="col-span-12 md:col-span-6">
@@ -1236,25 +1220,25 @@
             <section class="py-32 px-6 md:px-12 max-w-7xl mx-auto w-full">
                 <div class="grid grid-cols-12 gap-12 lg:gap-24">
                     <div class="col-span-12 lg:col-span-7 reveal-on-scroll">
-                        <h2 class="text-4xl md:text-5xl font-display-xl text-[#f2ca50] mb-8">The Challenge</h2>
+                        <h2 class="text-4xl md:text-5xl font-display-xl text-[#ffffff] mb-8">The Challenge</h2>
                         <p class="text-lg text-neutral-400 leading-relaxed mb-12">
                             Aurelian required a bridge between the clinical nature of financial data and the luxury of
                             elite asset management. The interface needed to be "invisible"—providing zero-friction
                             access to complex biometric security and real-time market liquidities.
                         </p>
-                        <div class="bg-[#16130b] border border-white/5 p-12 rounded-2xl">
+                        <div class="bg-[#09090b] border border-white/5 p-12 rounded-2xl">
                             <h3 class="text-2xl font-display-xl text-on-surface mb-6">Execution Specs</h3>
                             <ul class="space-y-6 text-neutral-500">
                                 <li class="flex items-center gap-4">
-                                    <span class="w-1 h-1 bg-[#d4af37] rounded-full"></span>
+                                    <span class="w-1 h-1 bg-[#ffffff] rounded-full"></span>
                                     <span>Zero-Latency Real-Time Data Streaming</span>
                                 </li>
                                 <li class="flex items-center gap-4">
-                                    <span class="w-1 h-1 bg-[#d4af37] rounded-full"></span>
+                                    <span class="w-1 h-1 bg-[#ffffff] rounded-full"></span>
                                     <span>Biometric Authorization Layer</span>
                                 </li>
                                 <li class="flex items-center gap-4">
-                                    <span class="w-1 h-1 bg-[#d4af37] rounded-full"></span>
+                                    <span class="w-1 h-1 bg-[#ffffff] rounded-full"></span>
                                     <span>Custom SVG Charting Engine</span>
                                 </li>
                             </ul>
@@ -1266,7 +1250,7 @@
                                 class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000"
                                 alt="Aurelian Detail">
                         </div>
-                        <p class="text-sm italic text-neutral-500 border-l border-[#d4af37] pl-6">
+                        <p class="text-sm italic text-neutral-500 border-l border-[#ffffff] pl-6">
                             "Aurelian represents the threshold of fintech aesthetics. It is where power meets
                             precision."
                         </p>
@@ -1276,13 +1260,13 @@
         </div>
 
         <!-- ================= PROJECT DETAILS: OBSIDIAN ================= -->
-        <div id="obsidian-section" class="page-section hidden flex-col w-full relative bg-[#0a0a0a]">
+        <div id="obsidian-section" class="page-section hidden flex-col w-full relative bg-[#000000]">
             <!-- Similar structure for Obsidian -->
             <section class="min-h-screen flex flex-col justify-center px-6 md:px-12 relative overflow-hidden">
                 <div class="absolute inset-0 z-0">
                     <img src="assets/obsidian.png" class="w-full h-full object-cover opacity-20 scale-110 parallax-img"
                         alt="Obsidian Background">
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a]/80 to-[#0a0a0a]"></div>
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#000000]/80 to-[#000000]"></div>
                 </div>
                 <div class="max-w-7xl mx-auto w-full relative z-10 pt-32">
                     <button onclick="navigate('home')"
@@ -1318,7 +1302,7 @@
                             properties without compromising load times or performance. The platform serves as a secure
                             data room for ultra-high-net-worth investors.
                         </p>
-                        <div class="bg-[#16130b] border border-white/5 p-12 rounded-2xl">
+                        <div class="bg-[#09090b] border border-white/5 p-12 rounded-2xl">
                             <h3 class="text-2xl font-display-xl text-on-surface mb-6">Execution Specs</h3>
                             <ul class="space-y-6 text-neutral-500">
                                 <li class="flex items-center gap-4">
@@ -1351,13 +1335,13 @@
         </div>
 
         <!-- ================= PROJECT DETAILS: AEGIS ================= -->
-        <div id="aegis-section" class="page-section hidden flex-col w-full relative bg-[#0a0a0a]">
+        <div id="aegis-section" class="page-section hidden flex-col w-full relative bg-[#000000]">
             <!-- Similar structure for Aegis -->
             <section class="min-h-screen flex flex-col justify-center px-6 md:px-12 relative overflow-hidden">
                 <div class="absolute inset-0 z-0">
                     <img src="assets/aegis.png" class="w-full h-full object-cover opacity-20 scale-110 parallax-img"
                         alt="Aegis Background">
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a]/80 to-[#0a0a0a]"></div>
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#000000]/80 to-[#000000]"></div>
                 </div>
                 <div class="max-w-7xl mx-auto w-full relative z-10 pt-32">
                     <button onclick="navigate('home')"
@@ -1384,7 +1368,7 @@
                             distill complex network topologies and threat vectors into an instantly readable, kinetic
                             dashboard that feels like mission control.
                         </p>
-                        <div class="bg-[#16130b] border border-white/5 p-12 rounded-2xl">
+                        <div class="bg-[#09090b] border border-white/5 p-12 rounded-2xl">
                             <h3 class="text-2xl font-display-xl text-on-surface mb-6">Execution Specs</h3>
                             <ul class="space-y-6 text-neutral-500">
                                 <li class="flex items-center gap-4">
@@ -1431,7 +1415,7 @@
             <!-- Progress bar -->
             <div class="w-full h-px bg-white/10 mb-16 relative">
                 <div id="form-progress"
-                    class="absolute top-0 left-0 h-px bg-gradient-to-r from-[#d4af37] to-[#f2ca50] transition-all duration-700"
+                    class="absolute top-0 left-0 h-px bg-gradient-to-r from-[#ffffff] to-[#ffffff] transition-all duration-700"
                     style="width:33%"></div>
                 <div class="flex justify-between mt-4">
                     <span id="step-label" class="text-[10px] tracking-[0.3em] uppercase text-neutral-500">Step 1 / 3 —
@@ -1444,63 +1428,63 @@
             <div id="form-page-1" class="form-page flex flex-col gap-10">
                 <div>
                     <h2 class="text-4xl md:text-5xl font-display-xl text-white mb-3">What are you <span
-                            class="text-[#d4af37] italic">building?</span></h2>
+                            class="text-[#ffffff] italic">building?</span></h2>
                     <p class="text-neutral-500 text-sm">Select your project type — this advances automatically.</p>
                 </div>
                 <div class="flex flex-col gap-3" id="work-type-list">
-                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#d4af37]/60 hover:bg-[#d4af37]/5 transition-all duration-300"
+                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#ffffff]/60 hover:bg-[#ffffff]/5 transition-all duration-300"
                         data-value="Banner"><span class="text-white font-medium">Banner / Ad Creative</span><span
-                            class="material-symbols-outlined text-neutral-600 group-hover:text-[#d4af37] transition-colors">arrow_forward</span>
+                            class="material-symbols-outlined text-neutral-600 group-hover:text-[#ffffff] transition-colors">arrow_forward</span>
                     </div>
-                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#d4af37]/60 hover:bg-[#d4af37]/5 transition-all duration-300"
+                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#ffffff]/60 hover:bg-[#ffffff]/5 transition-all duration-300"
                         data-value="Startups"><span class="text-white font-medium">Startup Platform</span><span
-                            class="material-symbols-outlined text-neutral-600 group-hover:text-[#d4af37] transition-colors">arrow_forward</span>
+                            class="material-symbols-outlined text-neutral-600 group-hover:text-[#ffffff] transition-colors">arrow_forward</span>
                     </div>
-                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#d4af37]/60 hover:bg-[#d4af37]/5 transition-all duration-300"
+                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#ffffff]/60 hover:bg-[#ffffff]/5 transition-all duration-300"
                         data-value="Local Business"><span class="text-white font-medium">Local Business Site</span><span
-                            class="material-symbols-outlined text-neutral-600 group-hover:text-[#d4af37] transition-colors">arrow_forward</span>
+                            class="material-symbols-outlined text-neutral-600 group-hover:text-[#ffffff] transition-colors">arrow_forward</span>
                     </div>
-                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#d4af37]/60 hover:bg-[#d4af37]/5 transition-all duration-300"
+                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#ffffff]/60 hover:bg-[#ffffff]/5 transition-all duration-300"
                         data-value="Custom Web Design"><span class="text-white font-medium">Custom Web
                             Design</span><span
-                            class="material-symbols-outlined text-neutral-600 group-hover:text-[#d4af37] transition-colors">arrow_forward</span>
+                            class="material-symbols-outlined text-neutral-600 group-hover:text-[#ffffff] transition-colors">arrow_forward</span>
                     </div>
-                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#d4af37]/60 hover:bg-[#d4af37]/5 transition-all duration-300"
+                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#ffffff]/60 hover:bg-[#ffffff]/5 transition-all duration-300"
                         data-value="Administrative"><span class="text-white font-medium">Administrative /
                             Office</span><span
-                            class="material-symbols-outlined text-neutral-600 group-hover:text-[#d4af37] transition-colors">arrow_forward</span>
+                            class="material-symbols-outlined text-neutral-600 group-hover:text-[#ffffff] transition-colors">arrow_forward</span>
                     </div>
-                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#d4af37]/60 hover:bg-[#d4af37]/5 transition-all duration-300"
+                    <div class="work-card group flex items-center justify-between border border-white/10 rounded-xl px-6 py-5 cursor-pointer hover:border-[#ffffff]/60 hover:bg-[#ffffff]/5 transition-all duration-300"
                         data-value="Other"><span class="text-white font-medium">Other / Not Listed</span><span
-                            class="material-symbols-outlined text-neutral-600 group-hover:text-[#d4af37] transition-colors">arrow_forward</span>
+                            class="material-symbols-outlined text-neutral-600 group-hover:text-[#ffffff] transition-colors">arrow_forward</span>
                     </div>
                 </div>
                 <!-- Optional source + days revealed after selection -->
                 <div id="p1-extra" class="hidden flex-col gap-8">
                     <div class="flex flex-col gap-2">
-                        <label class="text-[10px] tracking-[0.3em] uppercase text-[#d4af37] font-bold">Estimated Days
+                        <label class="text-[10px] tracking-[0.3em] uppercase text-[#ffffff] font-bold">Estimated Days
                             Required *</label>
                         <input type="number" id="input-days" min="1" placeholder="e.g. 14"
-                            class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#d4af37] transition-colors text-lg">
+                            class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#ffffff] transition-colors text-lg">
                     </div>
                     <div class="flex flex-col gap-3">
                         <label class="text-[10px] tracking-[0.3em] uppercase text-neutral-500 font-bold">How did you
                             hear about us? <span class="text-neutral-600">(Optional)</span></label>
                         <div class="flex flex-wrap gap-2" id="source-list">
-                            <div class="source-card text-xs border border-white/10 rounded-full px-4 py-2 cursor-pointer hover:border-[#d4af37]/60 text-neutral-400 hover:text-white transition-all"
+                            <div class="source-card text-xs border border-white/10 rounded-full px-4 py-2 cursor-pointer hover:border-[#ffffff]/60 text-neutral-400 hover:text-white transition-all"
                                 data-value="Advertise">Advertise</div>
-                            <div class="source-card text-xs border border-white/10 rounded-full px-4 py-2 cursor-pointer hover:border-[#d4af37]/60 text-neutral-400 hover:text-white transition-all"
+                            <div class="source-card text-xs border border-white/10 rounded-full px-4 py-2 cursor-pointer hover:border-[#ffffff]/60 text-neutral-400 hover:text-white transition-all"
                                 data-value="Representative">Representative</div>
-                            <div class="source-card text-xs border border-white/10 rounded-full px-4 py-2 cursor-pointer hover:border-[#d4af37]/60 text-neutral-400 hover:text-white transition-all"
+                            <div class="source-card text-xs border border-white/10 rounded-full px-4 py-2 cursor-pointer hover:border-[#ffffff]/60 text-neutral-400 hover:text-white transition-all"
                                 data-value="Friends">Friends</div>
-                            <div class="source-card text-xs border border-white/10 rounded-full px-4 py-2 cursor-pointer hover:border-[#d4af37]/60 text-neutral-400 hover:text-white transition-all"
+                            <div class="source-card text-xs border border-white/10 rounded-full px-4 py-2 cursor-pointer hover:border-[#ffffff]/60 text-neutral-400 hover:text-white transition-all"
                                 data-value="Business">Business</div>
                         </div>
                     </div>
                     <div class="flex justify-between items-center pt-4">
                         <div></div>
                         <button id="p1-next-btn" onclick="nextPage(2)"
-                            class="flex items-center gap-3 text-white border border-white/20 rounded-full px-8 py-3 hover:border-[#d4af37] hover:text-[#d4af37] transition-all text-sm font-bold tracking-widest uppercase">Continue
+                            class="flex items-center gap-3 text-white border border-white/20 rounded-full px-8 py-3 hover:border-[#ffffff] hover:text-[#ffffff] transition-all text-sm font-bold tracking-widest uppercase">Continue
                             <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
                     </div>
                 </div>
@@ -1510,65 +1494,65 @@
             <div id="form-page-2" class="form-page hidden flex-col gap-8">
                 <div>
                     <h2 class="text-4xl md:text-5xl font-display-xl text-white mb-3">Who are <span
-                            class="text-[#d4af37] italic">you?</span></h2>
+                            class="text-[#ffffff] italic">you?</span></h2>
                     <p class="text-neutral-500 text-sm">Your details are encrypted and never shared.</p>
                 </div>
                 <div class="grid grid-cols-2 gap-x-8 gap-y-8">
                     <div class="flex flex-col gap-2">
-                        <label class="text-[10px] tracking-[0.3em] uppercase text-[#d4af37] font-bold">First Name
+                        <label class="text-[10px] tracking-[0.3em] uppercase text-[#ffffff] font-bold">First Name
                             *</label>
                         <input type="text" id="input-firstname"
-                            class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#d4af37] transition-colors text-lg"
+                            class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#ffffff] transition-colors text-lg"
                             placeholder="John">
                     </div>
                     <div class="flex flex-col gap-2">
-                        <label class="text-[10px] tracking-[0.3em] uppercase text-[#d4af37] font-bold">Last Name
+                        <label class="text-[10px] tracking-[0.3em] uppercase text-[#ffffff] font-bold">Last Name
                             *</label>
                         <input type="text" id="input-lastname"
-                            class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#d4af37] transition-colors text-lg"
+                            class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#ffffff] transition-colors text-lg"
                             placeholder="Doe">
                     </div>
                     <div class="flex flex-col gap-2">
-                        <label class="text-[10px] tracking-[0.3em] uppercase text-[#d4af37] font-bold">Email Address
+                        <label class="text-[10px] tracking-[0.3em] uppercase text-[#ffffff] font-bold">Email Address
                             *</label>
                         <input type="email" id="input-email"
-                            class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#d4af37] transition-colors text-lg"
+                            class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#ffffff] transition-colors text-lg"
                             placeholder="you@company.com">
                     </div>
                     <div class="flex flex-col gap-2">
                         <label class="text-[10px] tracking-[0.3em] uppercase text-neutral-500 font-bold">Phone <span
                                 class="text-neutral-600">(Opt)</span></label>
                         <input type="tel" id="input-phone"
-                            class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#d4af37] transition-colors text-lg"
+                            class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#ffffff] transition-colors text-lg"
                             placeholder="+1 000 000 0000">
                     </div>
                     <div class="flex flex-col gap-2">
                         <label class="text-[10px] tracking-[0.3em] uppercase text-neutral-500 font-bold">Company <span
                                 class="text-neutral-600">(Opt)</span></label>
                         <input type="text" id="input-company"
-                            class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#d4af37] transition-colors text-lg"
+                            class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#ffffff] transition-colors text-lg"
                             placeholder="Acme Corp">
                     </div>
                     <div class="flex flex-col gap-2">
                         <label class="text-[10px] tracking-[0.3em] uppercase text-neutral-500 font-bold">Backup Email
                             <span class="text-neutral-600">(Opt)</span></label>
                         <input type="email" id="input-backup-email"
-                            class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#d4af37] transition-colors text-lg"
+                            class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#ffffff] transition-colors text-lg"
                             placeholder="backup@email.com">
                     </div>
                 </div>
                 <div class="flex flex-col gap-2 col-span-2">
-                    <label class="text-[10px] tracking-[0.3em] uppercase text-[#d4af37] font-bold">Primary Goal
+                    <label class="text-[10px] tracking-[0.3em] uppercase text-[#ffffff] font-bold">Primary Goal
                         *</label>
                     <textarea id="input-goal" rows="3" placeholder="What outcome do you expect from this project?"
-                        class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#d4af37] transition-colors text-lg resize-none"></textarea>
+                        class="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-neutral-600 focus:outline-none focus:border-[#ffffff] transition-colors text-lg resize-none"></textarea>
                 </div>
                 <div id="p2-next-row" class="flex justify-between items-center pt-4 hidden">
                     <button onclick="nextPage(1)"
                         class="flex items-center gap-2 text-neutral-500 hover:text-white transition-colors text-sm font-bold tracking-widest uppercase"><span
                             class="material-symbols-outlined text-sm">arrow_back</span> Back</button>
                     <button onclick="nextPage(3)"
-                        class="flex items-center gap-3 text-white border border-white/20 rounded-full px-8 py-3 hover:border-[#d4af37] hover:text-[#d4af37] transition-all text-sm font-bold tracking-widest uppercase">Continue
+                        class="flex items-center gap-3 text-white border border-white/20 rounded-full px-8 py-3 hover:border-[#ffffff] hover:text-[#ffffff] transition-all text-sm font-bold tracking-widest uppercase">Continue
                         <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
                 </div>
                 <div id="p2-back-only" class="flex justify-between items-center pt-4">
@@ -1583,7 +1567,7 @@
             <div id="form-page-3" class="form-page hidden flex-col gap-8">
                 <div>
                     <h2 class="text-4xl md:text-5xl font-display-xl text-white mb-3">Mutual <span
-                            class="text-[#d4af37] italic">Consent.</span></h2>
+                            class="text-[#ffffff] italic">Consent.</span></h2>
                     <p class="text-neutral-500 text-sm">Review and confirm your intent to collaborate.</p>
                 </div>
                 <div
@@ -1600,9 +1584,9 @@
                 <label class="flex items-start gap-4 cursor-pointer group">
                     <div class="relative flex-shrink-0 mt-1">
                         <input type="checkbox" id="input-consent"
-                            class="peer appearance-none w-5 h-5 border border-white/30 rounded checked:bg-[#d4af37] checked:border-[#d4af37] transition-colors cursor-pointer">
+                            class="peer appearance-none w-5 h-5 border border-white/30 rounded checked:bg-[#ffffff] checked:border-[#ffffff] transition-colors cursor-pointer">
                         <span
-                            class="material-symbols-outlined absolute top-0 left-0 text-[#16130b] text-base opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity leading-none">check</span>
+                            class="material-symbols-outlined absolute top-0 left-0 text-[#09090b] text-base opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity leading-none">check</span>
                     </div>
                     <span class="text-neutral-400 group-hover:text-white transition-colors text-sm leading-relaxed">I
                         agree to these terms and would like to proceed with The 1 Percent on mutual consent and
@@ -1613,47 +1597,47 @@
                         class="flex items-center gap-2 text-neutral-500 hover:text-white transition-colors text-sm font-bold tracking-widest uppercase"><span
                             class="material-symbols-outlined text-sm">arrow_back</span> Back</button>
                     <button onclick="submitForm()"
-                        class="bg-[#d4af37] text-[#0a0a0a] px-10 py-4 rounded-full font-bold tracking-widest uppercase text-sm hover:bg-[#f2ca50] transition-colors shadow-[0_0_30px_rgba(212,175,55,0.3)]">Submit
+                        class="bg-[#ffffff] text-[#000000] px-10 py-4 rounded-full font-bold tracking-widest uppercase text-sm hover:bg-[#ffffff] transition-colors shadow-[0_0_30px_rgba(255, 255, 255,0.3)]">Submit
                         Application</button>
                 </div>
             </div>
 
             <!-- Success -->
             <div id="form-success" class="form-page hidden flex-col items-center text-center gap-6 py-16">
-                <div class="w-16 h-16 rounded-full border border-[#d4af37]/40 flex items-center justify-center mb-4">
-                    <span class="material-symbols-outlined text-[#d4af37] text-3xl">task_alt</span>
+                <div class="w-16 h-16 rounded-full border border-[#ffffff]/40 flex items-center justify-center mb-4">
+                    <span class="material-symbols-outlined text-[#ffffff] text-3xl">task_alt</span>
                 </div>
                 <h2 class="text-4xl font-display-xl text-white">Application <span
-                        class="text-[#d4af37] italic">Received.</span></h2>
+                        class="text-[#ffffff] italic">Received.</span></h2>
                 <p class="text-neutral-500 max-w-sm">Your details have been securely recorded. We will review your
                     project parameters and contact you shortly.</p>
                 <button onclick="closeFormOverlay()"
-                    class="mt-8 border border-white/20 text-white px-10 py-3 rounded-full text-sm font-bold tracking-widest uppercase hover:border-[#d4af37] hover:text-[#d4af37] transition-all">Return</button>
+                    class="mt-8 border border-white/20 text-white px-10 py-3 rounded-full text-sm font-bold tracking-widest uppercase hover:border-[#ffffff] hover:text-[#ffffff] transition-all">Return</button>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-neutral-950 w-full border-t border-[#D4AF37]/5 mt-auto relative z-10">
+    <footer class="bg-neutral-950 w-full border-t border-[#ffffff]/5 mt-auto relative z-10">
         <div
             class="flex flex-col md:flex-row justify-between items-center w-full max-w-7xl mx-auto px-6 md:px-12 py-12">
             <div class="flex flex-col gap-xs items-center md:items-start mb-8 md:mb-0">
                 <span
-                    class="flex items-baseline gap-2 text-xl font-bold text-[#D4AF37] tracking-[0.2em] uppercase font-serif antialiased">
+                    class="flex items-baseline gap-2 text-xl font-bold text-[#ffffff] tracking-[0.2em] uppercase font-serif antialiased">
                     <span>The</span>
                     <span
-                        class="text-3xl text-[#f2ca50] animate-pulse drop-shadow-[0_0_15px_rgba(242,202,80,0.8)]">1</span>
+                        class="text-3xl text-[#ffffff] animate-pulse drop-shadow-[0_0_15px_rgba(255, 255, 255,0.8)]">1</span>
                     <span>Percent</span>
                 </span>
                 <span class="font-serif text-sm tracking-normal text-neutral-500 mt-1">© 2026 The 1 Percent. All rights
                     reserved.</span>
             </div>
             <div class="flex gap-8 items-center">
-                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#D4AF37] transition-colors ease-in-out duration-300"
+                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#ffffff] transition-colors ease-in-out duration-300"
                     href="#privacy" data-target="privacy">Privacy Policy</a>
-                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#D4AF37] transition-colors ease-in-out duration-300"
+                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#ffffff] transition-colors ease-in-out duration-300"
                     href="#terms" data-target="terms">Terms of Service</a>
-                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#D4AF37] transition-colors ease-in-out duration-300"
+                <a class="font-serif text-sm tracking-widest uppercase text-neutral-500 hover:text-[#ffffff] transition-colors ease-in-out duration-300"
                     href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com"
                     target="_blank">Contact</a>
             </div>
@@ -1798,8 +1782,8 @@
             function updateCarousel(index) {
                 currentSlide = index;
                 carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
-                dots.forEach(dot => dot.classList.remove('active', 'bg-[#d4af37]'));
-                dots[currentSlide].classList.add('active', 'bg-[#d4af37]');
+                dots.forEach(dot => dot.classList.remove('active', 'bg-[#ffffff]'));
+                dots[currentSlide].classList.add('active', 'bg-[#ffffff]');
                 dots[currentSlide].classList.remove('bg-white/40');
             }
             dots.forEach((dot, index) => {
@@ -1942,12 +1926,12 @@
         document.querySelectorAll('.work-card').forEach(card => {
             card.addEventListener('click', function () {
                 document.querySelectorAll('.work-card').forEach(c => {
-                    c.classList.remove('border-[#d4af37]', 'bg-[#d4af37]/10', '!border-[#d4af37]');
+                    c.classList.remove('border-[#ffffff]', 'bg-[#ffffff]/10', '!border-[#ffffff]');
                     c.style.borderColor = '';
                     c.style.backgroundColor = '';
                 });
-                this.style.borderColor = '#d4af37';
-                this.style.backgroundColor = 'rgba(212,175,55,0.1)';
+                this.style.borderColor = '#ffffff';
+                this.style.backgroundColor = 'rgba(255, 255, 255,0.1)';
                 document.getElementById('work-type-list').setAttribute('data-selected', this.dataset.value);
                 // Show the extra fields panel
                 const extra = document.getElementById('p1-extra');
@@ -1960,8 +1944,8 @@
         document.querySelectorAll('.source-card').forEach(card => {
             card.addEventListener('click', function () {
                 document.querySelectorAll('.source-card').forEach(c => { c.style.borderColor = ''; c.style.color = ''; });
-                this.style.borderColor = '#d4af37';
-                this.style.color = '#d4af37';
+                this.style.borderColor = '#ffffff';
+                this.style.color = '#ffffff';
                 document.getElementById('source-list').setAttribute('data-selected', this.dataset.value);
             });
         });
@@ -2372,7 +2356,7 @@
                     } else {
                         cursorDot.style.width = '24px';
                         cursorDot.style.height = '24px';
-                        cursorDot.style.backgroundColor = 'rgba(212, 175, 55, 1)'; // Gold
+                        cursorDot.style.backgroundColor = '#ffffff'; 
                     }
                 };
                 const onLeave = () => {
@@ -2398,7 +2382,7 @@
 
         // ------------------ DYNAMIC BACKGROUND SHIFT ------------------
         gsap.to("body", {
-            backgroundColor: "#16130b", // Shift to espresso in the middle
+            backgroundColor: "#09090b", // Shift to espresso in the middle
             scrollTrigger: {
                 trigger: "#concepts",
                 start: "top center",
@@ -2407,7 +2391,7 @@
             }
         });
         gsap.to("body", {
-            backgroundColor: "#050608", // Shift to deep midnight at the end
+            backgroundColor: "#09090b", // Shift to deep midnight at the end
             scrollTrigger: {
                 trigger: "#pricing",
                 start: "top center",
