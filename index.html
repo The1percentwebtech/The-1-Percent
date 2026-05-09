@@ -14,9 +14,6 @@
     <!-- GSAP & Lenis -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/sheryjs/dist/Shery.css" />
-    <script src="https://unpkg.com/sheryjs/dist/Shery.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600&amp;display=swap"
@@ -314,31 +311,34 @@
 
 <body class="font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container">
 
-    <!-- Cinematic Preloader -->
-    <div id="preloader" class="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#0a0a0a]">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.05),transparent_70%)]"></div>
-        <div class="relative flex flex-col items-center">
-            <div class="flex items-baseline overflow-hidden">
-                <span class="font-display-xl text-7xl md:text-[10rem] text-white z-10 leading-none tracking-tighter" id="preloader-counter">0</span>
-                <span class="font-display-xl text-3xl md:text-5xl text-[#d4af37] z-10 ml-2">%</span>
-            </div>
-            <span class="font-label-sm text-[#d4af37] tracking-[0.4em] uppercase mt-8 opacity-70">Initializing Protocol</span>
+    <!-- High-End Typographic Preloader -->
+    <div id="preloader" class="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#0a0a0a] overflow-hidden">
+        <div class="relative flex items-center justify-center">
+            <!-- Outline Text -->
+            <h1 class="font-display-xl text-6xl md:text-9xl text-transparent tracking-tighter absolute" 
+                style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">
+                THE 1 PERCENT
+            </h1>
+            <!-- Fill Text (Masked) -->
+            <h1 class="font-display-xl text-6xl md:text-9xl text-[#d4af37] tracking-tighter z-10" 
+                id="preloader-text" style="clip-path: inset(100% 0 0 0);">
+                THE 1 PERCENT
+            </h1>
         </div>
-        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 w-64 h-[1px] bg-white/10 overflow-hidden">
-            <div class="h-full w-0 bg-[#d4af37]" id="preloader-bar"></div>
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-4 opacity-0" id="preloader-meta">
+            <span class="font-label-sm text-[#d4af37] tracking-[0.4em] uppercase">Initializing</span>
+            <span class="w-1 h-1 bg-[#d4af37] rounded-full animate-ping"></span>
+            <span class="font-display-xl text-xl text-white" id="preloader-counter">0</span>
         </div>
     </div>
 
-    <!-- Custom Cursor -->
-    <div id="cursor-container"
-        class="pointer-events-none fixed top-0 left-0 w-0 h-0 z-[9999] opacity-0 transition-opacity duration-300 mix-blend-exclusion">
+    <!-- Ultra-Premium Custom Cursor -->
+    <div id="cursor-container" class="pointer-events-none fixed top-0 left-0 w-0 h-0 z-[9999] opacity-0 transition-opacity duration-300">
         <div id="cursor-dot"
-            class="w-3 h-3 bg-white rounded-full absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center text-[8px] font-bold tracking-widest text-black uppercase overflow-hidden"
-            style="will-change: transform, width, height;">
+            class="w-3 h-3 bg-white rounded-full absolute top-0 left-0 flex items-center justify-center text-[10px] font-bold tracking-widest text-black uppercase overflow-hidden"
+            style="will-change: transform, width, height, background-color; backdrop-filter: blur(0px); transform: translate(-50%, -50%); transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1), height 0.4s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.4s, backdrop-filter 0.4s;">
             <span id="cursor-text" class="opacity-0 transition-opacity duration-300"></span>
         </div>
-        <div id="cursor-ring" class="w-10 h-10 border border-white/50 rounded-full absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2"
-            style="will-change: transform, width, height, background-color;"></div>
     </div>
 
     <!-- TopNavBar -->
@@ -2232,130 +2232,91 @@
             }
         });
 
-        // ------------------ MAGNETIC IMAGE SHIFT & WEBGL DISTORTIONS ------------------
-        if (typeof Shery !== 'undefined') {
-            Shery.imageEffect(".project-image", {
-                style: 4,
-                config: {
-                    "uColor": { "value": false },
-                    "uSpeed": { "value": 0.6, "range": [0.1, 1], "rangep": [1, 10] },
-                    "uAmplitude": { "value": 1.5, "range": [0, 5] },
-                    "uFrequency": { "value": 3.5, "range": [0, 10] },
-                    "geoVertex": { "range": [1, 64], "value": 32 },
-                    "zindex": { "value": 10, "range": [-9999999, 9999999] },
-                    "aspect": { "value": 0.8 },
-                    "ignoreShapeAspect": { "value": true },
-                    "shapePosition": { "value": { "x": 0, "y": 0 } },
-                    "shapeScale": { "value": { "x": 0.5, "y": 0.5 } },
-                    "shapeEdgeSoftness": { "value": 0, "range": [0, 0.5] },
-                    "shapeRadius": { "value": 0, "range": [0, 2] },
-                    "currentScroll": { "value": 0 },
-                    "scrollLerp": { "value": 0.07 },
-                    "gooey": { "value": false },
-                    "infiniteGooey": { "value": false },
-                    "growSize": { "value": 4, "range": [1, 15] },
-                    "durationOut": { "value": 1, "range": [0.1, 5] },
-                    "durationIn": { "value": 1.5, "range": [0.1, 5] },
-                    "displaceAmount": { "value": 0.5 },
-                    "masker": { "value": true },
-                    "maskVal": { "value": 1.2, "range": [1, 5] },
-                    "scrollType": { "value": 0 },
-                    "noEffectGooey": { "value": true },
-                    "onMouse": { "value": 1 },
-                    "noise_speed": { "value": 0.2, "range": [0, 10] },
-                    "metaball": { "value": 0.2, "range": [0, 2] },
-                    "discard_threshold": { "value": 0.5, "range": [0, 1] },
-                    "antialias_threshold": { "value": 0.002, "range": [0, 0.1] },
-                    "noise_height": { "value": 0.5, "range": [0, 2] },
-                    "noise_scale": { "value": 10, "range": [0, 100] }
-                }
-            });
+        // ------------------ DEEP PARALLAX & MAGNETIC IMAGES ------------------
+        document.querySelectorAll('.project-card').forEach(card => {
+            const img = card.querySelector('.project-image');
+            if (img) {
+                // Parallax inside the card on scroll
+                gsap.to(img, {
+                    yPercent: 15,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                });
 
-            // Kinetic Typography (Awwwards Style Text Reveal)
-            Shery.textAnimate(".font-display-xl", {
-                style: 2,
-                y: 10,
-                delay: 0.1,
-                duration: 2,
-                ease: "cubic-bezier(0.23, 1, 0.320, 1)",
-                multiplier: 0.1,
-            });
-        } else {
-            // Fallback to GSAP Magnetic Image Shift if Shery fails
-            document.querySelectorAll('.project-card').forEach(card => {
-                const img = card.querySelector('.project-image');
-                if (img) {
-                    card.addEventListener('mousemove', (e) => {
-                        const rect = card.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-                        const xPercent = (x / rect.width - 0.5) * 30;
-                        const yPercent = (y / rect.height - 0.5) * 30;
+                // Magnetic Hover
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const xPercent = (x / rect.width - 0.5) * 15;
+                    const yPercent = (y / rect.height - 0.5) * 15;
 
-                        gsap.to(img, {
-                            x: xPercent,
-                            y: yPercent,
-                            scale: 1.15,
-                            duration: 0.8,
-                            ease: "power2.out"
-                        });
+                    gsap.to(img, {
+                        xPercent: xPercent,
+                        yPercent: yPercent,
+                        scale: 1.1,
+                        duration: 0.6,
+                        ease: "power2.out"
                     });
+                });
 
-                    card.addEventListener('mouseleave', () => {
-                        gsap.to(img, {
-                            x: 0,
-                            y: 0,
-                            scale: 1.1,
-                            duration: 0.8,
-                            ease: "power2.out"
-                        });
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(img, {
+                        xPercent: 0,
+                        yPercent: 0,
+                        scale: 1,
+                        duration: 0.8,
+                        ease: "power2.out"
                     });
-                }
-            });
-        }
-
-
-
+                });
+            }
+        });
 
         // ------------------ PRELOADER ENGINE ------------------
         const initPreloader = () => {
             const preloader = document.getElementById('preloader');
+            const preloaderText = document.getElementById('preloader-text');
             const counter = document.getElementById('preloader-counter');
-            const bar = document.getElementById('preloader-bar');
+            const meta = document.getElementById('preloader-meta');
             
-            if (!preloader || !counter || !bar || typeof gsap === 'undefined') {
+            if (!preloader || !preloaderText || !counter || typeof gsap === 'undefined') {
                 if(preloader) preloader.style.display = 'none';
                 return;
             }
 
-            // Prevent scrolling while loading
             document.body.style.overflow = 'hidden';
 
             const tl = gsap.timeline({
                 onComplete: () => {
                     document.body.style.overflow = '';
                     gsap.to(preloader, {
-                        yPercent: -100,
-                        duration: 1.2,
-                        ease: "expo.inOut",
-                        onComplete: () => {
-                            preloader.style.display = 'none';
-                            // Trigger hero animations here if desired
-                        }
+                        height: 0,
+                        duration: 1.5,
+                        ease: "power4.inOut",
+                        onComplete: () => preloader.style.display = 'none'
                     });
                 }
             });
 
-            // Simulate loading progress
+            gsap.to(meta, { opacity: 1, duration: 0.5 });
+
             tl.to({ val: 0 }, {
                 val: 100,
-                duration: 2.5,
-                ease: "power2.inOut",
+                duration: 3,
+                ease: "power3.inOut",
                 onUpdate: function() {
-                    counter.innerText = Math.round(this.targets()[0].val);
-                    bar.style.width = this.targets()[0].val + '%';
+                    let progress = Math.round(this.targets()[0].val);
+                    counter.innerText = progress;
+                    // Reveal text from bottom to top
+                    preloaderText.style.clipPath = `inset(${100 - progress}% 0 0 0)`;
                 }
             });
+            tl.to(meta, { opacity: 0, duration: 0.3 }, "-=0.3");
         };
 
         if (document.readyState === 'loading') {
@@ -2369,13 +2330,9 @@
             if (typeof gsap === 'undefined') return;
             const cursorContainer = document.getElementById("cursor-container");
             const cursorDot = document.getElementById("cursor-dot");
-            const cursorRing = document.getElementById("cursor-ring");
             const cursorText = document.getElementById("cursor-text");
 
-            if (!cursorContainer || !cursorDot || !cursorRing) return;
-
-            // Remove hardcoded translations since we moved them to CSS (-translate-x-1/2)
-            gsap.set([cursorDot, cursorRing], { force3D: true });
+            if (!cursorContainer || !cursorDot) return;
 
             let lastX = window.innerWidth / 2;
             let lastY = window.innerHeight / 2;
@@ -2384,65 +2341,46 @@
                 lastX = x;
                 lastY = y;
                 gsap.to(cursorContainer, { opacity: 1, duration: 0.3 });
-                // Immediate dot
-                gsap.set(cursorDot, { x: x, y: y });
-                // Smooth ring
-                gsap.to(cursorRing, { x: x, y: y, duration: 0.2, ease: "power2.out", overwrite: "auto" });
+                // Heavy, smooth trailing for the dot
+                gsap.to(cursorDot, { x: x, y: y, duration: 0.4, ease: "power3.out", overwrite: "auto" });
             };
 
-            window.addEventListener("mousemove", (e) => {
-                updatePos(e.clientX, e.clientY);
-            });
-
-            window.addEventListener("touchstart", (e) => {
-                const touch = e.touches[0];
-                updatePos(touch.clientX, touch.clientY);
-            }, { passive: true });
-
-            window.addEventListener("touchmove", (e) => {
-                const touch = e.touches[0];
-                updatePos(touch.clientX, touch.clientY);
-            }, { passive: true });
-
-            window.addEventListener("touchend", () => {
-                gsap.to(cursorContainer, { opacity: 0, duration: 0.3 });
-            }, { passive: true });
-
+            window.addEventListener("mousemove", (e) => updatePos(e.clientX, e.clientY));
+            window.addEventListener("touchstart", (e) => updatePos(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+            window.addEventListener("touchmove", (e) => updatePos(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+            
+            window.addEventListener("touchend", () => gsap.to(cursorContainer, { opacity: 0, duration: 0.3 }), { passive: true });
             window.addEventListener("mouseout", (e) => {
-                if (!e.relatedTarget && !e.toElement) {
-                    gsap.to(cursorContainer, { opacity: 0, duration: 0.3 });
-                }
+                if (!e.relatedTarget && !e.toElement) gsap.to(cursorContainer, { opacity: 0, duration: 0.3 });
             });
 
-            // Interaction scaling - Smart Cursor States
-            const interactables = document.querySelectorAll("a, button, .project-card, .nav-link, .work-card, #interactive-diamond, .carousel-dot, .source-card, .shiny-email-box, .glass-card, input, textarea, select");
+            // Smart Cursor States
+            const interactables = document.querySelectorAll("a, button, .project-card, .nav-link, .work-card, #interactive-diamond, .carousel-dot, .source-card, .shiny-email-box, .glass-card");
             interactables.forEach(el => {
                 const isProjectCard = el.classList.contains('project-card');
 
                 const onEnter = () => {
                     if (isProjectCard) {
-                        gsap.to(cursorDot, { width: 80, height: 80, duration: 0.4, ease: "power2.out" });
-                        gsap.to(cursorRing, { width: 0, height: 0, opacity: 0, duration: 0.2 });
+                        cursorDot.style.width = '100px';
+                        cursorDot.style.height = '100px';
+                        cursorDot.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+                        cursorDot.style.backdropFilter = 'blur(10px)';
                         if(cursorText) {
-                            cursorText.textContent = "VIEW";
+                            cursorText.textContent = "EXPLORE";
                             gsap.to(cursorText, { opacity: 1, duration: 0.3, delay: 0.1 });
                         }
                     } else {
-                        gsap.to(cursorRing, { scale: 1.5, backgroundColor: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0)", duration: 0.3 });
-                        gsap.to(cursorDot, { scale: 0.3, duration: 0.3 });
+                        cursorDot.style.width = '24px';
+                        cursorDot.style.height = '24px';
+                        cursorDot.style.backgroundColor = 'rgba(212, 175, 55, 1)'; // Gold
                     }
                 };
                 const onLeave = () => {
-                    if (isProjectCard) {
-                        gsap.to(cursorDot, { width: 12, height: 12, duration: 0.4, ease: "power2.out" });
-                        gsap.to(cursorRing, { width: 40, height: 40, opacity: 1, duration: 0.4 });
-                        if(cursorText) {
-                            gsap.to(cursorText, { opacity: 0, duration: 0.2, onComplete: () => cursorText.textContent = "" });
-                        }
-                    } else {
-                        gsap.to(cursorRing, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(255,255,255,0.5)", duration: 0.3 });
-                        gsap.to(cursorDot, { scale: 1, duration: 0.3 });
-                    }
+                    cursorDot.style.width = '12px';
+                    cursorDot.style.height = '12px';
+                    cursorDot.style.backgroundColor = 'white';
+                    cursorDot.style.backdropFilter = 'blur(0px)';
+                    if(cursorText) gsap.to(cursorText, { opacity: 0, duration: 0.2, onComplete: () => cursorText.textContent = "" });
                 };
 
                 el.addEventListener("mouseenter", onEnter);
@@ -2457,6 +2395,26 @@
         } else {
             initCursor();
         }
+
+        // ------------------ DYNAMIC BACKGROUND SHIFT ------------------
+        gsap.to("body", {
+            backgroundColor: "#16130b", // Shift to espresso in the middle
+            scrollTrigger: {
+                trigger: "#concepts",
+                start: "top center",
+                end: "bottom center",
+                scrub: true
+            }
+        });
+        gsap.to("body", {
+            backgroundColor: "#050608", // Shift to deep midnight at the end
+            scrollTrigger: {
+                trigger: "#pricing",
+                start: "top center",
+                end: "bottom center",
+                scrub: true
+            }
+        });
 
         // ------------------ MAGNETIC ELEMENTS (UNIFIED) ------------------
         const initMagnetics = () => {
