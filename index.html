@@ -123,8 +123,13 @@
         }
 
         @keyframes ticker {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
         }
 
         /* ============================
@@ -137,8 +142,13 @@
         }
 
         @keyframes rotateDiamond {
-            from { transform: rotateY(0deg); }
-            to   { transform: rotateY(360deg); }
+            from {
+                transform: rotateY(0deg);
+            }
+
+            to {
+                transform: rotateY(360deg);
+            }
         }
 
         .glow-pulse {
@@ -146,8 +156,15 @@
         }
 
         @keyframes glow-pulse {
-            0%, 100% { text-shadow: 0 0 5px rgba(212,175,55,0.3); }
-            50%       { text-shadow: 0 0 25px rgba(212,175,55,0.7), 0 0 50px rgba(212,175,55,0.3); }
+
+            0%,
+            100% {
+                text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+            }
+
+            50% {
+                text-shadow: 0 0 25px rgba(212, 175, 55, 0.7), 0 0 50px rgba(212, 175, 55, 0.3);
+            }
         }
 
         /* ============================
@@ -182,25 +199,25 @@
             transform-style: preserve-3d;
             transition: transform 0.15s ease, box-shadow 0.15s ease;
             box-shadow:
-                0 8px 16px rgba(0,0,0,0.4),
-                0 0 0 1px rgba(255,255,255,0.15),
-                inset 0 1px 0 rgba(255,255,255,0.2);
+                0 8px 16px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .btn-3d:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow:
-                0 16px 32px rgba(0,0,0,0.6),
-                0 0 0 1px rgba(255,255,255,0.3),
-                inset 0 1px 0 rgba(255,255,255,0.3),
-                0 0 30px rgba(212,175,55,0.2);
+                0 16px 32px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                0 0 30px rgba(212, 175, 55, 0.2);
         }
 
         .btn-3d:active {
             transform: translateY(1px) scale(0.99);
             box-shadow:
-                0 2px 4px rgba(0,0,0,0.4),
-                0 0 0 1px rgba(255,255,255,0.1);
+                0 2px 4px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
         }
 
         /* ============================
@@ -217,11 +234,9 @@
             position: absolute;
             inset: 0;
             border-radius: inherit;
-            background: radial-gradient(
-                circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                rgba(255,255,255,0.08) 0%,
-                transparent 60%
-            );
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                    rgba(255, 255, 255, 0.08) 0%,
+                    transparent 60%);
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
@@ -236,7 +251,7 @@
            CONCEPTS / PANELS
         ============================ */
         .bloom-shadow {
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.12), 0 0 120px rgba(212,175,55,0.05);
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.12), 0 0 120px rgba(212, 175, 55, 0.05);
         }
 
         .glass-panel {
@@ -250,8 +265,17 @@
         }
 
         @keyframes textPulse {
-            0%, 100% { opacity: 1;   text-shadow: 0 0 10px rgba(212,175,55,0.2); }
-            50%       { opacity: 0.8; text-shadow: 0 0 30px rgba(212,175,55,0.6); }
+
+            0%,
+            100% {
+                opacity: 1;
+                text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+            }
+
+            50% {
+                opacity: 0.8;
+                text-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+            }
         }
 
         .typing-cursor {
@@ -259,13 +283,15 @@
         }
 
         @keyframes blink {
-            50% { opacity: 0; }
+            50% {
+                opacity: 0;
+            }
         }
 
         .carousel-dot.active {
             background-color: #D4AF37;
             transform: scale(1.5);
-            box-shadow: 0 0 8px rgba(212,175,55,0.8);
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
         }
 
         .carousel-container {
@@ -283,7 +309,7 @@
         .pop-hover:hover {
             transform: scale(1.02) translateY(-8px);
             border-color: rgba(212, 175, 55, 0.4) !important;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 40px rgba(212,175,55,0.12);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), 0 0 40px rgba(212, 175, 55, 0.12);
         }
 
         .pulse-light {
@@ -291,8 +317,15 @@
         }
 
         @keyframes pulseLight {
-            0%, 100% { opacity: 0.08; }
-            50%       { opacity: 0.25; }
+
+            0%,
+            100% {
+                opacity: 0.08;
+            }
+
+            50% {
+                opacity: 0.25;
+            }
         }
 
         /* ============================
@@ -305,13 +338,13 @@
 
         .shiny-gloss {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(
-                circle 200px at var(--mouse-x, -500px) var(--mouse-y, -500px),
-                rgba(255,255,255,0.15),
-                transparent 80%
-            );
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle 200px at var(--mouse-x, -500px) var(--mouse-y, -500px),
+                    rgba(255, 255, 255, 0.15),
+                    transparent 80%);
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
@@ -329,18 +362,18 @@
             background: rgba(10, 8, 20, 0.7);
             backdrop-filter: blur(24px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .glass-card:hover {
             transform: scale(1.02) translateY(-6px);
             border-color: rgba(212, 175, 55, 0.25);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 40px rgba(212,175,55,0.1), inset 0 1px 0 rgba(255,255,255,0.15);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7), 0 0 40px rgba(212, 175, 55, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15);
         }
 
         .gold-glow-text {
-            text-shadow: 0 0 20px rgba(212,175,55,0.5), 0 0 40px rgba(212,175,55,0.2);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5), 0 0 40px rgba(212, 175, 55, 0.2);
         }
 
         /* ============================
@@ -358,10 +391,21 @@
         }
 
         @keyframes orbFloat {
-            0%   { transform: translate(0, 0) scale(1); }
-            33%  { transform: translate(3vw, -4vh) scale(1.05); }
-            66%  { transform: translate(-2vw, 3vh) scale(0.95); }
-            100% { transform: translate(0, 0) scale(1); }
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(3vw, -4vh) scale(1.05);
+            }
+
+            66% {
+                transform: translate(-2vw, 3vh) scale(0.95);
+            }
+
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
         }
 
         .heartbeat {
@@ -369,8 +413,15 @@
         }
 
         @keyframes heartbeat {
-            0%, 100% { opacity: 0.3; }
-            50%       { opacity: 0.7; }
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
         }
 
         /* ============================
@@ -404,30 +455,43 @@
     </style>
 </head>
 
-<body class="font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container bg-[#050508] relative">
+<body
+    class="font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container bg-[#050508] relative">
 
     <!-- Ambient Volumetric Lighting (3 scrolling orbs) -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden" style="z-index: -1;">
-        <div class="ambient-orb w-[55vw] h-[55vw] bg-[#4A2080]/35" style="top: -10%; left: -15%; animation-duration: 20s;"></div>
-        <div class="ambient-orb w-[65vw] h-[65vw] bg-[#D4AF37]/12" style="bottom: -15%; right: -20%; animation-duration: 28s; animation-delay: -8s;"></div>
-        <div class="ambient-orb w-[45vw] h-[45vw] bg-[#0A3D8F]/25" style="top: 35%; left: 25%; animation-duration: 35s; animation-delay: -15s;"></div>
+        <div class="ambient-orb w-[55vw] h-[55vw] bg-[#4A2080]/35"
+            style="top: -10%; left: -15%; animation-duration: 20s;"></div>
+        <div class="ambient-orb w-[65vw] h-[65vw] bg-[#D4AF37]/12"
+            style="bottom: -15%; right: -20%; animation-duration: 28s; animation-delay: -8s;"></div>
+        <div class="ambient-orb w-[45vw] h-[45vw] bg-[#0A3D8F]/25"
+            style="top: 35%; left: 25%; animation-duration: 35s; animation-delay: -15s;"></div>
     </div>
 
     <!-- 3D Spatial Preloader -->
-    <div id="preloader" class="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#050608] overflow-hidden" style="perspective: 1000px;">
-        <div class="relative flex items-center justify-center w-64 h-64" id="preloader-3d-scene" style="transform-style: preserve-3d;">
+    <div id="preloader"
+        class="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#050608] overflow-hidden"
+        style="perspective: 1000px;">
+        <div class="relative flex items-center justify-center w-64 h-64" id="preloader-3d-scene"
+            style="transform-style: preserve-3d;">
             <!-- Outer Rings -->
-            <div class="absolute w-full h-full border border-white/20 rounded-full" id="ring-1" style="transform: rotateX(60deg) rotateY(0deg);"></div>
-            <div class="absolute w-full h-full border border-[#D4AF37]/40 rounded-full" id="ring-2" style="transform: rotateX(60deg) rotateY(60deg);"></div>
-            <div class="absolute w-full h-full border border-[#0047AB]/40 rounded-full" id="ring-3" style="transform: rotateX(60deg) rotateY(120deg);"></div>
+            <div class="absolute w-full h-full border border-white/20 rounded-full" id="ring-1"
+                style="transform: rotateX(60deg) rotateY(0deg);"></div>
+            <div class="absolute w-full h-full border border-[#D4AF37]/40 rounded-full" id="ring-2"
+                style="transform: rotateX(60deg) rotateY(60deg);"></div>
+            <div class="absolute w-full h-full border border-[#0047AB]/40 rounded-full" id="ring-3"
+                style="transform: rotateX(60deg) rotateY(120deg);"></div>
             <!-- Core -->
-            <div class="absolute font-display-xl text-3xl font-bold text-white tracking-widest drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]" id="preloader-counter">0%</div>
+            <div class="absolute font-display-xl text-3xl font-bold text-white tracking-widest drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]"
+                id="preloader-counter">0%</div>
         </div>
-        <div class="absolute bottom-12 font-label-sm text-white/50 tracking-[0.4em] uppercase" id="preloader-meta">Establishing Neural Link</div>
+        <div class="absolute bottom-12 font-label-sm text-white/50 tracking-[0.4em] uppercase" id="preloader-meta">
+            Establishing Neural Link</div>
     </div>
 
     <!-- Ultra-Premium Custom Cursor -->
-    <div id="cursor-container" class="pointer-events-none fixed top-0 left-0 w-0 h-0 z-[9999] opacity-0 transition-opacity duration-300">
+    <div id="cursor-container"
+        class="pointer-events-none fixed top-0 left-0 w-0 h-0 z-[9999] opacity-0 transition-opacity duration-300">
         <div id="cursor-dot"
             class="w-3 h-3 bg-white rounded-full absolute top-0 left-0 flex items-center justify-center text-[10px] font-bold tracking-widest text-black uppercase overflow-hidden"
             style="will-change: transform, width, height, background-color; backdrop-filter: blur(0px); transform: translate(-50%, -50%); transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1), height 0.4s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.4s, backdrop-filter 0.4s;">
@@ -436,13 +500,15 @@
     </div>
 
     <!-- TopNavBar -->
-    <header class="fixed top-0 w-full z-50 border-b border-white/[0.06] bg-[#060610]/80 backdrop-blur-[30px]" style="box-shadow: 0 1px 0 rgba(255,255,255,0.05), 0 20px 40px rgba(0,0,0,0.4);">
+    <header class="fixed top-0 w-full z-50 border-b border-white/[0.06] bg-[#060610]/80 backdrop-blur-[30px]"
+        style="box-shadow: 0 1px 0 rgba(255,255,255,0.05), 0 20px 40px rgba(0,0,0,0.4);">
         <div class="flex justify-between items-center px-6 md:px-12 h-24 max-w-[1440px] mx-auto">
             <!-- Brand Logo -->
             <div class="flex items-center gap-4">
                 <a href="#home" data-target="home" id="brand-logo-text"
                     class="flex items-baseline gap-2 text-lg md:text-xl font-bold text-[#ffffff] tracking-[0.25em] uppercase font-sans antialiased transition-all duration-400">
-                    <span class="text-3xl md:text-4xl font-bold bg-gradient-to-br from-[#D4AF37] via-[#FFF8DC] to-[#D4AF37] bg-clip-text text-transparent">1</span>
+                    <span
+                        class="text-3xl md:text-4xl font-bold bg-gradient-to-br from-[#D4AF37] via-[#FFF8DC] to-[#D4AF37] bg-clip-text text-transparent">1</span>
                     <span class="text-white/90">PERCENT</span>
                 </a>
             </div>
@@ -456,7 +522,8 @@
             <!-- Action -->
             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com" target="_blank"
                 class="hidden md:block">
-                <button class="btn-3d bg-gradient-to-br from-[#D4AF37] to-[#A07820] text-black px-8 py-3 font-sans font-bold tracking-[0.2em] uppercase text-sm rounded-sm">
+                <button
+                    class="btn-3d bg-gradient-to-br from-[#D4AF37] to-[#A07820] text-black px-8 py-3 font-sans font-bold tracking-[0.2em] uppercase text-sm rounded-sm">
                     ENQUIRE
                 </button>
             </a>
@@ -2319,7 +2386,7 @@
         // ------------------ 3D TILT PHYSICS & PARALLAX ------------------
         document.querySelectorAll('.project-card, .pricing-card, .glass-card, .work-card').forEach(card => {
             const img = card.querySelector('.project-image');
-            
+
             // Set 3D perspective
             gsap.set(card, { transformPerspective: 1500, transformStyle: "preserve-3d" });
 
@@ -2342,9 +2409,9 @@
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
+
                 // Calculate rotation based on cursor position (-15 to 15 degrees)
-                const rotateY = ((x / rect.width) - 0.5) * 20; 
+                const rotateY = ((x / rect.width) - 0.5) * 20;
                 const rotateX = ((y / rect.height) - 0.5) * -20;
 
                 gsap.to(card, {
@@ -2386,9 +2453,9 @@
             const ring2 = document.getElementById('ring-2');
             const ring3 = document.getElementById('ring-3');
             const counter = document.getElementById('preloader-counter');
-            
+
             if (!preloader || !counter || typeof gsap === 'undefined') {
-                if(preloader) preloader.style.display = 'none';
+                if (preloader) preloader.style.display = 'none';
                 return;
             }
 
@@ -2422,7 +2489,7 @@
                 val: 100,
                 duration: 2.5,
                 ease: "power2.inOut",
-                onUpdate: function() {
+                onUpdate: function () {
                     counter.innerText = Math.round(this.targets()[0].val) + '%';
                 }
             });
@@ -2586,7 +2653,7 @@
 
             // ---- Resize ----
             function resize() {
-                W = canvas.width  = canvas.offsetWidth;
+                W = canvas.width = canvas.offsetWidth;
                 H = canvas.height = canvas.offsetHeight;
             }
             resize();
@@ -2625,10 +2692,10 @@
 
             // ---- Aurora Blobs — fully autonomous, figure-8 / lissajous paths ----
             const blobs = [
-                { cx: 0.20, cy: 0.45, ax: 0.18, ay: 0.14, fx: 0.00019, fy: 0.00031, r: 0.58, color: [74,  32,  128], phase: 0.0  },
-                { cx: 0.72, cy: 0.38, ax: 0.20, ay: 0.16, fx: 0.00014, fy: 0.00022, r: 0.52, color: [212, 175, 55 ], phase: 2.1  },
-                { cx: 0.50, cy: 0.70, ax: 0.22, ay: 0.12, fx: 0.00024, fy: 0.00017, r: 0.48, color: [10,  61,  143], phase: 4.3  },
-                { cx: 0.85, cy: 0.55, ax: 0.12, ay: 0.20, fx: 0.00017, fy: 0.00028, r: 0.42, color: [100, 20,  110], phase: 1.0  },
+                { cx: 0.20, cy: 0.45, ax: 0.18, ay: 0.14, fx: 0.00019, fy: 0.00031, r: 0.58, color: [74, 32, 128], phase: 0.0 },
+                { cx: 0.72, cy: 0.38, ax: 0.20, ay: 0.16, fx: 0.00014, fy: 0.00022, r: 0.52, color: [212, 175, 55], phase: 2.1 },
+                { cx: 0.50, cy: 0.70, ax: 0.22, ay: 0.12, fx: 0.00024, fy: 0.00017, r: 0.48, color: [10, 61, 143], phase: 4.3 },
+                { cx: 0.85, cy: 0.55, ax: 0.12, ay: 0.20, fx: 0.00017, fy: 0.00028, r: 0.42, color: [100, 20, 110], phase: 1.0 },
             ];
 
 
@@ -2636,15 +2703,15 @@
             // ---- Draw Blobs ----
             function drawBlobs() {
                 blobs.forEach(b => {
-                    b.phase += 1;
+                    b.phase += 0.05;
                     const bx = (b.cx + Math.sin(b.phase * b.fx * 1000) * b.ax) * W;
                     const by = (b.cy + Math.cos(b.phase * b.fy * 1000) * b.ay) * H;
                     const br = b.r * Math.min(W, H);
 
                     const grd = ctx.createRadialGradient(bx, by, 0, bx, by, br);
-                    grd.addColorStop(0,   `rgba(${b.color.join(',')},0.20)`);
-                    grd.addColorStop(0.45,`rgba(${b.color.join(',')},0.07)`);
-                    grd.addColorStop(1,   `rgba(${b.color.join(',')},0)`);
+                    grd.addColorStop(0, `rgba(${b.color.join(',')},0.20)`);
+                    grd.addColorStop(0.45, `rgba(${b.color.join(',')},0.07)`);
+                    grd.addColorStop(1, `rgba(${b.color.join(',')},0)`);
                     ctx.fillStyle = grd;
                     ctx.beginPath();
                     ctx.arc(bx, by, br, 0, Math.PI * 2);
