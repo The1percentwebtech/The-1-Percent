@@ -14,7 +14,7 @@
     <!-- GSAP & Lenis -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600&amp;display=swap"
         rel="stylesheet" />
@@ -1251,6 +1251,43 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Content -->
+            <section class="py-32 px-6 md:px-12 max-w-7xl mx-auto w-full">
+                <div class="grid grid-cols-12 gap-12 lg:gap-24">
+                    <div class="col-span-12 lg:col-span-7 reveal-on-scroll">
+                        <h2 class="text-4xl md:text-5xl font-display-xl text-[#64b5f6] mb-8">The Challenge</h2>
+                        <p class="text-lg text-neutral-400 leading-relaxed mb-12">
+                            Obsidian needed to render high-fidelity, interactive 3D digital twins of unlisted luxury properties without compromising load times or performance. The platform serves as a secure data room for ultra-high-net-worth investors.
+                        </p>
+                        <div class="bg-[#16130b] border border-white/5 p-12 rounded-2xl">
+                            <h3 class="text-2xl font-display-xl text-on-surface mb-6">Execution Specs</h3>
+                            <ul class="space-y-6 text-neutral-500">
+                                <li class="flex items-center gap-4">
+                                    <span class="w-1 h-1 bg-[#64b5f6] rounded-full"></span>
+                                    <span>WebGL 3D Rendering Engine</span>
+                                </li>
+                                <li class="flex items-center gap-4">
+                                    <span class="w-1 h-1 bg-[#64b5f6] rounded-full"></span>
+                                    <span>Encrypted Spatial Data Storage</span>
+                                </li>
+                                <li class="flex items-center gap-4">
+                                    <span class="w-1 h-1 bg-[#64b5f6] rounded-full"></span>
+                                    <span>Real-Time Environmental Lighting</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-span-12 lg:col-span-5 flex flex-col gap-12 reveal-on-scroll">
+                        <div class="h-[600px] bg-neutral-900 overflow-hidden rounded-2xl relative group">
+                            <img src="assets/obsidian.png" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000" alt="Obsidian Detail">
+                        </div>
+                        <p class="text-sm italic text-neutral-500 border-l border-[#64b5f6] pl-6">
+                            "Obsidian is the intersection of architecture and digital sovereignty."
+                        </p>
+                    </div>
+                </div>
+            </section>
         </div>
 
         <!-- ================= PROJECT DETAILS: AEGIS ================= -->
@@ -1269,6 +1306,43 @@
                     <h1 class="text-7xl md:text-[10rem] font-display-xl text-on-surface leading-none uppercase mb-8 line-reveal">
                         <span class="line-reveal-inner">Aegis<br/><span class="text-[#e57373] italic">Defense</span></span>
                     </h1>
+                </div>
+            </section>
+
+            <!-- Content -->
+            <section class="py-32 px-6 md:px-12 max-w-7xl mx-auto w-full">
+                <div class="grid grid-cols-12 gap-12 lg:gap-24">
+                    <div class="col-span-12 lg:col-span-7 reveal-on-scroll">
+                        <h2 class="text-4xl md:text-5xl font-display-xl text-[#e57373] mb-8">The Challenge</h2>
+                        <p class="text-lg text-neutral-400 leading-relaxed mb-12">
+                            Aegis required a visual command center for enterprise data security. The interface had to distill complex network topologies and threat vectors into an instantly readable, kinetic dashboard that feels like mission control.
+                        </p>
+                        <div class="bg-[#16130b] border border-white/5 p-12 rounded-2xl">
+                            <h3 class="text-2xl font-display-xl text-on-surface mb-6">Execution Specs</h3>
+                            <ul class="space-y-6 text-neutral-500">
+                                <li class="flex items-center gap-4">
+                                    <span class="w-1 h-1 bg-[#e57373] rounded-full"></span>
+                                    <span>Live Threat Vector Visualization</span>
+                                </li>
+                                <li class="flex items-center gap-4">
+                                    <span class="w-1 h-1 bg-[#e57373] rounded-full"></span>
+                                    <span>Quantum-Resistant Encryption Protocols</span>
+                                </li>
+                                <li class="flex items-center gap-4">
+                                    <span class="w-1 h-1 bg-[#e57373] rounded-full"></span>
+                                    <span>Kinetic Alert System</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-span-12 lg:col-span-5 flex flex-col gap-12 reveal-on-scroll">
+                        <div class="h-[600px] bg-neutral-900 overflow-hidden rounded-2xl relative group">
+                            <img src="assets/aegis.png" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000" alt="Aegis Detail">
+                        </div>
+                        <p class="text-sm italic text-neutral-500 border-l border-[#e57373] pl-6">
+                            "Aegis transforms absolute security into an intuitive, visual language."
+                        </p>
+                    </div>
                 </div>
             </section>
         </div>
@@ -1734,16 +1808,25 @@
         }
 
         // ------------------ FIREBASE SETUP ------------------
-        const firebaseConfig = {
-            apiKey: "AIzaSyAu7YOeCeate7oMvi5aRMlprOkZd42KJ-E",
-            authDomain: "the1percent-portfolio.firebaseapp.com",
-            projectId: "the1percent-portfolio",
-            storageBucket: "the1percent-portfolio.firebasestorage.app",
-            messagingSenderId: "54481295093",
-            appId: "1:54481295093:web:87b6e837be618c834b17bc"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        let db = null;
+        try {
+            const firebaseConfig = {
+                apiKey: "AIzaSyAu7YOeCeate7oMvi5aRMlprOkZd42KJ-E",
+                authDomain: "the1percent-portfolio.firebaseapp.com",
+                projectId: "the1percent-portfolio",
+                storageBucket: "the1percent-portfolio.firebasestorage.app",
+                messagingSenderId: "54481295093",
+                appId: "1:54481295093:web:87b6e837be618c834b17bc"
+            };
+            if (typeof firebase !== 'undefined') {
+                firebase.initializeApp(firebaseConfig);
+                db = firebase.firestore();
+            } else {
+                console.warn("Firebase SDK not loaded.");
+            }
+        } catch (e) {
+            console.error("Firebase initialization failed:", e);
+        }
 
         // ------------------ FORM LOGIC ------------------
         const formOverlay = document.getElementById('form-overlay');
@@ -1998,27 +2081,37 @@
         }
 
         // ------------------ MOTION ENGINE (LENIS + GSAP) ------------------
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            orientation: 'vertical',
-            gestureOrientation: 'vertical',
-            smoothWheel: true,
-            wheelMultiplier: 1,
-            smoothTouch: false,
-            touchMultiplier: 2,
-            infinite: false,
-        })
+        try {
+            if (typeof Lenis !== 'undefined') {
+                const lenis = new Lenis({
+                    duration: 1.2,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                    orientation: 'vertical',
+                    gestureOrientation: 'vertical',
+                    smoothWheel: true,
+                    wheelMultiplier: 1,
+                    smoothTouch: false,
+                    touchMultiplier: 2,
+                    infinite: false,
+                });
 
-        // Sync ScrollTrigger and GSAP with Lenis
-        gsap.ticker.add((time) => {
-            lenis.raf(time * 1000)
-        })
-        gsap.ticker.lagSmoothing(0)
-        lenis.on('scroll', ScrollTrigger.update)
+                // Sync ScrollTrigger and GSAP with Lenis
+                if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                    gsap.ticker.add((time) => {
+                        lenis.raf(time * 1000);
+                    });
+                    gsap.ticker.lagSmoothing(0);
+                    lenis.on('scroll', ScrollTrigger.update);
+                }
+            }
+        } catch(e) {
+            console.error("Lenis init failed", e);
+        }
 
         // GSAP Scroll Reveals
-        gsap.registerPlugin(ScrollTrigger);
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+        }
 
         // Simple reveal for general elements
         document.querySelectorAll('.reveal-on-scroll').forEach(el => {
@@ -2107,6 +2200,7 @@
 
         // ------------------ CURSOR ENGINE (BULLETPROOF MOUSE & TOUCH) ------------------
         const initCursor = () => {
+            if (typeof gsap === 'undefined') return;
             const cursorContainer = document.getElementById("cursor-container");
             const cursorDot = document.getElementById("cursor-dot");
             const cursorRing = document.getElementById("cursor-ring");
@@ -2179,6 +2273,7 @@
 
         // ------------------ MAGNETIC ELEMENTS (UNIFIED) ------------------
         const initMagnetics = () => {
+            if (typeof gsap === 'undefined') return;
             document.querySelectorAll(".nav-link, button:not(#mobile-menu-btn):not(#close-menu-btn), #interactive-diamond, .carousel-dot, .source-card").forEach(el => {
                 const handleMove = (e) => {
                     const rect = el.getBoundingClientRect();
