@@ -2690,12 +2690,12 @@
                 vy: (Math.random() - 0.5) * 0.00012,
             }));
 
-            // ---- Aurora Blobs — fully autonomous, figure-8 / lissajous paths ----
+            // ---- Aurora Blobs — fully autonomous, very slow Borealis-like movement ----
             const blobs = [
-                { cx: 0.20, cy: 0.45, ax: 0.18, ay: 0.14, fx: 0.00019, fy: 0.00031, r: 0.58, color: [74, 32, 128], phase: 0.0 },
-                { cx: 0.72, cy: 0.38, ax: 0.20, ay: 0.16, fx: 0.00014, fy: 0.00022, r: 0.52, color: [212, 175, 55], phase: 2.1 },
-                { cx: 0.50, cy: 0.70, ax: 0.22, ay: 0.12, fx: 0.00024, fy: 0.00017, r: 0.48, color: [10, 61, 143], phase: 4.3 },
-                { cx: 0.85, cy: 0.55, ax: 0.12, ay: 0.20, fx: 0.00017, fy: 0.00028, r: 0.42, color: [100, 20, 110], phase: 1.0 },
+                { cx: 0.20, cy: 0.45, ax: 0.18, ay: 0.14, fx: 0.00008, fy: 0.00012, r: 0.65, color: [74,  32,  128], phase: 0.0  }, // Violet
+                { cx: 0.72, cy: 0.38, ax: 0.20, ay: 0.16, fx: 0.00006, fy: 0.00009, r: 0.55, color: [0,   128, 96 ], phase: 2.1  }, // Deep Green (Borealis)
+                { cx: 0.50, cy: 0.70, ax: 0.22, ay: 0.12, fx: 0.00010, fy: 0.00007, r: 0.50, color: [10,  61,  143], phase: 4.3  }, // Cobalt
+                { cx: 0.85, cy: 0.55, ax: 0.12, ay: 0.20, fx: 0.00007, fy: 0.00011, r: 0.45, color: [80,  0,   120], phase: 1.0  }, // Deep Purple
             ];
 
 
@@ -2703,7 +2703,7 @@
             // ---- Draw Blobs ----
             function drawBlobs() {
                 blobs.forEach(b => {
-                    b.phase += 0.05;
+                    b.phase += 0.008; // Much slower for seamless drift
                     const bx = (b.cx + Math.sin(b.phase * b.fx * 1000) * b.ax) * W;
                     const by = (b.cy + Math.cos(b.phase * b.fy * 1000) * b.ay) * H;
                     const br = b.r * Math.min(W, H);
