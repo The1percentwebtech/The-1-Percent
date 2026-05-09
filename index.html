@@ -14,6 +14,9 @@
     <!-- GSAP & Lenis -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/sheryjs/dist/Shery.css" />
+    <script src="https://unpkg.com/sheryjs/dist/Shery.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600&amp;display=swap"
@@ -311,13 +314,31 @@
 
 <body class="font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container">
 
+    <!-- Cinematic Preloader -->
+    <div id="preloader" class="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#0a0a0a]">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.05),transparent_70%)]"></div>
+        <div class="relative flex flex-col items-center">
+            <div class="flex items-baseline overflow-hidden">
+                <span class="font-display-xl text-7xl md:text-[10rem] text-white z-10 leading-none tracking-tighter" id="preloader-counter">0</span>
+                <span class="font-display-xl text-3xl md:text-5xl text-[#d4af37] z-10 ml-2">%</span>
+            </div>
+            <span class="font-label-sm text-[#d4af37] tracking-[0.4em] uppercase mt-8 opacity-70">Initializing Protocol</span>
+        </div>
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 w-64 h-[1px] bg-white/10 overflow-hidden">
+            <div class="h-full w-0 bg-[#d4af37]" id="preloader-bar"></div>
+        </div>
+    </div>
+
     <!-- Custom Cursor -->
-    <div id="cursor-container" class="pointer-events-none fixed top-0 left-0 w-0 h-0 z-[9999] opacity-0 transition-opacity duration-300">
-        <div id="cursor-dot" class="w-2 h-2 bg-[#f2ca50] rounded-full absolute top-0 left-0 shadow-[0_0_15px_rgba(242,202,80,0.8)]"
-            style="will-change: transform;"></div>
-        <div id="cursor-ring"
-            class="w-12 h-12 border border-[#d4af37]/60 rounded-full absolute top-0 left-0"
-            style="will-change: transform;"></div>
+    <div id="cursor-container"
+        class="pointer-events-none fixed top-0 left-0 w-0 h-0 z-[9999] opacity-0 transition-opacity duration-300 mix-blend-exclusion">
+        <div id="cursor-dot"
+            class="w-3 h-3 bg-white rounded-full absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center text-[8px] font-bold tracking-widest text-black uppercase overflow-hidden"
+            style="will-change: transform, width, height;">
+            <span id="cursor-text" class="opacity-0 transition-opacity duration-300"></span>
+        </div>
+        <div id="cursor-ring" class="w-10 h-10 border border-white/50 rounded-full absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2"
+            style="will-change: transform, width, height, background-color;"></div>
     </div>
 
     <!-- TopNavBar -->
@@ -501,13 +522,15 @@
 
                     <div class="flex flex-col gap-32">
                         <!-- Project 1 -->
-                        <div class="project-card group cursor-pointer relative" data-color="#1a120b" onclick="navigate('aurelian')">
+                        <div class="project-card group cursor-pointer relative" data-color="#1a120b"
+                            onclick="navigate('aurelian')">
                             <div class="w-full h-[60vh] md:h-[80vh] bg-neutral-900 overflow-hidden relative">
                                 <div
                                     class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.1),transparent)] group-hover:scale-105 transition-transform duration-1000 ease-out">
                                 </div>
                                 <div class="absolute inset-0 flex items-center justify-center">
-                                    <img src="assets/aurelian.png" alt="Aurelian Platform" class="w-full h-full object-cover opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out project-image">
+                                    <img src="assets/aurelian.png" alt="Aurelian Platform"
+                                        class="w-full h-full object-cover opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out project-image">
                                 </div>
                             </div>
                             <div class="mt-8 flex justify-between items-end">
@@ -529,13 +552,15 @@
                         </div>
 
                         <!-- Project 2 -->
-                        <div class="project-card group cursor-pointer relative" data-color="#0b161a" onclick="navigate('obsidian')">
+                        <div class="project-card group cursor-pointer relative" data-color="#0b161a"
+                            onclick="navigate('obsidian')">
                             <div class="w-full h-[60vh] md:h-[80vh] bg-neutral-900 overflow-hidden relative">
                                 <div
                                     class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(100,181,246,0.1),transparent)] group-hover:scale-105 transition-transform duration-1000 ease-out">
                                 </div>
                                 <div class="absolute inset-0 flex items-center justify-center">
-                                    <img src="assets/obsidian.png" alt="Obsidian Digital Twin" class="w-full h-full object-cover opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out project-image">
+                                    <img src="assets/obsidian.png" alt="Obsidian Digital Twin"
+                                        class="w-full h-full object-cover opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out project-image">
                                 </div>
                             </div>
                             <div class="mt-8 flex justify-between items-end">
@@ -557,13 +582,15 @@
                         </div>
 
                         <!-- Project 3 -->
-                        <div class="project-card group cursor-pointer relative" data-color="#1a0b0f" onclick="navigate('aegis')">
+                        <div class="project-card group cursor-pointer relative" data-color="#1a0b0f"
+                            onclick="navigate('aegis')">
                             <div class="w-full h-[60vh] md:h-[80vh] bg-neutral-900 overflow-hidden relative">
                                 <div
                                     class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(229,115,115,0.1),transparent)] group-hover:scale-105 transition-transform duration-1000 ease-out">
                                 </div>
                                 <div class="absolute inset-0 flex items-center justify-center">
-                                    <img src="assets/aegis.png" alt="Aegis Security" class="w-full h-full object-cover opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out project-image">
+                                    <img src="assets/aegis.png" alt="Aegis Security"
+                                        class="w-full h-full object-cover opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out project-image">
                                 </div>
                             </div>
                             <div class="mt-8 flex justify-between items-end">
@@ -599,7 +626,8 @@
                         <span class="text-[#d4af37] text-xs font-bold tracking-[0.3em] uppercase mb-6">Phase 01</span>
                         <h1
                             class="text-7xl md:text-[9rem] leading-none font-display-xl text-on-surface uppercase tracking-tight line-reveal">
-                            <span class="line-reveal-inner">The <br /> <span class="text-[#f2ca50] italic pr-4">Concepts</span></span>
+                            <span class="line-reveal-inner">The <br /> <span
+                                    class="text-[#f2ca50] italic pr-4">Concepts</span></span>
                         </h1>
                     </div>
                     <div class="max-w-md mt-12 md:mt-0 md:text-right">
@@ -618,8 +646,10 @@
                         <span
                             class="absolute -top-12 -left-8 text-[12rem] md:text-[18rem] font-display-xl text-white/5 select-none leading-none z-0 tracking-tighter">01</span>
                         <div class="relative z-10">
-                            <h2 class="text-5xl md:text-6xl font-display-xl text-[#f2ca50] mb-8 leading-tight line-reveal">
-                                <span class="line-reveal-inner">Architectural<br />Sovereignty</span></h2>
+                            <h2
+                                class="text-5xl md:text-6xl font-display-xl text-[#f2ca50] mb-8 leading-tight line-reveal">
+                                <span class="line-reveal-inner">Architectural<br />Sovereignty</span>
+                            </h2>
                             <div class="space-y-6 font-body-md text-neutral-400">
                                 <p class="text-lg leading-relaxed">We treat code exactly like prime real estate. We
                                     don't use templates; we forge
@@ -704,8 +734,10 @@
                         <span
                             class="absolute -top-12 -right-8 text-[12rem] md:text-[18rem] font-display-xl text-white/5 select-none leading-none z-0 tracking-tighter">02</span>
                         <div class="relative z-10">
-                            <h2 class="text-5xl md:text-6xl font-display-xl text-[#f2ca50] mb-8 leading-tight line-reveal">
-                                <span class="line-reveal-inner">Epicurean<br />Mastery</span></h2>
+                            <h2
+                                class="text-5xl md:text-6xl font-display-xl text-[#f2ca50] mb-8 leading-tight line-reveal">
+                                <span class="line-reveal-inner">Epicurean<br />Mastery</span>
+                            </h2>
                             <div class="space-y-6 font-body-md text-neutral-400">
                                 <p class="text-lg leading-relaxed">The future of dining is hyper-personalized. Our
                                     concepts focus on 'Molecular Connection'.</p>
@@ -759,7 +791,8 @@
         <div id="methodology-section"
             class="page-section hidden flex-col pt-32 md:pt-48 pb-24 md:pb-32 max-w-[1440px] mx-auto px-6 md:px-12 w-full relative">
             <section class="mb-20 md:mb-32 text-center w-full reveal-on-scroll">
-                <h1 class="font-display-xl text-[#D4AF37] mb-8 gold-glow-text line-reveal"><span class="line-reveal-inner">The Architecture of Excellence</span></h1>
+                <h1 class="font-display-xl text-[#D4AF37] mb-8 gold-glow-text line-reveal"><span
+                        class="line-reveal-inner">The Architecture of Excellence</span></h1>
                 <p class="font-body-lg text-on-surface-variant max-w-3xl mx-auto opacity-80">
                     Our methodology is not a curriculum; it is a structured evolution. Designed for the global elite, we
                     facilitate transitions from individual success to collective sovereignty.
@@ -860,7 +893,8 @@
                 <span class="font-label-sm text-primary tracking-[0.3em] uppercase mb-8 block">Investment tiers</span>
                 <h1
                     class="text-5xl md:text-8xl font-display-xl font-bold mb-6 tracking-tight leading-none text-transparent bg-clip-text bg-gradient-to-b from-[#f2ca50] to-[#b38815] drop-shadow-[0_0_30px_rgba(212,175,55,0.5)] line-reveal">
-                    <span class="line-reveal-inner">Tailored for Excellence</span></h1>
+                    <span class="line-reveal-inner">Tailored for Excellence</span>
+                </h1>
                 <p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto">
                     Join an elite ecosystem designed for those who demand absolute quality. Experience precision, speed,
                     and unrivaled craftsmanship.
@@ -1156,31 +1190,41 @@
             <!-- Hero -->
             <section class="min-h-screen flex flex-col justify-center px-6 md:px-12 relative overflow-hidden">
                 <div class="absolute inset-0 z-0">
-                    <img src="assets/aurelian.png" class="w-full h-full object-cover opacity-20 scale-110 parallax-img" alt="Aurelian Background">
+                    <img src="assets/aurelian.png" class="w-full h-full object-cover opacity-20 scale-110 parallax-img"
+                        alt="Aurelian Background">
                     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a]/80 to-[#0a0a0a]"></div>
                 </div>
-                
+
                 <div class="max-w-7xl mx-auto w-full relative z-10 pt-32">
-                    <button onclick="navigate('home')" class="group mb-12 flex items-center gap-4 text-neutral-500 hover:text-[#d4af37] transition-colors uppercase tracking-[0.3em] text-xs font-bold">
-                        <span class="material-symbols-outlined group-hover:-translate-x-2 transition-transform">arrow_back</span>
+                    <button onclick="navigate('home')"
+                        class="group mb-12 flex items-center gap-4 text-neutral-500 hover:text-[#d4af37] transition-colors uppercase tracking-[0.3em] text-xs font-bold">
+                        <span
+                            class="material-symbols-outlined group-hover:-translate-x-2 transition-transform">arrow_back</span>
                         Back to Works
                     </button>
-                    <h1 class="text-7xl md:text-[10rem] font-display-xl text-on-surface leading-none uppercase mb-8 line-reveal">
-                        <span class="line-reveal-inner">Aurelian<br/><span class="text-[#f2ca50] italic">Protocol</span></span>
+                    <h1
+                        class="text-7xl md:text-[10rem] font-display-xl text-on-surface leading-none uppercase mb-8 line-reveal">
+                        <span class="line-reveal-inner">Aurelian<br /><span
+                                class="text-[#f2ca50] italic">Protocol</span></span>
                     </h1>
                     <div class="grid grid-cols-12 gap-8 items-end">
                         <div class="col-span-12 md:col-span-6">
-                            <p class="text-xl md:text-2xl text-neutral-400 font-body-lg leading-relaxed reveal-on-scroll">
-                                Reimagining high-frequency trading through a minimalist, kinetic lens. A platform built for the digital sovereign.
+                            <p
+                                class="text-xl md:text-2xl text-neutral-400 font-body-lg leading-relaxed reveal-on-scroll">
+                                Reimagining high-frequency trading through a minimalist, kinetic lens. A platform built
+                                for the digital sovereign.
                             </p>
                         </div>
-                        <div class="col-span-12 md:col-span-6 flex justify-end gap-12 border-l border-white/10 pl-12 reveal-on-scroll">
+                        <div
+                            class="col-span-12 md:col-span-6 flex justify-end gap-12 border-l border-white/10 pl-12 reveal-on-scroll">
                             <div>
-                                <span class="block text-[10px] text-neutral-500 uppercase tracking-widest mb-2 font-bold">Sector</span>
+                                <span
+                                    class="block text-[10px] text-neutral-500 uppercase tracking-widest mb-2 font-bold">Sector</span>
                                 <span class="text-on-surface">Fintech / Web3</span>
                             </div>
                             <div>
-                                <span class="block text-[10px] text-neutral-500 uppercase tracking-widest mb-2 font-bold">Year</span>
+                                <span
+                                    class="block text-[10px] text-neutral-500 uppercase tracking-widest mb-2 font-bold">Year</span>
                                 <span class="text-on-surface">2026</span>
                             </div>
                         </div>
@@ -1194,7 +1238,9 @@
                     <div class="col-span-12 lg:col-span-7 reveal-on-scroll">
                         <h2 class="text-4xl md:text-5xl font-display-xl text-[#f2ca50] mb-8">The Challenge</h2>
                         <p class="text-lg text-neutral-400 leading-relaxed mb-12">
-                            Aurelian required a bridge between the clinical nature of financial data and the luxury of elite asset management. The interface needed to be "invisible"—providing zero-friction access to complex biometric security and real-time market liquidities.
+                            Aurelian required a bridge between the clinical nature of financial data and the luxury of
+                            elite asset management. The interface needed to be "invisible"—providing zero-friction
+                            access to complex biometric security and real-time market liquidities.
                         </p>
                         <div class="bg-[#16130b] border border-white/5 p-12 rounded-2xl">
                             <h3 class="text-2xl font-display-xl text-on-surface mb-6">Execution Specs</h3>
@@ -1216,10 +1262,13 @@
                     </div>
                     <div class="col-span-12 lg:col-span-5 flex flex-col gap-12 reveal-on-scroll">
                         <div class="h-[600px] bg-neutral-900 overflow-hidden rounded-2xl relative group">
-                            <img src="assets/aurelian.png" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000" alt="Aurelian Detail">
+                            <img src="assets/aurelian.png"
+                                class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000"
+                                alt="Aurelian Detail">
                         </div>
                         <p class="text-sm italic text-neutral-500 border-l border-[#d4af37] pl-6">
-                            "Aurelian represents the threshold of fintech aesthetics. It is where power meets precision."
+                            "Aurelian represents the threshold of fintech aesthetics. It is where power meets
+                            precision."
                         </p>
                     </div>
                 </div>
@@ -1231,21 +1280,28 @@
             <!-- Similar structure for Obsidian -->
             <section class="min-h-screen flex flex-col justify-center px-6 md:px-12 relative overflow-hidden">
                 <div class="absolute inset-0 z-0">
-                    <img src="assets/obsidian.png" class="w-full h-full object-cover opacity-20 scale-110 parallax-img" alt="Obsidian Background">
+                    <img src="assets/obsidian.png" class="w-full h-full object-cover opacity-20 scale-110 parallax-img"
+                        alt="Obsidian Background">
                     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a]/80 to-[#0a0a0a]"></div>
                 </div>
                 <div class="max-w-7xl mx-auto w-full relative z-10 pt-32">
-                    <button onclick="navigate('home')" class="group mb-12 flex items-center gap-4 text-neutral-500 hover:text-[#64b5f6] transition-colors uppercase tracking-[0.3em] text-xs font-bold">
-                        <span class="material-symbols-outlined group-hover:-translate-x-2 transition-transform">arrow_back</span>
+                    <button onclick="navigate('home')"
+                        class="group mb-12 flex items-center gap-4 text-neutral-500 hover:text-[#64b5f6] transition-colors uppercase tracking-[0.3em] text-xs font-bold">
+                        <span
+                            class="material-symbols-outlined group-hover:-translate-x-2 transition-transform">arrow_back</span>
                         Back to Works
                     </button>
-                    <h1 class="text-7xl md:text-[10rem] font-display-xl text-on-surface leading-none uppercase mb-8 line-reveal">
-                        <span class="line-reveal-inner">Obsidian<br/><span class="text-[#64b5f6] italic">Estate</span></span>
+                    <h1
+                        class="text-7xl md:text-[10rem] font-display-xl text-on-surface leading-none uppercase mb-8 line-reveal">
+                        <span class="line-reveal-inner">Obsidian<br /><span
+                                class="text-[#64b5f6] italic">Estate</span></span>
                     </h1>
                     <div class="grid grid-cols-12 gap-8 items-end">
                         <div class="col-span-12 md:col-span-6">
-                            <p class="text-xl md:text-2xl text-neutral-400 font-body-lg leading-relaxed reveal-on-scroll">
-                                High-fidelity architectural digital twins for unlisted luxury assets. Visualizing the future of sovereignty.
+                            <p
+                                class="text-xl md:text-2xl text-neutral-400 font-body-lg leading-relaxed reveal-on-scroll">
+                                High-fidelity architectural digital twins for unlisted luxury assets. Visualizing the
+                                future of sovereignty.
                             </p>
                         </div>
                     </div>
@@ -1258,7 +1314,9 @@
                     <div class="col-span-12 lg:col-span-7 reveal-on-scroll">
                         <h2 class="text-4xl md:text-5xl font-display-xl text-[#64b5f6] mb-8">The Challenge</h2>
                         <p class="text-lg text-neutral-400 leading-relaxed mb-12">
-                            Obsidian needed to render high-fidelity, interactive 3D digital twins of unlisted luxury properties without compromising load times or performance. The platform serves as a secure data room for ultra-high-net-worth investors.
+                            Obsidian needed to render high-fidelity, interactive 3D digital twins of unlisted luxury
+                            properties without compromising load times or performance. The platform serves as a secure
+                            data room for ultra-high-net-worth investors.
                         </p>
                         <div class="bg-[#16130b] border border-white/5 p-12 rounded-2xl">
                             <h3 class="text-2xl font-display-xl text-on-surface mb-6">Execution Specs</h3>
@@ -1280,7 +1338,9 @@
                     </div>
                     <div class="col-span-12 lg:col-span-5 flex flex-col gap-12 reveal-on-scroll">
                         <div class="h-[600px] bg-neutral-900 overflow-hidden rounded-2xl relative group">
-                            <img src="assets/obsidian.png" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000" alt="Obsidian Detail">
+                            <img src="assets/obsidian.png"
+                                class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000"
+                                alt="Obsidian Detail">
                         </div>
                         <p class="text-sm italic text-neutral-500 border-l border-[#64b5f6] pl-6">
                             "Obsidian is the intersection of architecture and digital sovereignty."
@@ -1295,16 +1355,21 @@
             <!-- Similar structure for Aegis -->
             <section class="min-h-screen flex flex-col justify-center px-6 md:px-12 relative overflow-hidden">
                 <div class="absolute inset-0 z-0">
-                    <img src="assets/aegis.png" class="w-full h-full object-cover opacity-20 scale-110 parallax-img" alt="Aegis Background">
+                    <img src="assets/aegis.png" class="w-full h-full object-cover opacity-20 scale-110 parallax-img"
+                        alt="Aegis Background">
                     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a]/80 to-[#0a0a0a]"></div>
                 </div>
                 <div class="max-w-7xl mx-auto w-full relative z-10 pt-32">
-                    <button onclick="navigate('home')" class="group mb-12 flex items-center gap-4 text-neutral-500 hover:text-[#e57373] transition-colors uppercase tracking-[0.3em] text-xs font-bold">
-                        <span class="material-symbols-outlined group-hover:-translate-x-2 transition-transform">arrow_back</span>
+                    <button onclick="navigate('home')"
+                        class="group mb-12 flex items-center gap-4 text-neutral-500 hover:text-[#e57373] transition-colors uppercase tracking-[0.3em] text-xs font-bold">
+                        <span
+                            class="material-symbols-outlined group-hover:-translate-x-2 transition-transform">arrow_back</span>
                         Back to Works
                     </button>
-                    <h1 class="text-7xl md:text-[10rem] font-display-xl text-on-surface leading-none uppercase mb-8 line-reveal">
-                        <span class="line-reveal-inner">Aegis<br/><span class="text-[#e57373] italic">Defense</span></span>
+                    <h1
+                        class="text-7xl md:text-[10rem] font-display-xl text-on-surface leading-none uppercase mb-8 line-reveal">
+                        <span class="line-reveal-inner">Aegis<br /><span
+                                class="text-[#e57373] italic">Defense</span></span>
                     </h1>
                 </div>
             </section>
@@ -1315,7 +1380,9 @@
                     <div class="col-span-12 lg:col-span-7 reveal-on-scroll">
                         <h2 class="text-4xl md:text-5xl font-display-xl text-[#e57373] mb-8">The Challenge</h2>
                         <p class="text-lg text-neutral-400 leading-relaxed mb-12">
-                            Aegis required a visual command center for enterprise data security. The interface had to distill complex network topologies and threat vectors into an instantly readable, kinetic dashboard that feels like mission control.
+                            Aegis required a visual command center for enterprise data security. The interface had to
+                            distill complex network topologies and threat vectors into an instantly readable, kinetic
+                            dashboard that feels like mission control.
                         </p>
                         <div class="bg-[#16130b] border border-white/5 p-12 rounded-2xl">
                             <h3 class="text-2xl font-display-xl text-on-surface mb-6">Execution Specs</h3>
@@ -1337,7 +1404,9 @@
                     </div>
                     <div class="col-span-12 lg:col-span-5 flex flex-col gap-12 reveal-on-scroll">
                         <div class="h-[600px] bg-neutral-900 overflow-hidden rounded-2xl relative group">
-                            <img src="assets/aegis.png" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000" alt="Aegis Detail">
+                            <img src="assets/aegis.png"
+                                class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000"
+                                alt="Aegis Detail">
                         </div>
                         <p class="text-sm italic text-neutral-500 border-l border-[#e57373] pl-6">
                             "Aegis transforms absolute security into an intuitive, visual language."
@@ -1981,7 +2050,7 @@
         async function saveLead(status) {
             const firstName = document.getElementById('input-firstname').value.trim();
             const email = document.getElementById('input-email').value.trim();
-            
+
             // Don't save if there's no minimal identifying info, unless it's the final submission
             if (status === 'dead' && !firstName && !email) return;
 
@@ -2104,7 +2173,7 @@
                     lenis.on('scroll', ScrollTrigger.update);
                 }
             }
-        } catch(e) {
+        } catch (e) {
             console.error("Lenis init failed", e);
         }
 
@@ -2163,40 +2232,137 @@
             }
         });
 
-        // ------------------ MAGNETIC IMAGE SHIFT ------------------
-        document.querySelectorAll('.project-card').forEach(card => {
-            const img = card.querySelector('.project-image');
-            if (img) {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const xPercent = (x / rect.width - 0.5) * 30;
-                    const yPercent = (y / rect.height - 0.5) * 30;
+        // ------------------ MAGNETIC IMAGE SHIFT & WEBGL DISTORTIONS ------------------
+        if (typeof Shery !== 'undefined') {
+            Shery.imageEffect(".project-image", {
+                style: 4,
+                config: {
+                    "uColor": { "value": false },
+                    "uSpeed": { "value": 0.6, "range": [0.1, 1], "rangep": [1, 10] },
+                    "uAmplitude": { "value": 1.5, "range": [0, 5] },
+                    "uFrequency": { "value": 3.5, "range": [0, 10] },
+                    "geoVertex": { "range": [1, 64], "value": 32 },
+                    "zindex": { "value": 10, "range": [-9999999, 9999999] },
+                    "aspect": { "value": 0.8 },
+                    "ignoreShapeAspect": { "value": true },
+                    "shapePosition": { "value": { "x": 0, "y": 0 } },
+                    "shapeScale": { "value": { "x": 0.5, "y": 0.5 } },
+                    "shapeEdgeSoftness": { "value": 0, "range": [0, 0.5] },
+                    "shapeRadius": { "value": 0, "range": [0, 2] },
+                    "currentScroll": { "value": 0 },
+                    "scrollLerp": { "value": 0.07 },
+                    "gooey": { "value": false },
+                    "infiniteGooey": { "value": false },
+                    "growSize": { "value": 4, "range": [1, 15] },
+                    "durationOut": { "value": 1, "range": [0.1, 5] },
+                    "durationIn": { "value": 1.5, "range": [0.1, 5] },
+                    "displaceAmount": { "value": 0.5 },
+                    "masker": { "value": true },
+                    "maskVal": { "value": 1.2, "range": [1, 5] },
+                    "scrollType": { "value": 0 },
+                    "noEffectGooey": { "value": true },
+                    "onMouse": { "value": 1 },
+                    "noise_speed": { "value": 0.2, "range": [0, 10] },
+                    "metaball": { "value": 0.2, "range": [0, 2] },
+                    "discard_threshold": { "value": 0.5, "range": [0, 1] },
+                    "antialias_threshold": { "value": 0.002, "range": [0, 0.1] },
+                    "noise_height": { "value": 0.5, "range": [0, 2] },
+                    "noise_scale": { "value": 10, "range": [0, 100] }
+                }
+            });
 
-                    gsap.to(img, {
-                        x: xPercent,
-                        y: yPercent,
-                        scale: 1.15,
-                        duration: 0.8,
-                        ease: "power2.out"
-                    });
-                });
+            // Kinetic Typography (Awwwards Style Text Reveal)
+            Shery.textAnimate(".font-display-xl", {
+                style: 2,
+                y: 10,
+                delay: 0.1,
+                duration: 2,
+                ease: "cubic-bezier(0.23, 1, 0.320, 1)",
+                multiplier: 0.1,
+            });
+        } else {
+            // Fallback to GSAP Magnetic Image Shift if Shery fails
+            document.querySelectorAll('.project-card').forEach(card => {
+                const img = card.querySelector('.project-image');
+                if (img) {
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const xPercent = (x / rect.width - 0.5) * 30;
+                        const yPercent = (y / rect.height - 0.5) * 30;
 
-                card.addEventListener('mouseleave', () => {
-                    gsap.to(img, {
-                        x: 0,
-                        y: 0,
-                        scale: 1.1,
-                        duration: 0.8,
-                        ease: "power2.out"
+                        gsap.to(img, {
+                            x: xPercent,
+                            y: yPercent,
+                            scale: 1.15,
+                            duration: 0.8,
+                            ease: "power2.out"
+                        });
                     });
-                });
+
+                    card.addEventListener('mouseleave', () => {
+                        gsap.to(img, {
+                            x: 0,
+                            y: 0,
+                            scale: 1.1,
+                            duration: 0.8,
+                            ease: "power2.out"
+                        });
+                    });
+                }
+            });
+        }
+
+
+
+
+        // ------------------ PRELOADER ENGINE ------------------
+        const initPreloader = () => {
+            const preloader = document.getElementById('preloader');
+            const counter = document.getElementById('preloader-counter');
+            const bar = document.getElementById('preloader-bar');
+            
+            if (!preloader || !counter || !bar || typeof gsap === 'undefined') {
+                if(preloader) preloader.style.display = 'none';
+                return;
             }
-        });
 
-    
+            // Prevent scrolling while loading
+            document.body.style.overflow = 'hidden';
 
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    document.body.style.overflow = '';
+                    gsap.to(preloader, {
+                        yPercent: -100,
+                        duration: 1.2,
+                        ease: "expo.inOut",
+                        onComplete: () => {
+                            preloader.style.display = 'none';
+                            // Trigger hero animations here if desired
+                        }
+                    });
+                }
+            });
+
+            // Simulate loading progress
+            tl.to({ val: 0 }, {
+                val: 100,
+                duration: 2.5,
+                ease: "power2.inOut",
+                onUpdate: function() {
+                    counter.innerText = Math.round(this.targets()[0].val);
+                    bar.style.width = this.targets()[0].val + '%';
+                }
+            });
+        };
+
+        if (document.readyState === 'loading') {
+            window.addEventListener('load', initPreloader);
+        } else {
+            initPreloader();
+        }
 
         // ------------------ CURSOR ENGINE (BULLETPROOF MOUSE & TOUCH) ------------------
         const initCursor = () => {
@@ -2204,11 +2370,13 @@
             const cursorContainer = document.getElementById("cursor-container");
             const cursorDot = document.getElementById("cursor-dot");
             const cursorRing = document.getElementById("cursor-ring");
+            const cursorText = document.getElementById("cursor-text");
 
             if (!cursorContainer || !cursorDot || !cursorRing) return;
 
-            gsap.set([cursorDot, cursorRing], { xPercent: -50, yPercent: -50, force3D: true });
-            
+            // Remove hardcoded translations since we moved them to CSS (-translate-x-1/2)
+            gsap.set([cursorDot, cursorRing], { force3D: true });
+
             let lastX = window.innerWidth / 2;
             let lastY = window.innerHeight / 2;
 
@@ -2246,16 +2414,35 @@
                 }
             });
 
-            // Interaction scaling
+            // Interaction scaling - Smart Cursor States
             const interactables = document.querySelectorAll("a, button, .project-card, .nav-link, .work-card, #interactive-diamond, .carousel-dot, .source-card, .shiny-email-box, .glass-card, input, textarea, select");
             interactables.forEach(el => {
+                const isProjectCard = el.classList.contains('project-card');
+
                 const onEnter = () => {
-                    gsap.to(cursorRing, { scale: 1.8, backgroundColor: "rgba(212,175,55,0.15)", borderColor: "rgba(242,202,80,1)", backdropFilter: "blur(4px)", duration: 0.3 });
-                    gsap.to(cursorDot, { scale: 0.5, opacity: 0.5, duration: 0.3 });
+                    if (isProjectCard) {
+                        gsap.to(cursorDot, { width: 80, height: 80, duration: 0.4, ease: "power2.out" });
+                        gsap.to(cursorRing, { width: 0, height: 0, opacity: 0, duration: 0.2 });
+                        if(cursorText) {
+                            cursorText.textContent = "VIEW";
+                            gsap.to(cursorText, { opacity: 1, duration: 0.3, delay: 0.1 });
+                        }
+                    } else {
+                        gsap.to(cursorRing, { scale: 1.5, backgroundColor: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0)", duration: 0.3 });
+                        gsap.to(cursorDot, { scale: 0.3, duration: 0.3 });
+                    }
                 };
                 const onLeave = () => {
-                    gsap.to(cursorRing, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(212,175,55,0.6)", backdropFilter: "none", duration: 0.3 });
-                    gsap.to(cursorDot, { scale: 1, opacity: 1, duration: 0.3 });
+                    if (isProjectCard) {
+                        gsap.to(cursorDot, { width: 12, height: 12, duration: 0.4, ease: "power2.out" });
+                        gsap.to(cursorRing, { width: 40, height: 40, opacity: 1, duration: 0.4 });
+                        if(cursorText) {
+                            gsap.to(cursorText, { opacity: 0, duration: 0.2, onComplete: () => cursorText.textContent = "" });
+                        }
+                    } else {
+                        gsap.to(cursorRing, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(255,255,255,0.5)", duration: 0.3 });
+                        gsap.to(cursorDot, { scale: 1, duration: 0.3 });
+                    }
                 };
 
                 el.addEventListener("mouseenter", onEnter);
@@ -2302,6 +2489,7 @@
         } else {
             initMagnetics();
         }
-        </script>
+    </script>
 </body>
+
 </html>
