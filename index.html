@@ -494,14 +494,8 @@
 
             <!-- HERO BLOCK (100vh) -->
             <div class="relative w-full min-h-screen flex flex-col justify-center">
-                <!-- Apple-style subtle static gradient background -->
-                <div
-                    class="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(255, 255, 255,0.15),rgba(10,10,10,1))]">
-                </div>
-                <!-- Subtle noise overlay for texture -->
-                <div class="absolute inset-0 pointer-events-none z-0 opacity-[0.03]"
-                    style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');">
-                </div>
+                <!-- Interactive Galaxy Canvas -->
+                <canvas id="hero-canvas" class="absolute inset-0 w-full h-full" style="z-index: 0;"></canvas>
 
                 <div
                     class="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-12 relative z-10 pt-32 md:pt-48 pb-24 md:pb-32 md:pb-64">
@@ -2579,6 +2573,199 @@
         } else {
             initMagnetics();
         }
+
+        // ================== HERO GALAXY CANVAS ==================
+        (function initGalaxyCanvas() {
+            const canvas = document.getElementById('hero-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            let W, H, mouse = { x: -9999, y: -9999 };
+            let animFrame;
+
+            // ---- Resize ----
+            function resize() {
+                W = canvas.width  = canvas.offsetWidth;
+                H = canvas.height = canvas.offsetHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            // ---- Mouse ----
+            canvas.closest('.relative').addEventListener('mousemove', (e) => {
+                const r = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - r.left;
+                mouse.y = e.clientY - r.top;
+            });
+            canvas.closest('.relative').addEventListener('mouseleave', () => {
+                mouse.x = W / 2; mouse.y = H * 0.4;
+            });
+            // Default mouse to center
+            mouse.x = 9999; mouse.y = 9999;
+
+            // ---- Stars ----
+            const STAR_COUNT = 220;
+            const stars = Array.from({ length: STAR_COUNT }, () => ({
+                x: Math.random(),
+                y: Math.random(),
+                r: Math.random() * 1.2 + 0.2,
+                alpha: Math.random() * 0.7 + 0.15,
+                twinkleSpeed: Math.random() * 0.02 + 0.005,
+                twinkleOffset: Math.random() * Math.PI * 2,
+                vx: (Math.random() - 0.5) * 0.00015,
+                vy: (Math.random() - 0.5) * 0.00015,
+            }));
+
+            // ---- Aurora Blobs ----
+            const blobs = [
+                { x: 0.15, y: 0.5,  r: 0.55, color: [74,  32,  128], speed: 0.00018, phase: 0    },
+                { x: 0.75, y: 0.35, r: 0.50, color: [212, 175, 55 ], speed: 0.00012, phase: 2.1  },
+                { x: 0.50, y: 0.75, r: 0.45, color: [10,  61,  143], speed: 0.00022, phase: 4.3  },
+                { x: 0.88, y: 0.60, r: 0.40, color: [100, 20,  100], speed: 0.00016, phase: 1.0  },
+            ];
+
+            // ---- Light Rays (bezier streams) ----
+            const RAYS = 18;
+            const rays = Array.from({ length: RAYS }, (_, i) => ({
+                angle: (i / RAYS) * Math.PI * 2,
+                length: 0.3 + Math.random() * 0.4,
+                width: Math.random() * 1.5 + 0.3,
+                alpha: Math.random() * 0.12 + 0.04,
+                speed: (Math.random() - 0.5) * 0.0004,
+                color: i % 3 === 0 ? '212,175,55' : i % 3 === 1 ? '74,32,128' : '255,255,255',
+            }));
+
+            let t = 0;
+
+            function drawBlobs() {
+                blobs.forEach(b => {
+                    b.phase += b.speed;
+                    const bx = (b.x + Math.sin(b.phase * 1.3) * 0.12) * W;
+                    const by = (b.y + Math.cos(b.phase) * 0.10) * H;
+                    const br = b.r * Math.min(W, H);
+
+                    // Mouse attraction: gently pull blob centers toward cursor
+                    const mx = mouse.x < W * 1.5 ? mouse.x : W / 2;
+                    const my = mouse.y < H * 1.5 ? mouse.y : H * 0.4;
+                    const pullX = bx + (mx - bx) * 0.015;
+                    const pullY = by + (my - by) * 0.015;
+
+                    const grd = ctx.createRadialGradient(pullX, pullY, 0, pullX, pullY, br);
+                    grd.addColorStop(0,   `rgba(${b.color.join(',')},0.22)`);
+                    grd.addColorStop(0.5, `rgba(${b.color.join(',')},0.08)`);
+                    grd.addColorStop(1,   `rgba(${b.color.join(',')},0)`);
+                    ctx.fillStyle = grd;
+                    ctx.beginPath();
+                    ctx.arc(pullX, pullY, br, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+            }
+
+            function drawRays() {
+                const cx = mouse.x < W * 1.5 ? mouse.x * 0.4 + W * 0.3 : W * 0.5;
+                const cy = mouse.y < H * 1.5 ? mouse.y * 0.35 + H * 0.2 : H * 0.35;
+
+                rays.forEach(ray => {
+                    ray.angle += ray.speed;
+                    const ex = cx + Math.cos(ray.angle) * ray.length * W;
+                    const ey = cy + Math.sin(ray.angle) * ray.length * H;
+                    const cpx = cx + Math.cos(ray.angle + 0.4) * ray.length * 0.5 * W;
+                    const cpy = cy + Math.sin(ray.angle + 0.4) * ray.length * 0.5 * H;
+
+                    const grd = ctx.createLinearGradient(cx, cy, ex, ey);
+                    grd.addColorStop(0,   `rgba(${ray.color},${ray.alpha * 1.5})`);
+                    grd.addColorStop(0.5, `rgba(${ray.color},${ray.alpha})`);
+                    grd.addColorStop(1,   `rgba(${ray.color},0)`);
+
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy);
+                    ctx.quadraticCurveTo(cpx, cpy, ex, ey);
+                    ctx.strokeStyle = grd;
+                    ctx.lineWidth = ray.width;
+                    ctx.stroke();
+                });
+            }
+
+            function drawStars() {
+                const mx = mouse.x < W * 1.5 ? mouse.x : W / 2;
+                const my = mouse.y < H * 1.5 ? mouse.y : H / 2;
+
+                stars.forEach(s => {
+                    // Drift
+                    s.x += s.vx;
+                    s.y += s.vy;
+                    if (s.x < 0) s.x = 1; if (s.x > 1) s.x = 0;
+                    if (s.y < 0) s.y = 1; if (s.y > 1) s.y = 0;
+
+                    const sx = s.x * W;
+                    const sy = s.y * H;
+
+                    // Mouse proximity boost
+                    const dx = mx - sx, dy = my - sy;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    const boost = dist < 180 ? (1 - dist / 180) * 0.9 : 0;
+
+                    const twinkle = Math.sin(t * s.twinkleSpeed * 60 + s.twinkleOffset);
+                    const a = Math.max(0, s.alpha + twinkle * 0.2 + boost);
+
+                    ctx.beginPath();
+                    ctx.arc(sx, sy, s.r + boost * 1.2, 0, Math.PI * 2);
+                    ctx.fillStyle = boost > 0.3
+                        ? `rgba(212,175,55,${a})`
+                        : `rgba(255,255,255,${a})`;
+                    ctx.fill();
+
+                    // Star glow for bright ones
+                    if (s.alpha > 0.55 || boost > 0.2) {
+                        const glow = ctx.createRadialGradient(sx, sy, 0, sx, sy, (s.r + 2) * 3);
+                        glow.addColorStop(0, `rgba(255,255,255,${(a * 0.4)})`);
+                        glow.addColorStop(1, 'rgba(255,255,255,0)');
+                        ctx.fillStyle = glow;
+                        ctx.beginPath();
+                        ctx.arc(sx, sy, (s.r + 2) * 3, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                });
+            }
+
+            function draw() {
+                t++;
+                ctx.clearRect(0, 0, W, H);
+
+                // Deep base
+                ctx.fillStyle = '#050610';
+                ctx.fillRect(0, 0, W, H);
+
+                ctx.save();
+                ctx.globalCompositeOperation = 'screen';
+                drawBlobs();
+                ctx.restore();
+
+                ctx.save();
+                ctx.globalCompositeOperation = 'screen';
+                drawRays();
+                ctx.restore();
+
+                drawStars();
+
+                animFrame = requestAnimationFrame(draw);
+            }
+
+            draw();
+
+            // Stop when section scrolls out of view (perf)
+            if ('IntersectionObserver' in window) {
+                const obs = new IntersectionObserver(([entry]) => {
+                    if (entry.isIntersecting) {
+                        if (!animFrame) draw();
+                    } else {
+                        cancelAnimationFrame(animFrame);
+                        animFrame = null;
+                    }
+                }, { threshold: 0.01 });
+                obs.observe(canvas);
+            }
+        })();
     </script>
 </body>
 
