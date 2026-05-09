@@ -59,54 +59,77 @@
         }
     </script>
     <style>
+        :root {
+            --orb-1: #4A2080;
+            --orb-2: #D4AF37;
+            --orb-3: #0A3D8F;
+        }
+
         body {
-            background-color: #09090b;
+            background-color: #060610;
             cursor: none;
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            color: #eae1d4;
+            color: #e8e8f0;
         }
 
+        /* ============================
+           NAVIGATION
+        ============================ */
         .nav-link {
             font-family: 'Inter', sans-serif;
             font-weight: 500;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             position: relative;
-            color: #a1a1aa;
-            transition: all 0.2s ease-out;
-            padding: 8px 16px;
+            color: #71717a;
+            transition: color 0.25s ease;
+            padding: 8px 14px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 80%;
+            height: 1px;
+            background: #ffffff;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .nav-link:hover {
-            color: #000000;
-            background-color: #ffffff;
-            transform: translateY(-2px);
+            color: #ffffff;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            transform: translateX(-50%) scaleX(1);
         }
 
         .nav-link.active {
             color: #ffffff;
-            border-bottom: 1px solid #ffffff;
-            padding-bottom: 6px;
         }
 
+        /* ============================
+           TICKER
+        ============================ */
         .ticker-scroll {
             animation: ticker 40s linear infinite;
         }
 
         @keyframes ticker {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
+        /* ============================
+           LOGO ANIMATION
+        ============================ */
         .diamond-rotate {
             display: inline-block;
             animation: rotateDiamond 8s linear infinite;
@@ -114,13 +137,8 @@
         }
 
         @keyframes rotateDiamond {
-            from {
-                transform: rotateY(0deg);
-            }
-
-            to {
-                transform: rotateY(360deg);
-            }
+            from { transform: rotateY(0deg); }
+            to   { transform: rotateY(360deg); }
         }
 
         .glow-pulse {
@@ -128,26 +146,103 @@
         }
 
         @keyframes glow-pulse {
-
-            0%,
-            100% {
-                text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-            }
-
-            50% {
-                text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
-            }
+            0%, 100% { text-shadow: 0 0 5px rgba(212,175,55,0.3); }
+            50%       { text-shadow: 0 0 25px rgba(212,175,55,0.7), 0 0 50px rgba(212,175,55,0.3); }
         }
 
-        /* Concepts Styles */
+        /* ============================
+           DEEP GLASSMORPHISM BASE
+           Used on cards, modals, panels
+        ============================ */
+        .glass {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow:
+                0 40px 80px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .glass:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.18);
+            box-shadow:
+                0 60px 120px rgba(0, 0, 0, 0.8),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                0 0 40px rgba(212, 175, 55, 0.08);
+        }
+
+        /* ============================
+           3D BUTTON PHYSICS
+        ============================ */
+        .btn-3d {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            box-shadow:
+                0 8px 16px rgba(0,0,0,0.4),
+                0 0 0 1px rgba(255,255,255,0.15),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        .btn-3d:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow:
+                0 16px 32px rgba(0,0,0,0.6),
+                0 0 0 1px rgba(255,255,255,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.3),
+                0 0 30px rgba(212,175,55,0.2);
+        }
+
+        .btn-3d:active {
+            transform: translateY(1px) scale(0.99);
+            box-shadow:
+                0 2px 4px rgba(0,0,0,0.4),
+                0 0 0 1px rgba(255,255,255,0.1);
+        }
+
+        /* ============================
+           SPATIAL CARD (3D TILTABLE)
+        ============================ */
+        .spatial-card {
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition: box-shadow 0.4s ease;
+        }
+
+        .spatial-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(
+                circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255,255,255,0.08) 0%,
+                transparent 60%
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .spatial-card:hover::before {
+            opacity: 1;
+        }
+
+        /* ============================
+           CONCEPTS / PANELS
+        ============================ */
         .bloom-shadow {
-            box-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.12), 0 0 120px rgba(212,175,55,0.05);
         }
 
         .glass-panel {
-            backdrop-filter: blur(20px);
-            background: rgba(22, 19, 11, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(24px);
+            background: rgba(10, 8, 4, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .pulsate-text {
@@ -155,17 +250,8 @@
         }
 
         @keyframes textPulse {
-
-            0%,
-            100% {
-                opacity: 1;
-                text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-            }
-
-            50% {
-                opacity: 0.8;
-                text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-            }
+            0%, 100% { opacity: 1;   text-shadow: 0 0 10px rgba(212,175,55,0.2); }
+            50%       { opacity: 0.8; text-shadow: 0 0 30px rgba(212,175,55,0.6); }
         }
 
         .typing-cursor {
@@ -173,14 +259,13 @@
         }
 
         @keyframes blink {
-            50% {
-                opacity: 0;
-            }
+            50% { opacity: 0; }
         }
 
         .carousel-dot.active {
-            background-color: #ffffff;
+            background-color: #D4AF37;
             transform: scale(1.5);
+            box-shadow: 0 0 8px rgba(212,175,55,0.8);
         }
 
         .carousel-container {
@@ -188,14 +273,17 @@
             transition: transform 0.6s cubic-bezier(0.8, 0, 0.2, 1);
         }
 
-        /* Pricing Styles */
+        /* ============================
+           PRICING
+        ============================ */
         .pop-hover {
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.4s ease;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
         .pop-hover:hover {
-            transform: scale(1.02) translateY(-4px);
-            border-color: rgba(255, 255, 255, 0.5) !important;
+            transform: scale(1.02) translateY(-8px);
+            border-color: rgba(212, 175, 55, 0.4) !important;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 40px rgba(212,175,55,0.12);
         }
 
         .pulse-light {
@@ -203,17 +291,13 @@
         }
 
         @keyframes pulseLight {
-
-            0%,
-            100% {
-                opacity: 0.1;
-            }
-
-            50% {
-                opacity: 0.3;
-            }
+            0%, 100% { opacity: 0.08; }
+            50%       { opacity: 0.25; }
         }
 
+        /* ============================
+           SHINY EMAIL BOX
+        ============================ */
         .shiny-email-box {
             position: relative;
             overflow: hidden;
@@ -221,11 +305,13 @@
 
         .shiny-gloss {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle 200px at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(255, 255, 255, 0.15), transparent 80%);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(
+                circle 200px at var(--mouse-x, -500px) var(--mouse-y, -500px),
+                rgba(255,255,255,0.15),
+                transparent 80%
+            );
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
@@ -236,22 +322,46 @@
             opacity: 1;
         }
 
-        /* Methodology Styles */
+        /* ============================
+           METHODOLOGY GLASS CARDS
+        ============================ */
         .glass-card {
-            background: rgba(22, 19, 11, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(10, 8, 20, 0.7);
+            backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
             transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .glass-card:hover {
-            transform: scale(1.02) translateY(-4px);
-            border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.15);
+            transform: scale(1.02) translateY(-6px);
+            border-color: rgba(212, 175, 55, 0.25);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 40px rgba(212,175,55,0.1), inset 0 1px 0 rgba(255,255,255,0.15);
         }
 
         .gold-glow-text {
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            text-shadow: 0 0 20px rgba(212,175,55,0.5), 0 0 40px rgba(212,175,55,0.2);
+        }
+
+        /* ============================
+           AMBIENT LIGHT ORBS
+           (Volumetric, scroll-reactive)
+        ============================ */
+        .ambient-orb {
+            position: fixed;
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            pointer-events: none;
+            filter: blur(100px);
+            animation: orbFloat linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes orbFloat {
+            0%   { transform: translate(0, 0) scale(1); }
+            33%  { transform: translate(3vw, -4vh) scale(1.05); }
+            66%  { transform: translate(-2vw, 3vh) scale(0.95); }
+            100% { transform: translate(0, 0) scale(1); }
         }
 
         .heartbeat {
@@ -259,21 +369,16 @@
         }
 
         @keyframes heartbeat {
-
-            0%,
-            100% {
-                opacity: 0.3;
-            }
-
-            50% {
-                opacity: 0.7;
-            }
+            0%, 100% { opacity: 0.3; }
+            50%       { opacity: 0.7; }
         }
 
-        /* Scroll Reveal Utility */
+        /* ============================
+           SCROLL REVEAL
+        ============================ */
         .reveal-on-scroll {
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(50px);
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -282,7 +387,6 @@
             transform: translateY(0);
         }
 
-        /* Line Reveal Utility */
         .line-reveal {
             overflow: hidden;
             display: block;
@@ -290,7 +394,7 @@
 
         .line-reveal-inner {
             display: block;
-            transform: translateY(100%);
+            transform: translateY(110%);
             transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -300,27 +404,26 @@
     </style>
 </head>
 
-<body class="font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<body class="font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container bg-[#050508] relative">
 
-    <!-- High-End Typographic Preloader -->
-    <div id="preloader" class="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#000000] overflow-hidden">
-        <div class="relative flex items-center justify-center">
-            <!-- Outline Text -->
-            <h1 class="font-display-xl text-6xl md:text-9xl text-transparent tracking-tighter absolute" 
-                style="-webkit-text-stroke: 1px rgba(255,255,255,0.2);">
-                THE 1 PERCENT
-            </h1>
-            <!-- Fill Text (Masked) -->
-            <h1 class="font-display-xl text-6xl md:text-9xl text-[#ffffff] tracking-tighter z-10" 
-                id="preloader-text" style="clip-path: inset(100% 0 0 0);">
-                THE 1 PERCENT
-            </h1>
+    <!-- Ambient Volumetric Lighting (3 scrolling orbs) -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden" style="z-index: -1;">
+        <div class="ambient-orb w-[55vw] h-[55vw] bg-[#4A2080]/35" style="top: -10%; left: -15%; animation-duration: 20s;"></div>
+        <div class="ambient-orb w-[65vw] h-[65vw] bg-[#D4AF37]/12" style="bottom: -15%; right: -20%; animation-duration: 28s; animation-delay: -8s;"></div>
+        <div class="ambient-orb w-[45vw] h-[45vw] bg-[#0A3D8F]/25" style="top: 35%; left: 25%; animation-duration: 35s; animation-delay: -15s;"></div>
+    </div>
+
+    <!-- 3D Spatial Preloader -->
+    <div id="preloader" class="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#050608] overflow-hidden" style="perspective: 1000px;">
+        <div class="relative flex items-center justify-center w-64 h-64" id="preloader-3d-scene" style="transform-style: preserve-3d;">
+            <!-- Outer Rings -->
+            <div class="absolute w-full h-full border border-white/20 rounded-full" id="ring-1" style="transform: rotateX(60deg) rotateY(0deg);"></div>
+            <div class="absolute w-full h-full border border-[#D4AF37]/40 rounded-full" id="ring-2" style="transform: rotateX(60deg) rotateY(60deg);"></div>
+            <div class="absolute w-full h-full border border-[#0047AB]/40 rounded-full" id="ring-3" style="transform: rotateX(60deg) rotateY(120deg);"></div>
+            <!-- Core -->
+            <div class="absolute font-display-xl text-3xl font-bold text-white tracking-widest drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]" id="preloader-counter">0%</div>
         </div>
-        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-4 opacity-0" id="preloader-meta">
-            <span class="font-label-sm text-[#ffffff] tracking-[0.4em] uppercase">Initializing</span>
-            <span class="w-1 h-1 bg-[#ffffff] rounded-full animate-ping"></span>
-            <span class="font-display-xl text-xl text-white" id="preloader-counter">0</span>
-        </div>
+        <div class="absolute bottom-12 font-label-sm text-white/50 tracking-[0.4em] uppercase" id="preloader-meta">Establishing Neural Link</div>
     </div>
 
     <!-- Ultra-Premium Custom Cursor -->
@@ -333,18 +436,18 @@
     </div>
 
     <!-- TopNavBar -->
-    <header class="fixed top-0 w-full z-50 border-b border-[#27272a] bg-[#09090b]/90 backdrop-blur-[20px]">
+    <header class="fixed top-0 w-full z-50 border-b border-white/[0.06] bg-[#060610]/80 backdrop-blur-[30px]" style="box-shadow: 0 1px 0 rgba(255,255,255,0.05), 0 20px 40px rgba(0,0,0,0.4);">
         <div class="flex justify-between items-center px-6 md:px-12 h-24 max-w-[1440px] mx-auto">
             <!-- Brand Logo -->
             <div class="flex items-center gap-4">
                 <a href="#home" data-target="home" id="brand-logo-text"
-                    class="flex items-baseline gap-2 text-lg md:text-xl font-bold text-[#ffffff] tracking-[0.2em] uppercase font-sans antialiased hover:tracking-[0.4em] transition-all duration-300">
-                    <span class="text-3xl md:text-4xl text-[#ffffff] font-bold">1</span>
-                    <span>PERCENT</span>
+                    class="flex items-baseline gap-2 text-lg md:text-xl font-bold text-[#ffffff] tracking-[0.25em] uppercase font-sans antialiased transition-all duration-400">
+                    <span class="text-3xl md:text-4xl font-bold bg-gradient-to-br from-[#D4AF37] via-[#FFF8DC] to-[#D4AF37] bg-clip-text text-transparent">1</span>
+                    <span class="text-white/90">PERCENT</span>
                 </a>
             </div>
             <!-- Navigation -->
-            <nav class="hidden md:flex items-center gap-6 md:gap-8 md:p-12">
+            <nav class="hidden md:flex items-center gap-2">
                 <a class="nav-link active" href="#home" data-target="home">Home</a>
                 <a class="nav-link" href="#concepts" data-target="concepts">Concepts</a>
                 <a class="nav-link" href="#methodology" data-target="methodology">Methodology</a>
@@ -353,13 +456,12 @@
             <!-- Action -->
             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=the1percentwebtech@gmail.com" target="_blank"
                 class="hidden md:block">
-                <button
-                    class="bg-[#ffffff] text-[#000000] px-8 py-3 font-sans font-bold tracking-[0.2em] uppercase hover:bg-[#a1a1aa] transition-colors duration-300 border border-[#ffffff]">
+                <button class="btn-3d bg-gradient-to-br from-[#D4AF37] to-[#A07820] text-black px-8 py-3 font-sans font-bold tracking-[0.2em] uppercase text-sm rounded-sm">
                     ENQUIRE
                 </button>
             </a>
             <!-- Mobile Menu Toggle -->
-            <button id="mobile-menu-btn" class="md:hidden text-[#ffffff] hover:text-[#a1a1aa] transition-colors">
+            <button id="mobile-menu-btn" class="md:hidden text-[#ffffff] hover:text-[#D4AF37] transition-colors">
                 <span class="material-symbols-outlined text-3xl">menu</span>
             </button>
         </div>
@@ -663,6 +765,10 @@
                     </div>
                     <div
                         class="col-span-12 lg:col-span-7 order-1 lg:order-2 group overflow-hidden h-[500px] lg:h-[700px] flex flex-col justify-center items-center relative bg-[#000000] border border-white/10 rounded-2xl reveal-on-scroll parallax-img">
+                        <!-- Glass Card Background with Deep 3D Shadow -->
+                        <div
+                            class="absolute inset-0 bg-[#ffffff]/5 backdrop-blur-[20px] rounded-2xl border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1)] transition-colors duration-500 group-hover:bg-[#ffffff]/10">
+                        </div>
                         <div
                             class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255, 255, 255,0.05),transparent_70%)]">
                         </div>
@@ -2216,9 +2322,13 @@
             }
         });
 
-        // ------------------ DEEP PARALLAX & MAGNETIC IMAGES ------------------
-        document.querySelectorAll('.project-card').forEach(card => {
+        // ------------------ 3D TILT PHYSICS & PARALLAX ------------------
+        document.querySelectorAll('.project-card, .pricing-card, .glass-card, .work-card').forEach(card => {
             const img = card.querySelector('.project-image');
+            
+            // Set 3D perspective
+            gsap.set(card, { transformPerspective: 1500, transformStyle: "preserve-3d" });
+
             if (img) {
                 // Parallax inside the card on scroll
                 gsap.to(img, {
@@ -2231,55 +2341,82 @@
                         scrub: true
                     }
                 });
+            }
 
-                // Magnetic Hover
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
+            // 3D Tilt Hover Physics
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Calculate rotation based on cursor position (-15 to 15 degrees)
+                const rotateY = ((x / rect.width) - 0.5) * 20; 
+                const rotateX = ((y / rect.height) - 0.5) * -20;
+
+                gsap.to(card, {
+                    rotationX: rotateX,
+                    rotationY: rotateY,
+                    translateZ: 30,
+                    scale: 1.02,
+                    duration: 0.6,
+                    ease: "power2.out"
+                });
+
+                if (img) {
                     const xPercent = (x / rect.width - 0.5) * 15;
                     const yPercent = (y / rect.height - 0.5) * 15;
+                    gsap.to(img, { xPercent: xPercent, yPercent: yPercent, scale: 1.1, duration: 0.6, ease: "power2.out" });
+                }
+            });
 
-                    gsap.to(img, {
-                        xPercent: xPercent,
-                        yPercent: yPercent,
-                        scale: 1.1,
-                        duration: 0.6,
-                        ease: "power2.out"
-                    });
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    rotationX: 0,
+                    rotationY: 0,
+                    translateZ: 0,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: "power2.out"
                 });
 
-                card.addEventListener('mouseleave', () => {
-                    gsap.to(img, {
-                        xPercent: 0,
-                        yPercent: 0,
-                        scale: 1,
-                        duration: 0.8,
-                        ease: "power2.out"
-                    });
-                });
-            }
+                if (img) {
+                    gsap.to(img, { xPercent: 0, yPercent: 0, scale: 1, duration: 0.8, ease: "power2.out" });
+                }
+            });
         });
 
-        // ------------------ PRELOADER ENGINE ------------------
+        // ------------------ 3D PRELOADER ENGINE ------------------
         const initPreloader = () => {
             const preloader = document.getElementById('preloader');
-            const preloaderText = document.getElementById('preloader-text');
+            const ring1 = document.getElementById('ring-1');
+            const ring2 = document.getElementById('ring-2');
+            const ring3 = document.getElementById('ring-3');
             const counter = document.getElementById('preloader-counter');
-            const meta = document.getElementById('preloader-meta');
             
-            if (!preloader || !preloaderText || !counter || typeof gsap === 'undefined') {
+            if (!preloader || !counter || typeof gsap === 'undefined') {
                 if(preloader) preloader.style.display = 'none';
                 return;
             }
 
             document.body.style.overflow = 'hidden';
 
+            // Infinite 3D rotation
+            gsap.to([ring1, ring2, ring3], {
+                rotationX: "+=360",
+                rotationY: "+=360",
+                duration: 6,
+                ease: "none",
+                repeat: -1,
+                stagger: 0.2
+            });
+
             const tl = gsap.timeline({
                 onComplete: () => {
                     document.body.style.overflow = '';
+                    // Cinematic Z-Axis Zoom out
                     gsap.to(preloader, {
-                        height: 0,
+                        scale: 15,
+                        opacity: 0,
                         duration: 1.5,
                         ease: "power4.inOut",
                         onComplete: () => preloader.style.display = 'none'
@@ -2287,20 +2424,14 @@
                 }
             });
 
-            gsap.to(meta, { opacity: 1, duration: 0.5 });
-
             tl.to({ val: 0 }, {
                 val: 100,
-                duration: 3,
-                ease: "power3.inOut",
+                duration: 2.5,
+                ease: "power2.inOut",
                 onUpdate: function() {
-                    let progress = Math.round(this.targets()[0].val);
-                    counter.innerText = progress;
-                    // Reveal text from bottom to top
-                    preloaderText.style.clipPath = `inset(${100 - progress}% 0 0 0)`;
+                    counter.innerText = Math.round(this.targets()[0].val) + '%';
                 }
             });
-            tl.to(meta, { opacity: 0, duration: 0.3 }, "-=0.3");
         };
 
         if (document.readyState === 'loading') {
@@ -2309,7 +2440,7 @@
             initPreloader();
         }
 
-        // ------------------ CURSOR ENGINE (BULLETPROOF MOUSE & TOUCH) ------------------
+        // ------------------ CURSOR ENGINE ------------------
         const initCursor = () => {
             if (typeof gsap === 'undefined') return;
             const cursorContainer = document.getElementById("cursor-container");
@@ -2318,59 +2449,53 @@
 
             if (!cursorContainer || !cursorDot) return;
 
-            let lastX = window.innerWidth / 2;
-            let lastY = window.innerHeight / 2;
-
             const updatePos = (x, y) => {
-                lastX = x;
-                lastY = y;
                 gsap.to(cursorContainer, { opacity: 1, duration: 0.3 });
-                // Heavy, smooth trailing for the dot
-                gsap.to(cursorDot, { x: x, y: y, duration: 0.4, ease: "power3.out", overwrite: "auto" });
+                gsap.to(cursorDot, { x, y, duration: 0.4, ease: "power3.out", overwrite: "auto" });
             };
 
             window.addEventListener("mousemove", (e) => updatePos(e.clientX, e.clientY));
             window.addEventListener("touchstart", (e) => updatePos(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
             window.addEventListener("touchmove", (e) => updatePos(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
-            
             window.addEventListener("touchend", () => gsap.to(cursorContainer, { opacity: 0, duration: 0.3 }), { passive: true });
             window.addEventListener("mouseout", (e) => {
                 if (!e.relatedTarget && !e.toElement) gsap.to(cursorContainer, { opacity: 0, duration: 0.3 });
             });
 
             // Smart Cursor States
-            const interactables = document.querySelectorAll("a, button, .project-card, .nav-link, .work-card, #interactive-diamond, .carousel-dot, .source-card, .shiny-email-box, .glass-card");
-            interactables.forEach(el => {
+            document.querySelectorAll("a, button, .project-card, .nav-link, .work-card, #interactive-diamond, .carousel-dot, .source-card, .shiny-email-box, .glass-card").forEach(el => {
                 const isProjectCard = el.classList.contains('project-card');
 
-                const onEnter = () => {
+                el.addEventListener("mouseenter", () => {
                     if (isProjectCard) {
-                        cursorDot.style.width = '100px';
-                        cursorDot.style.height = '100px';
-                        cursorDot.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
-                        cursorDot.style.backdropFilter = 'blur(10px)';
-                        if(cursorText) {
+                        // Frosted glass "EXPLORE" state
+                        cursorDot.style.width = '90px';
+                        cursorDot.style.height = '90px';
+                        cursorDot.style.backgroundColor = 'rgba(212, 175, 55, 0.15)';
+                        cursorDot.style.backdropFilter = 'blur(12px)';
+                        cursorDot.style.border = '1px solid rgba(212, 175, 55, 0.5)';
+                        if (cursorText) {
                             cursorText.textContent = "EXPLORE";
-                            gsap.to(cursorText, { opacity: 1, duration: 0.3, delay: 0.1 });
+                            cursorText.style.color = '#D4AF37';
+                            gsap.to(cursorText, { opacity: 1, duration: 0.3, delay: 0.05 });
                         }
                     } else {
-                        cursorDot.style.width = '24px';
-                        cursorDot.style.height = '24px';
-                        cursorDot.style.backgroundColor = '#ffffff'; 
+                        // Gold accent state
+                        cursorDot.style.width = '20px';
+                        cursorDot.style.height = '20px';
+                        cursorDot.style.backgroundColor = '#D4AF37';
+                        cursorDot.style.border = 'none';
                     }
-                };
-                const onLeave = () => {
+                });
+
+                el.addEventListener("mouseleave", () => {
                     cursorDot.style.width = '12px';
                     cursorDot.style.height = '12px';
-                    cursorDot.style.backgroundColor = 'white';
+                    cursorDot.style.backgroundColor = 'rgba(255,255,255,0.9)';
                     cursorDot.style.backdropFilter = 'blur(0px)';
-                    if(cursorText) gsap.to(cursorText, { opacity: 0, duration: 0.2, onComplete: () => cursorText.textContent = "" });
-                };
-
-                el.addEventListener("mouseenter", onEnter);
-                el.addEventListener("mouseleave", onLeave);
-                el.addEventListener("touchstart", onEnter, { passive: true });
-                el.addEventListener("touchend", onLeave, { passive: true });
+                    cursorDot.style.border = 'none';
+                    if (cursorText) gsap.to(cursorText, { opacity: 0, duration: 0.15, onComplete: () => cursorText.textContent = "" });
+                });
             });
         };
 
@@ -2380,23 +2505,46 @@
             initCursor();
         }
 
+        // ------------------ SPATIAL GLARE TRACKER ------------------
+        // Updates --mouse-x and --mouse-y CSS variables on every card
+        // so the .spatial-card::before pseudo-element follows the cursor
+        document.querySelectorAll('.project-card, .pricing-card, .glass-card, .work-card, .source-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--mouse-x', x + '%');
+                card.style.setProperty('--mouse-y', y + '%');
+            });
+        });
+
         // ------------------ DYNAMIC BACKGROUND SHIFT ------------------
+        // Rich, immersive color journey as user scrolls
         gsap.to("body", {
-            backgroundColor: "#09090b", // Shift to espresso in the middle
+            backgroundColor: "#0a0614", // Deep indigo-midnight
             scrollTrigger: {
                 trigger: "#concepts",
-                start: "top center",
+                start: "top 80%",
                 end: "bottom center",
-                scrub: true
+                scrub: 1.5
             }
         });
         gsap.to("body", {
-            backgroundColor: "#09090b", // Shift to deep midnight at the end
+            backgroundColor: "#0d0a04", // Warm amber dark
+            scrollTrigger: {
+                trigger: "#methodology",
+                start: "top 80%",
+                end: "bottom center",
+                scrub: 1.5
+            }
+        });
+        gsap.to("body", {
+            backgroundColor: "#060610", // Back to deep space
             scrollTrigger: {
                 trigger: "#pricing",
-                start: "top center",
+                start: "top 80%",
                 end: "bottom center",
-                scrub: true
+                scrub: 1.5
             }
         });
 
